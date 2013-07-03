@@ -1,0 +1,37 @@
+<?php $this->css($this->assetModule('css/front.css')); ?>
+<div class="ask">
+   <div class="question-menu">
+	   <ul class="nav nav-tabs">
+		   <li <?php echo $tabclass['create']; ?>><a title="<?php _e('Sort by date Create'); ?>" href="<?php echo $url['create']; ?>"><?php _e('Create'); ?></a></li>
+		   <li <?php echo $tabclass['vote']; ?>><a title="<?php _e('Sort by Vote'); ?>" href="<?php echo $url['vote']; ?>"><?php _e('Vote'); ?></a></li>
+		   <li <?php echo $tabclass['hits']; ?>><a title="<?php _e('Sort by Hits'); ?>" href="<?php echo $url['hits']; ?>"><?php _e('Hits'); ?></a></li>
+		   <li <?php echo $tabclass['answer']; ?>><a title="<?php _e('Sort by Answer'); ?>" href="<?php echo $url['answer']; ?>"><?php _e('Answer'); ?></a></li>
+		   <?php if(!empty($tag)) {?>
+			<li <?php echo $tabclass['tag']; ?>><a title="<?php echo $this->escape($tag['title']); ?>" href="<?php echo $url['tag']; ?>" ><?php echo $this->escape($tag['title']); ?></a></li>   
+		   <?php } ?>
+         <li class="pull-right"><a title="<?php _e('Ask question'); ?>" href="<?php echo $this->url('.ask', array('module' => $module, 'controller' => 'submit')); ?>"><?php _e('Ask'); ?></a></li>
+	   </ul>
+   </div>
+   <div class="question-list">
+	   <?php foreach($questions as $question) { ?>
+	   <div class="question page-header">
+		   <div class="question-info span3">
+			   <ul>
+				   <li class="span4"><span class="<?php echo $question['labelpoint']; ?>"><?php echo $this->escape($question['point']); ?></span><small><?php _e('votes'); ?></small></li>
+				   <li class="span4"><span class="<?php echo $question['labelanswer']; ?>"><?php echo $this->escape($question['answer']); ?></span><small><?php _e('answers'); ?></small></li>
+				   <li class="span4"><span class="<?php echo $question['labelhits']; ?>"><?php echo $this->escape($question['hits']); ?></span><small><?php _e('views'); ?></small></li>
+			   </ul>
+		   </div>
+		   <div class="question-body span9">
+			   <div class="question-title pull-left"><a title="<?php echo $this->escape($question['title']); ?>" href="<?php echo $question['url']; ?>"><?php echo $this->escape($question['title']); ?></a></div>
+			   <div class="question-author pull-right"><?php echo $this->escape($question['create']); ?> <?php _e('By'); ?> <?php echo $this->escape($question['identity']); ?></div>
+			   <div class="clearfix"></div>
+			</div>
+		   <div class="clearfix"></div>
+	   </div>
+	   <?php } ?>
+   <div class="clearfix"></div>
+   </div>
+   <div class="question-mainurl"><a title="<?php echo $this->escape($mainurl['title']); ?>" href="<?php echo $mainurl['url']; ?>"><?php echo $this->escape($mainurl['title']); ?></a></div>
+	<div class="paginator"><?php if(isset($paginator) ) { echo $this->paginationControl($paginator, 'Sliding', 'paginator'); } ?></div>
+</div>

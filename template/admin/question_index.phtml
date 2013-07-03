@@ -1,0 +1,71 @@
+<?php
+    $this->css(array(
+        $this->assetModule('css/admin.css'),
+        $this->assetModule('script/system-ui.css', 'system'),
+    ));
+    $this->jQuery();
+    $this->js($this->assetModule('script/system-msg.js', 'system'));
+?>
+<div class="ask">
+	<h3><?php _e('List of questions') ?></h3>
+	<table id="question-list" class="table table-striped table-bordered table-condensed">
+		<tr>
+			<th><?php _e('ID'); ?></th>
+			<th><?php _e('Title'); ?></th>
+			<th><?php _e('Answers'); ?></th>
+			<th><?php _e('Create'); ?></th>
+			<th><?php _e('Action'); ?></th>
+		</tr>
+		<?php foreach($questions as $question) { ?>
+		<?php
+		if($question['status'] == 1) {
+			$labelClass = 'label-success';	
+		} else {
+			$labelClass = 'label-warning';	
+		}			
+		?>
+		<tr>
+			<td><span class="label <?php echo $labelClass; ?>"><?php echo $this->escape($question['id']); ?></span></td>
+			<td>
+				<?php if(isset($question['url'])) { ?>
+				<a title="<?php echo $this->escape($question['title']); ?>" href="<?php echo $question['url']; ?>"><?php echo $this->escape($question['title']); ?></a>
+				<?php } else { ?>
+				<?php echo $this->escape($question['title']); ?>
+				<?php } ?>
+			</td>
+			<td><?php echo $this->escape($question['answer']); ?></td>
+			<td><?php echo $this->escape($question['create']); ?></td>
+			<td>
+			   <div class="btn-group">
+					<?php if($question['status'] == 1) { ?>
+				   <button type="button" class="btn btn-warning" data-toggle="button" data-link="<?php echo $this->url('', array('action' => 'accept', 'id' => $question['id'], 'status' => '2')); ?>"><i class="icon-remove icon-white"></i> <?php _e('Reject'); ?></button>
+					<?php } else { ?>
+					<button type="button" class="btn btn-success" data-toggle="button" data-link="<?php echo $this->url('', array('action' => 'accept', 'id' => $question['id'], 'status' => '1')); ?>"><i class="icon-ok icon-white"></i> <?php _e('Accept'); ?></button>
+					<?php } ?>
+					<a class="btn" title="<?php _e('Edit'); ?>" href="<?php echo $this->url('', array('action' => 'submit', 'id' => $question['id'])); ?>"><i class="icon-edit"></i> <?php _e('Edit'); ?></a>
+					<a class="btn" title="<?php _e('Delete'); ?>" href="<?php echo $this->url('', array('action' => 'delete', 'id' => $question['id'])); ?>"><i class="icon-trash"></i> <?php _e('Delete'); ?></a>
+				</div>
+			</td>
+		</tr>
+		<?php } ?>
+	</table>
+	<div class="paginator"><?php echo $this->paginationControl($paginator, 'Sliding', 'paginator'); ?></div>
+	<p>
+		<span class="label label-success"><?php _e('Published'); ?></span>
+		<span class="label label-warning"><?php _e('Pending review'); ?></span>
+	</p>
+</div>
+<script type="text/javascript" >
+(function($){
+    $("#question-list").on("click","button",function(){
+       systemMessage.wait("<?php _e('Accept message in process'); ?>");
+       $.getJSON($(this).attr("data-link")).done(function(result){
+          if(result.status==1){
+             systemMessage.succ(result.message);
+          }else{
+             systemMessage.fail(result.message);
+          }
+       });
+    });
+})(jQuery)
+</script>

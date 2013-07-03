@@ -1,0 +1,79 @@
+<?php 
+	$this->css($this->assetModule('css/front.css'));
+	$this->jQuery();
+	$this->bootstrap(array(
+	    'js/bootstrap.min.js',
+	    'css/font-awesome.min.css'
+	));
+?>
+<div class="ask">
+	<div class="profile well">
+		<div class="profile-avatar pull-left">
+			<?php echo $this->gravatar($this->escape($user['email'])); ?>
+		</div>
+		<div class="profile-info pull-right">
+			<h5 class="profile-identity"><?php echo $this->escape($user['identity']); ?></h5>
+			<div class="profile-email"><?php echo $this->escape($user['email']); ?></div>
+		</div>
+		<div class="clearfix"></div>
+	</div> 
+	<div class="customer-more">
+	   <ul id="myTab" class="nav nav-tabs">
+		   <li class="active"><a href="#questions" data-toggle="tab"><?php _e('List of questions'); ?></a></li>
+	      <li class=""><a href="#answers" data-toggle="tab"><?php _e('List of Answers'); ?></a></li>
+	   </ul>
+	   <div id="myTabContent" class="tab-content">
+	      
+	      
+	      
+	      
+	      <div class="tab-pane fade active in" id="questions">
+				<div class="question-list">
+				   <?php foreach($questions as $question) { ?>
+				   <div class="question page-header">
+					   <div class="question-info span3">
+						   <ul>
+							   <li class="span4"><span class="<?php echo $question['labelpoint']; ?>"><?php echo $this->escape($question['point']); ?></span><small><?php _e('votes'); ?></small></li>
+							   <li class="span4"><span class="<?php echo $question['labelanswer']; ?>"><?php echo $this->escape($question['answer']); ?></span><small><?php _e('answers'); ?></small></li>
+							   <li class="span4"><span class="<?php echo $question['labelhits']; ?>"><?php echo $this->escape($question['hits']); ?></span><small><?php _e('views'); ?></small></li>
+						   </ul>
+					   </div>
+					   <div class="question-body span9">
+						   <div class="question-title pull-left"><a title="<?php echo $this->escape($question['title']); ?>" href="<?php echo $question['url']; ?>"><?php echo $this->escape($question['title']); ?></a></div>
+						   <div class="question-author pull-right"><?php echo $this->escape($question['create']); ?> <?php _e('By'); ?> <?php echo $this->escape($question['identity']); ?></div>
+						   <div class="clearfix"></div>
+						</div>
+					   <div class="clearfix"></div>
+				   </div>
+				   <?php } ?>
+			   <div class="clearfix"></div>
+			   </div>
+	      </div>
+	      
+	      
+	      
+	      <div class="tab-pane fade" id="answers">
+			   <div class="answer-list">
+			   <?php foreach($answers as $answer) { ?>
+				   <div class="question page-header">
+					   <div class="question-body">
+						   <div class="question-content">
+							   <div class="question-text"><?php echo $answer['content']; ?></div>
+						   </div>
+						   <div class="question-author pull-right"><?php echo $this->escape($answer['create']); ?> <?php _e('By'); ?> <?php echo $this->escape($answer['identity']); ?></div>
+						   <div class="clearfix"></div>
+						</div>
+					   <div class="clearfix"></div>
+					</div>
+			   <?php } ?>
+			   <div class="clearfix"></div>
+			   </div>
+	      </div>
+	      
+	      
+	      
+	      
+	      
+	   </div>  
+	</div>
+</div>

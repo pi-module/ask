@@ -1,0 +1,26 @@
+<?php 
+	$this->css($this->assetModule('css/front.css')); 
+	$this->jQuery();
+	$this->bootstrap('js/bootstrap.js');
+?>
+<div class="ask">
+	<h2><?php echo $this->escape($title); ?></h2>
+	<?php include $this->templateComponent('form'); ?>
+</div>
+<script type="text/javascript" >
+$('#searchinput').typeahead({
+	 minLength: 5,
+	 source: function (query, process) {
+	    return $.post("<?php echo $this->url('', array('action' => 'search')); ?>" , { key: query }, function (data) {
+	       var result = JSON.parse(data);
+	       if(result) {
+		       process(result);
+		       $('.check').hide();
+	       } else {
+		        $('.check').show();	
+	       }
+	        
+	    });
+	 }
+});
+</script>
