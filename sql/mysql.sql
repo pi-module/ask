@@ -15,7 +15,7 @@ CREATE TABLE `{question}` (
  `content` text,
  `tags` varchar(255) NOT NULL,
  PRIMARY KEY (`id`),
- KEY `alias` (`alias`),
+ UNIQUE KEY `alias` (`alias`),
  KEY `title` (`title`),
  KEY `status` (`status`),
  KEY `create` (`create`),

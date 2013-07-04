@@ -64,7 +64,7 @@ class SubmitController extends ActionController
                 // Set type
                 $values['type'] = 'Q';
                 // Set alias
-                $values['alias'] = $this->alias($values['title'], $values['id'], $this->getModel('question'));
+                $values['alias'] = Pi::service('api')->ask(array('Text', 'alias'), $values['title'], $values['id'], $this->getModel('question'));
                 // Save values
                 if (!empty($values['id'])) {
                     $row = $this->getModel('question')->find($values['id']);

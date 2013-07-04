@@ -80,8 +80,8 @@ class QuestionController extends ActionController
         }
         // Set view
         $this->view()->headTitle($question['title']);
-        $this->view()->headDescription($this->meta()->description($question['title']), 'set');
-        $this->view()->headKeywords($this->meta()->keywords($question['title']), 'set');
+        $this->view()->headDescription(Pi::service('api')->ask(array('Text', 'description'), $question['title']), 'set');
+        $this->view()->headKeywords(Pi::service('api')->ask(array('Text', 'keywords'), $question['title']), 'set');
         $this->view()->setTemplate('question_index');
         $this->view()->assign('question', $question);
         $this->view()->assign('config', $config);
