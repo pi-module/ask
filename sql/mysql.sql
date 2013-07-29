@@ -12,7 +12,7 @@ CREATE TABLE `{question}` (
  `create` int(10) unsigned NOT NULL,
  `update` int(10) unsigned NOT NULL,
  `title` varchar(255) NOT NULL, 
- `slug` varchar(255) NOT NULL,
+ `slug` varchar(255),
  `content` text,
  `tags` varchar(255) NOT NULL,
  PRIMARY KEY (`id`),
