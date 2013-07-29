@@ -35,29 +35,39 @@ class IndexController extends ActionController
         if (!in_array($selectOrder, array('create', 'hits', 'point', 'answer'))) {
             $selectOrder = 'create';
         }
-        // Get page ID or alias from url
+        // Get page ID or slug from url
         $params = $this->params()->fromRoute();
         // Get config
         $config = Pi::service('registry')->config->read($params['module']);
         // Set info
         $order = array($selectOrder . ' DESC', 'id DESC');
-        $columns = array('id', 'answer', 'author', 'point', 'count', 'hits', 'create', 'title', 'alias', 'tags');
+        $columns = array('id', 'answer', 'author', 'point', 'count', 'hits', 'create', 'title', 'slug', 'tags');
         $where = array('status' => 1, 'type' => 'Q');
         $limit = intval($config['show_index']);
+        $offset = (int)($page - 1) * $config['show_perpage'];
         // Get list of story
-        $select = $this->getModel('question')->select()->columns($columns)->where($where)->order($order)->limit($limit);
+        $select = $this->getModel('question')->select()->columns($columns)->where($where)->order($order)->offset($offset)->limit($limit);
         $rowset = $this->getModel('question')->selectWith($select);
         foreach ($rowset as $row) {
             $question[$row->id] = $row->toArray();
             $question[$row->id]['create'] = date('Y/m/d', $question[$row->id]['create']);
             $question[$row->id]['tags'] = Json::decode($question[$row->id]['tags']);
-            $question[$row->id]['url'] = $this->url('.ask', array('module' => $params['module'], 'controller' => 'question', 'alias' => $question[$row->id]['alias']));
+            $question[$row->id]['url'] = $this->url('.ask', array('module' => $params['module'], 'controller' => 'question', 'slug' => $question[$row->id]['slug']));
             $writer = Pi::model('user_account')->find($question[$row->id]['author'])->toArray();
             $question[$row->id]['identity'] = $writer['identity'];
             $question[$row->id]['labelpoint'] = HtmlClass::TabLabel($question[$row->id]['point']);
             $question[$row->id]['labelanswer'] = HtmlClass::TabLabel($question[$row->id]['answer']);
             $question[$row->id]['labelhits'] = HtmlClass::TabLabel($question[$row->id]['hits']);
         }
+        // Set paginator
+        $select = $this->getModel('question')->select()->columns(array('count' => new \Zend\Db\Sql\Predicate\Expression('count(*)')))->where($where);
+        $count = $this->getModel('question')->selectWith($select)->current()->count;
+        $paginator = \Pi\Paginator\Paginator::factory(intval($count));
+        $paginator->setItemCountPerPage($config['show_perpage']);
+        $paginator->setCurrentPageNumber($page);
+        $paginator->setUrlOptions(array(
+            'template' => $this->url('.ask', array('module' => $params['module'], 'controller' => 'index', 'order' => $selectOrder, 'page' => '%page%')),
+        ));
         // Tab urls
         $url = array(
             'create' => $this->url('.ask', array('module' => $params['module'], 'controller' => 'index', 'order' => 'create')),
@@ -67,8 +77,8 @@ class IndexController extends ActionController
         );
         // Main url
         $mainurl = array(
-            'title' => __('Complete list of questions'),
-            'url' => $this->url('.ask', array('module' => $params['module'], 'controller' => 'list')),
+            'title' => __('View Last questions'),
+            'url' => $this->url('.ask', array('module' => $params['module'], 'controller' => 'index')),
         );
         // Set view
         $this->view()->headTitle('ASK');
@@ -76,6 +86,7 @@ class IndexController extends ActionController
         $this->view()->headKeywords('ASK', 'set');
         $this->view()->setTemplate('question_list');
         $this->view()->assign('questions', $question);
+        $this->view()->assign('paginator', $paginator);
         $this->view()->assign('config', $config);
         $this->view()->assign('url', $url);
         $this->view()->assign('mainurl', $mainurl);

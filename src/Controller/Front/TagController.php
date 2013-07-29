@@ -36,11 +36,11 @@ class TagController extends ActionController
            */
 
         // Get info from url
-        $alias = $this->params('alias');
+        $slug = $this->params('slug');
         $module = $this->params('module');
         $page = $this->params('page', 1);
-        // Check alias
-        if (empty($alias)) {
+        // Check slug
+        if (empty($slug)) {
             $this->jump(array('route' => '.ask', 'module' => $module, 'controller' => 'index'), __('The tag not found.'));
         }
         // Get order
@@ -48,15 +48,15 @@ class TagController extends ActionController
         if (!in_array($selectOrder, array('create', 'hits', 'point', 'answer'))) {
             $selectOrder = 'create';
         }
-        // Get page ID or alias from url
+        // Get page ID or slug from url
         $params = $this->params()->fromRoute();
         // Get config
         $config = Pi::service('registry')->config->read($module);
         // Set offset
         $offset = (int)($page - 1) * $config['show_perpage'];
         // Get photo Id from tag module
-        $tags = Pi::service('tag')->getList($module, $alias, null, $config['show_tags'], $offset);
-        // Check alias
+        $tags = Pi::service('tag')->getList($module, $slug, null, $config['show_tags'], $offset);
+        // Check slug
         if (empty($tags)) {
             $this->jump(array('route' => '.ask', 'module' => $module, 'controller' => 'index'), __('The tag not found.'));
         }
@@ -65,7 +65,7 @@ class TagController extends ActionController
         }
         // Set info
         $order = array($selectOrder . ' DESC', 'id DESC');
-        $columns = array('id', 'answer', 'author', 'point', 'count', 'hits', 'create', 'title', 'alias', 'tags');
+        $columns = array('id', 'answer', 'author', 'point', 'count', 'hits', 'create', 'title', 'slug', 'tags');
         $where = array('status' => 1, 'type' => 'Q', 'id' => $tagId);
         $limit = intval($config['show_index']);
         // Get list of story
@@ -75,7 +75,7 @@ class TagController extends ActionController
             $question[$row->id] = $row->toArray();
             $question[$row->id]['create'] = date('Y/m/d', $question[$row->id]['create']);
             $question[$row->id]['tags'] = Json::decode($question[$row->id]['tags']);
-            $question[$row->id]['url'] = $this->url('.ask', array('module' => $module, 'controller' => 'question', 'alias' => $question[$row->id]['alias']));
+            $question[$row->id]['url'] = $this->url('.ask', array('module' => $module, 'controller' => 'question', 'slug' => $question[$row->id]['slug']));
             $writer = Pi::model('user_account')->find($question[$row->id]['author'])->toArray();
             $question[$row->id]['identity'] = $writer['identity'];
             $question[$row->id]['labelpoint'] = HtmlClass::TabLabel($question[$row->id]['point']);
@@ -89,14 +89,14 @@ class TagController extends ActionController
         $paginator->setItemCountPerPage($config['show_perpage']);
         $paginator->setCurrentPageNumber($page);
         $paginator->setUrlOptions(array(
-            'template' => $this->url('.ask', array('module' => $module, 'controller' => 'tag', 'alias' => urlencode($alias), 'order' => $selectOrder, 'page' => '%page%')),
+            'template' => $this->url('.ask', array('module' => $module, 'controller' => 'tag', 'slug' => urlencode($slug), 'order' => $selectOrder, 'page' => '%page%')),
         ));
         // Tab urls
         $url = array(
-            'create' => $this->url('.ask', array('module' => $module, 'controller' => 'tag', 'alias' => urlencode($alias), 'order' => 'create')),
-            'vote' => $this->url('.ask', array('module' => $module, 'controller' => 'tag', 'alias' => urlencode($alias), 'order' => 'point')),
-            'hits' => $this->url('.ask', array('module' => $module, 'controller' => 'tag', 'alias' => urlencode($alias), 'order' => 'hits')),
-            'answer' => $this->url('.ask', array('module' => $module, 'controller' => 'tag', 'alias' => urlencode($alias), 'order' => 'answer')),
+            'create' => $this->url('.ask', array('module' => $module, 'controller' => 'tag', 'slug' => urlencode($slug), 'order' => 'create')),
+            'vote' => $this->url('.ask', array('module' => $module, 'controller' => 'tag', 'slug' => urlencode($slug), 'order' => 'point')),
+            'hits' => $this->url('.ask', array('module' => $module, 'controller' => 'tag', 'slug' => urlencode($slug), 'order' => 'hits')),
+            'answer' => $this->url('.ask', array('module' => $module, 'controller' => 'tag', 'slug' => urlencode($slug), 'order' => 'answer')),
         );
         // Main url
         $mainurl = array(
@@ -104,9 +104,9 @@ class TagController extends ActionController
             'url' => $this->url('.ask', array('module' => $module, 'controller' => 'index')),
         );
         // Set view
-        $this->view()->headTitle($alias);
-        $this->view()->headDescription($alias, 'set');
-        $this->view()->headKeywords($alias, 'set');
+        $this->view()->headTitle($slug);
+        $this->view()->headDescription($slug, 'set');
+        $this->view()->headKeywords($slug, 'set');
         $this->view()->setTemplate('question_list');
         $this->view()->assign('questions', $question);
         $this->view()->assign('paginator', $paginator);

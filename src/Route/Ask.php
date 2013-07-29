@@ -66,7 +66,7 @@ class Ask extends Standard
         $controller = explode($this->paramDelimiter, $path, 2);
 
         // Set controller
-        if (isset($controller[0]) && in_array($controller[0], array('answer', 'index', 'list', 'profile', 'question', 'submit', 'tag', 'order'))) {
+        if (isset($controller[0]) && in_array($controller[0], array('answer', 'index', 'profile', 'question', 'submit', 'tag', 'order'))) {
             $matches['controller'] = urldecode($controller[0]);
         } elseif (isset($controller[0]) && $controller[0] == 'page') {
             $matches['page'] = intval($controller[1]);
@@ -85,16 +85,16 @@ class Ask extends Standard
                     }
                     break;
 
-                case 'list':
+                case 'index':
                     if (!empty($controller[1])) {
-                        $listPath = explode($this->paramDelimiter, $controller[1], 4);
-                        if (isset($listPath[0]) && $listPath[0] == 'order' && isset($listPath[2]) && $listPath[2] == 'page') {
-                            $matches['order'] = urldecode($listPath[1]);
-                            $matches['page'] = intval($listPath[3]);
-                        } elseif (isset($listPath[0]) && $listPath[0] == 'order') {
-                            $matches['order'] = urldecode($listPath[1]);
-                        } elseif (isset($listPath[0]) && $listPath[0] == 'page') {
-                            $matches['page'] = intval($listPath[1]);
+                        $indexPath = explode($this->paramDelimiter, $controller[1], 4);
+                        if (isset($indexPath[0]) && $indexPath[0] == 'order' && isset($indexPath[2]) && $indexPath[2] == 'page') {
+                            $matches['order'] = urldecode($indexPath[1]);
+                            $matches['page'] = intval($indexPath[3]);
+                        } elseif (isset($indexPath[0]) && $indexPath[0] == 'order') {
+                            $matches['order'] = urldecode($indexPath[1]);
+                        } elseif (isset($indexPath[0]) && $indexPath[0] == 'page') {
+                            $matches['page'] = intval($indexPath[1]);
                         }
                     }
                     break;
@@ -102,7 +102,7 @@ class Ask extends Standard
                 case 'question':
                     if (!empty($controller[1])) {
                         $questionPath = explode($this->paramDelimiter, $controller[1], 2);
-                        $matches['alias'] = urldecode($questionPath[0]);
+                        $matches['slug'] = urldecode($questionPath[0]);
                     }
                     break;
 
@@ -118,8 +118,8 @@ class Ask extends Standard
                 case 'tag':
                     if (!empty($controller[1])) {
                         $tagPath = explode($this->paramDelimiter, $controller[1], 5);
-                        $matches['alias'] = urldecode($tagPath[0]);
-                        if (isset($tagPath[1]) && $tagPath[1] == 'order' && isset($listPath[1]) && $listPath[1] == 'page') {
+                        $matches['slug'] = urldecode($tagPath[0]);
+                        if (isset($tagPath[1]) && $tagPath[1] == 'order' && isset($indexPath[1]) && $indexPath[1] == 'page') {
                             $matches['order'] = urldecode($tagPath[2]);
                             $matches['page'] = intval($tagPath[4]);
                         } elseif (isset($tagPath[1]) && $tagPath[1] == 'order') {
@@ -141,7 +141,7 @@ class Ask extends Standard
                 case 'profile':
                     if (!empty($controller[1])) {
                         $profilePath = explode($this->paramDelimiter, $controller[1], 2);
-                        $matches['alias'] = urldecode($profilePath[0]);
+                        $matches['slug'] = urldecode($profilePath[0]);
                     }
                     break;    
             }
@@ -173,8 +173,8 @@ class Ask extends Standard
         if (!empty($mergedParams['action']) && $mergedParams['action'] != 'index') {
             $url['action'] = $mergedParams['action'];
         }
-        if (!empty($mergedParams['alias'])) {
-            $url['alias'] = $mergedParams['alias'];
+        if (!empty($mergedParams['slug'])) {
+            $url['slug'] = $mergedParams['slug'];
         }
         if (!empty($mergedParams['order'])) {
             $url['order'] = 'order' . $this->paramDelimiter . $mergedParams['order'];

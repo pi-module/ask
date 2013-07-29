@@ -27,7 +27,7 @@ use Module\Ask\Form\AnswerFilter;
 class AnswerController extends ActionController
 {
     protected $questionColumns = array('id', 'type', 'pid', 'answer', 'author', 'point', 'count', 'hits',
-        'status', 'create', 'update', 'title', 'alias', 'content');
+        'status', 'create', 'update', 'title', 'slug', 'content');
 
     public function indexAction()
     {
@@ -82,7 +82,7 @@ class AnswerController extends ActionController
                     // set message
                     $message = __('Your selected question edit successfully.');
                     $class = 'alert-success';
-                    $this->jump(array('route' => '.ask', 'module' => $params['module'], 'controller' => 'question', 'alias' => $question['alias']), $message);
+                    $this->jump(array('route' => '.ask', 'module' => $params['module'], 'controller' => 'question', 'slug' => $question['slug']), $message);
                 } else {
                     $message = __('Story data not saved.');
                     $class = 'alert-error';

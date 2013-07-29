@@ -28,7 +28,7 @@ use Zend\Json\Json;
 class SubmitController extends ActionController
 {
     protected $questionColumns = array('id', 'type', 'pid', 'answer', 'author', 'point', 'count', 'hits',
-        'status', 'create', 'update', 'title', 'alias', 'content', 'tags');
+        'status', 'create', 'update', 'title', 'slug', 'content', 'tags');
 
     public function indexAction()
     {
@@ -63,8 +63,11 @@ class SubmitController extends ActionController
                 $values['status'] = 1;
                 // Set type
                 $values['type'] = 'Q';
-                // Set alias
-                $values['alias'] = Pi::service('api')->ask(array('Text', 'alias'), $values['title'], $values['id'], $this->getModel('question'));
+                // Set slug
+                $slug = _strip($values['title']);
+                $slug = strtolower(trim($slug));
+                $slug = array_filter(explode(' ', $slug));
+                $values['slug'] = implode('-', $slug);
                 // Save values
                 if (!empty($values['id'])) {
                     $row = $this->getModel('question')->find($values['id']);
@@ -95,8 +98,8 @@ class SubmitController extends ActionController
                 $class = 'alert-error';
             }
         } else {
-            if (!empty($params['alias'])) {
-                $values = $this->getModel('question')->find($params['alias'], 'alias')->toArray();
+            if (!empty($params['slug'])) {
+                $values = $this->getModel('question')->find($params['slug'], 'slug')->toArray();
                 $values['tag'] = implode(' ', Pi::service('tag')->get($params['module'], $values['id'], ''));
                 $form->setData($values);
                 $message = 'You can edit this question';
@@ -119,7 +122,7 @@ class SubmitController extends ActionController
             if (isset($params['key']) && !empty($params['key'])) {
                 // Get info
                 $order = array('point DESC', 'id DESC');
-                $columns = array('id', 'title', 'alias');
+                $columns = array('id', 'title', 'slug');
                 $where = array('status' => 1, 'type' => 'Q', 'title LIKE ?' => $params['key'] . '%');
                 // Set select
                 $select = $this->getModel('question')->select()->columns($columns)->where($where)->order($order)->limit(10);

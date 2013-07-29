@@ -26,10 +26,10 @@ class QuestionController extends ActionController
 {
     public function indexAction()
     {
-        // Get question ID or alias from url
+        // Get question ID or slug from url
         $params = $this->params()->fromRoute();
         // Find story
-        $question = $this->getModel('question')->find($params['alias'], 'alias')->toArray();
+        $question = $this->getModel('question')->find($params['slug'], 'slug')->toArray();
         // Get Module Config
         $config = Pi::service('registry')->config->read($params['module']);
         // Check page
@@ -78,10 +78,22 @@ class QuestionController extends ActionController
             }
             $this->view()->assign('answers', $answers);
         }
+        
+        // Set keywords
+        $keywords = _strip($question['title']);
+        $keywords = strtolower(trim($keywords));
+        $keywords = array_unique(array_filter(explode(' ', $keywords)));
+        $keywords = implode(',', $keywords);
+        
+        // Set description
+        $description = _strip($question['title']);
+        $description = strtolower(trim($description));
+        $description = preg_replace('/[\s]+/', ' ', $description);
+ 
         // Set view
         $this->view()->headTitle($question['title']);
-        $this->view()->headDescription(Pi::service('api')->ask(array('Text', 'description'), $question['title']), 'set');
-        $this->view()->headKeywords(Pi::service('api')->ask(array('Text', 'keywords'), $question['title']), 'set');
+        $this->view()->headDescription($description, 'set');
+        $this->view()->headKeywords($keywords, 'set');
         $this->view()->setTemplate('question_index');
         $this->view()->assign('question', $question);
         $this->view()->assign('config', $config);

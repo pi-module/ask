@@ -29,15 +29,15 @@ class ProfileController extends ActionController
 	 public function indexAction()
     {
 	     // Get info from url
-        $alias = $this->params('alias');
+        $slug = $this->params('slug');
         $module = $this->params('module');
-        // Check alias
-        if (empty($alias)) {
+        // Check slug
+        if (empty($slug)) {
             $this->jump(array('route' => '.ask', 'module' => $module, 'controller' => 'index'), __('Please select user.'));
         }
         // Find user
-        $user = Pi::model('user_account')->find($alias, 'identity');
-        // Check alias
+        $user = Pi::model('user_account')->find($slug, 'identity');
+        // Check slug
         if (empty($user)) {
             $this->jump(array('route' => '.ask', 'module' => $module, 'controller' => 'index'), __('Please select user.'));
         }
@@ -47,7 +47,7 @@ class ProfileController extends ActionController
         $config = Pi::service('registry')->config->read($module);
         // Set info
         $order = array('create DESC', 'id DESC');
-        $columns = array('id', 'answer', 'author', 'point', 'count', 'hits', 'create', 'title', 'alias', 'content', 'tags');
+        $columns = array('id', 'answer', 'author', 'point', 'count', 'hits', 'create', 'title', 'slug', 'content', 'tags');
         $limit = intval($config['show_index']);
         // Get list of questions
         $whereQ = array('status' => 1, 'type' => 'Q', 'author' => $user['id']);
@@ -57,7 +57,7 @@ class ProfileController extends ActionController
             $question[$row->id] = $row->toArray();
             $question[$row->id]['create'] = date('Y/m/d', $question[$row->id]['create']);
             $question[$row->id]['tags'] = Json::decode($question[$row->id]['tags']);
-            $question[$row->id]['url'] = $this->url('.ask', array('module' => $module, 'controller' => 'question', 'alias' => $question[$row->id]['alias']));
+            $question[$row->id]['url'] = $this->url('.ask', array('module' => $module, 'controller' => 'question', 'slug' => $question[$row->id]['slug']));
             $question[$row->id]['identity'] = $user['identity'];
             $question[$row->id]['labelpoint'] = HtmlClass::TabLabel($question[$row->id]['point']);
             $question[$row->id]['labelanswer'] = HtmlClass::TabLabel($question[$row->id]['answer']);

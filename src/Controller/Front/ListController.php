@@ -24,7 +24,7 @@ use Pi\Mvc\Controller\ActionController;
 use Module\Ask\HtmlClass;
 use Zend\Json\Json;
 
-class ListController extends ActionController
+class IndexController extends ActionController
 {
     public function indexAction()
     {
@@ -35,13 +35,13 @@ class ListController extends ActionController
         if (!in_array($selectOrder, array('create', 'hits', 'point', 'answer'))) {
             $selectOrder = 'create';
         }
-        // Get page ID or alias from url
+        // Get page ID or slug from url
         $params = $this->params()->fromRoute();
         // Get config
         $config = Pi::service('registry')->config->read($params['module']);
         // Set info
         $order = array($selectOrder . ' DESC', 'id DESC');
-        $columns = array('id', 'answer', 'author', 'point', 'count', 'hits', 'create', 'title', 'alias', 'tags');
+        $columns = array('id', 'answer', 'author', 'point', 'count', 'hits', 'create', 'title', 'slug', 'tags');
         $where = array('status' => 1, 'type' => 'Q');
         $limit = intval($config['show_index']);
         $offset = (int)($page - 1) * $config['show_perpage'];
@@ -52,7 +52,7 @@ class ListController extends ActionController
             $question[$row->id] = $row->toArray();
             $question[$row->id]['create'] = date('Y/m/d', $question[$row->id]['create']);
             $question[$row->id]['tags'] = Json::decode($question[$row->id]['tags']);
-            $question[$row->id]['url'] = $this->url('.ask', array('module' => $params['module'], 'controller' => 'question', 'alias' => $question[$row->id]['alias']));
+            $question[$row->id]['url'] = $this->url('.ask', array('module' => $params['module'], 'controller' => 'question', 'slug' => $question[$row->id]['slug']));
             $writer = Pi::model('user_account')->find($question[$row->id]['author'])->toArray();
             $question[$row->id]['identity'] = $writer['identity'];
             $question[$row->id]['labelpoint'] = HtmlClass::TabLabel($question[$row->id]['point']);
@@ -66,14 +66,14 @@ class ListController extends ActionController
         $paginator->setItemCountPerPage($config['show_perpage']);
         $paginator->setCurrentPageNumber($page);
         $paginator->setUrlOptions(array(
-            'template' => $this->url('.ask', array('module' => $params['module'], 'controller' => 'list', 'order' => $selectOrder, 'page' => '%page%')),
+            'template' => $this->url('.ask', array('module' => $params['module'], 'controller' => 'index', 'order' => $selectOrder, 'page' => '%page%')),
         ));
         // Tab urls
         $url = array(
-            'create' => $this->url('.ask', array('module' => $params['module'], 'controller' => 'list', 'order' => 'create')),
-            'vote' => $this->url('.ask', array('module' => $params['module'], 'controller' => 'list', 'order' => 'point')),
-            'hits' => $this->url('.ask', array('module' => $params['module'], 'controller' => 'list', 'order' => 'hits')),
-            'answer' => $this->url('.ask', array('module' => $params['module'], 'controller' => 'list', 'order' => 'answer')),
+            'create' => $this->url('.ask', array('module' => $params['module'], 'controller' => 'index', 'order' => 'create')),
+            'vote' => $this->url('.ask', array('module' => $params['module'], 'controller' => 'index', 'order' => 'point')),
+            'hits' => $this->url('.ask', array('module' => $params['module'], 'controller' => 'index', 'order' => 'hits')),
+            'answer' => $this->url('.ask', array('module' => $params['module'], 'controller' => 'index', 'order' => 'answer')),
         );
         // Main url
         $mainurl = array(

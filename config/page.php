@@ -26,11 +26,6 @@ return array(
             'block' => 1,
         ),
         array(
-            'title' => __('List'),
-            'controller' => 'list',
-            'block' => 1,
-        ),
-        array(
             'title' => __('Answer page'),
             'controller' => 'answer',
             'block' => 1,

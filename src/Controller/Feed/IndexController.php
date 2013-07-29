@@ -41,7 +41,7 @@ class IndexController extends FeedController
             'date_created' => time(),
         );
 
-        $columns = array('id', 'title', 'alias', 'content', 'create');
+        $columns = array('id', 'title', 'slug', 'content', 'create');
         $order = array('create DESC', 'id DESC');
         $where = array('status' => 1, 'type' => 'Q');
         $limit = intval($this->config('feed_num'));
@@ -52,19 +52,19 @@ class IndexController extends FeedController
             $entry['title'] = $row['title'];
             $entry['description'] = $row['content'];
             $entry['date_modified'] = (int)$row['create'];
-            $entry['link'] = $this->getHref($row['alias']);
+            $entry['link'] = $this->getHref($row['slug']);
             $feed['entries'][] = $entry;
         }
         return $feed;
     }
 
-    protected function getHref($alias)
+    protected function getHref($slug)
     {
         $uri = $this->url('.ask', array(
             'module' => $this->getModule(),
             'controller' => 'question',
             'action' => 'index',
-            'alias' => $alias
+            'slug' => $slug
         ));
         return Pi::url($uri, false);
     }

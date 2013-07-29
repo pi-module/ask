@@ -30,7 +30,7 @@ class QuestionController extends ActionController
         $page = $this->params('p', 1);
         // Get info
         $order = array('create DESC', 'id DESC');
-        $columns = array('id', 'type', 'answer', 'title', 'alias', 'status', 'create', 'author');
+        $columns = array('id', 'type', 'answer', 'title', 'slug', 'status', 'create', 'author');
         $where = array('type' => 'Q');
         $offset = (int)($page - 1) * $this->config('admin_perpage');
         $limit = intval($this->config('admin_perpage'));
@@ -42,7 +42,7 @@ class QuestionController extends ActionController
             $question[$row->id] = $row->toArray();
             $question[$row->id]['create'] = date('Y/m/d H:i:s', $question[$row->id]['create']);
             if ($question[$row->id]['type'] == 'Q') {
-                $question[$row->id]['url'] = $this->url('.ask', array('module' => $this->params('module'), 'controller' => 'question', 'alias' => $question[$row->id]['alias']));
+                $question[$row->id]['url'] = $this->url('.ask', array('module' => $this->params('module'), 'controller' => 'question', 'slug' => $question[$row->id]['slug']));
             }
         }
         // Set paginator

@@ -56,7 +56,7 @@ class Install extends BasicInstall
             'create' => time(),
             'update' => time(),
             'title' => __('This is a sample question'),
-            'alias' => __('this-is-a-sample-question'),
+            'slug' => __('this-is-a-sample-question'),
             'content' => __('Sample question for test new ask module instaltion. you can remove this question after install'),
         );
         $model->insert($data);
