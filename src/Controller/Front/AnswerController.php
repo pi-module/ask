@@ -1,20 +1,14 @@
 <?php
 /**
- * Ask answer controller
+ * Pi Engine (http://pialog.org)
  *
- * You may not change or alter any portion of this comment or credits
- * of supporting developers from this source code or any supporting source code
- * which is considered copyrighted (c) material of the original comment or credit authors.
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- *
- * @copyright       Copyright (c) Pi Engine http://www.xoopsengine.org
- * @license         http://www.xoopsengine.org/license New BSD License
- * @author          Hossein Azizabadi <azizabadi@faragostaresh.com>
- * @since           3.0
- * @package         Module\Ask
- * @version         $Id$
+ * @link            http://code.pialog.org for the Pi Engine source repository
+ * @copyright       Copyright (c) Pi Engine http://pialog.org
+ * @license         http://pialog.org/license.txt New BSD License
+ */
+
+/**
+ * @author Hossein Azizabadi <azizabadi@faragostaresh.com>
  */
 
 namespace Module\Ask\Controller\Front;
@@ -26,20 +20,33 @@ use Module\Ask\Form\AnswerFilter;
 
 class AnswerController extends ActionController
 {
-    protected $questionColumns = array('id', 'type', 'pid', 'answer', 'author', 'point', 'count', 'hits',
-        'status', 'create', 'update', 'title', 'slug', 'content');
+    protected $questionColumns = array(
+        'id', 'type', 'pid', 'answer', 'uid', 'point', 'count', 'favorite', 'hits', 'status',
+        'time_create', 'time_update', 'title', 'slug', 'content', 'tags', 'seo_title',
+        'seo_keywords','seo_description'
+    );
 
     public function indexAction()
     {
-
-        $questionId = $this->params('question');
-        if (!isset($questionId) || !$questionId) {
-            $message = __('Please select a question');
-            return $this->jump(array('route' => '.ask', 'module' => $this->params('module'), 'controller' => 'index'), $message);
+        // Check user is login or not
+        Pi::service('authentication')->requireLogin();
+        // Get info from url
+        $slug = $this->params('slug');
+        $module = $this->params('module');
+        // Get config
+        $config = Pi::service('registry')->config->read($module);
+        // Find story
+        $question = $this->getModel('question')->find($slug, 'slug')->toArray();
+        // Check page
+        if (!$question || $question['status'] != 1) {
+            $message = __('The question not found.');
+            $url = array('', 'module' => $module, 'controller' => 'index', 'action' => 'index');
+            $this->jump($url, $message);
         }
-        // Set question
-        $question = $this->getModel('question')->find($questionId)->toArray();
-        $question['content'] = Pi::service('markup')->render($question['content'], 'html', 'markdown');
+        // Set date
+        $question['create'] = _date($question['create']);
+        // Set markup
+        $question['content'] = Pi::service('markup')->render($question['content'], 'html', 'text');
         // get info
         $form = new AnswerForm('Answer');
         if ($this->request->isPost()) {
@@ -48,59 +55,54 @@ class AnswerController extends ActionController
             $form->setData($data);
             if ($form->isValid()) {
                 $values = $form->getData();
+                // Set just category fields
                 foreach (array_keys($values) as $key) {
                     if (!in_array($key, $this->questionColumns)) {
                         unset($values[$key]);
                     }
                 }
-                // Set time
-                if (empty($values['id'])) {
-                    $values['create'] = $values['update'] = time();
-                } else {
-                    $values['update'] = time();
-                }
-                // Set user
-                if (empty($values['id'])) {
-                    $values['author'] = Pi::registry('user')->id;
-                }
-                // Set status
-                $values['status'] = 1;
-                // Set type
+                // Set seo_title
+                $values['title'] = sprintf(__('Answer to %s'), $question['title']);
+                $values['slug'] = Pi::api('text', 'ask')->slug($values['title'] . ' ' . _date());
+                $values['seo_title'] = Pi::api('text', 'ask')->title($values['title']);
+                $values['seo_keywords'] = Pi::api('text', 'ask')->keywords($values['title']);
+                $values['seo_description'] = Pi::api('text', 'ask')->description($values['title']);
+                $values['time_create'] = time();
+                $values['time_update'] = time();
+                $values['uid'] = Pi::user()->getId();
+                $values['status'] = $this->config('auto_approval');
                 $values['type'] = 'A';
+                // Update answer
+                $this->getModel('question')->update(array('answer' => $question['answer'] + 1), array('id' => $question['id']));
                 // Save values
-                if (!empty($values['id'])) {
-                    $row = $this->getModel('question')->find($values['id']);
-                } else {
-                    $row = $this->getModel('question')->createRow();
-                }
+                $row = $this->getModel('question')->createRow();
                 $row->assign($values);
                 $row->save();
                 // Check it save or not
-                if ($row->id) {
-                    // update answer count
-                    $this->getModel('question')->update(array('answer' => $question['answer'] + 1), array('id' => $question['id']));
-                    // set message
-                    $message = __('Your selected question edit successfully.');
-                    $class = 'alert-success';
-                    $this->jump(array('route' => '.ask', 'module' => $params['module'], 'controller' => 'question', 'slug' => $question['slug']), $message);
+                if ($this->config('auto_approval')) {
+                    $message = __('Your new answer to this question save successfully, and show under question');
                 } else {
-                    $message = __('Story data not saved.');
-                    $class = 'alert-error';
+                    $message = __('Your new answer to this question save successfully, But it need review and publish by website admin');
                 }
-            } else {
-                $message = __('Invalid data, please check and re-submit.');
-                $class = 'alert-error';
+                $url = array('', 'module' => $module, 'controller' => 'question', 'action' => 'index', 'slug' => $question['slug']);
+                $this->jump($url, $message);
             }
         } else {
             $values['pid'] = $question['id'];
             $form->setData($values);
-            $message = '';
-            $this->view()->assign('content', $question['content']);
-            ;
         }
-        $this->view()->assign('form', $form);
-        $this->view()->assign('title', sprintf(__('Answer to %s'), $question['title']));
-        $this->view()->assign('message', $message);
+        // Set header
+        $title = sprintf(__('Answer to %s'), $question['title']);
+        $seo_title = Pi::api('text', 'ask')->title($title);
+        $seo_keywords = Pi::api('text', 'ask')->keywords($title);
+        $seo_description = Pi::api('text', 'ask')->description($title);
+        // Set view
+        $this->view()->headTitle($seo_title);
+        $this->view()->headDescription($seo_keywords, 'set');
+        $this->view()->headKeywords($seo_description, 'set');
         $this->view()->setTemplate('answer_index');
+        $this->view()->assign('form', $form);
+        $this->view()->assign('title', $title);
+        $this->view()->assign('question', $question);
     }
 }

@@ -1,7 +1,7 @@
-<?php $this->css($this->assetModule('css/front.css')); ?>
 <div class="ask">
-	<h2><?php echo $this->escape($title); ?></h2>
-	<div class="question-content"><?php echo $content; ?></div>
-	<div class="clearfix"></div>
+	<div class="well">
+		<h4><?php echo $this->escape($title); ?></h4>
+		<div class="question-content"><?php echo $question['content']; ?></div>
+	</div>
 	<?php include $this->templateComponent('form'); ?>
 </div>

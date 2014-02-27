@@ -1,60 +1,29 @@
-<?php 
-	$this->css($this->assetModule('css/front.css'));
-	if (!empty($vote)) {
-		$this->jQuery();
-		$this->js($this->assetModule('script/plus.js', 'vote'));
-	}
- ?>
 <div class="ask">
-   <div class="question-title">
-	   <h3><?php echo $this->escape($question['title']); ?></h3>
-   </div>
-   <div class="question-content">
-      <div class="span1">
-      <?php if (!empty($vote)) { ?>
-      <?php $voteClass = 'btn-group-vertical'; ?>
-      <?php include $this->template('module/vote:front/votebar'); ?>
-      <?php } ?>
-      </div>
-      <div class="span11">
-	      <div class="question-text"><?php echo $question['content']; ?></div>
-	      <?php if($tags) { ?>
-			<div class="tagbar">
-			<?php foreach($tags as $tag) { ?>
-				<a title="<?php echo $tag; ?>" href="<?php echo $this->url('.ask', array('module' => $module, 'controller' => 'tag', 'alias' => urlencode($tag))); ?>"><span class="label label-inverse icon-tag"> <?php echo $tag; ?></span></a>
-			<?php } ?>
-			</div>
-			<?php } ?>
-      </div>
-      <div class="question-author pull-right"><?php echo $this->escape($question['create']); ?> <?php _e('By'); ?> <?php echo $this->escape($question['identity']); ?></div>
-	   <div class="clearfix"></div>
-   </div>
-   <?php if(!empty($answers)) { ?>
-   <h4 class="page-header"><?php _e('List of answers'); ?></h4>
-   <div class="answer-list">
-   <?php foreach($answers as $answer) { ?>
-	   <div class="question page-header">
-		   <div class="question-body">
-			   <div class="question-content">
-				   <div class="span1">
-               <?php if (!empty($vote)) { ?>
-					<?php $vote = $answer['vote']; ?>
-					<?php $voteClass = 'btn-group-vertical'; ?>
-				   <?php include $this->template('module/vote:front/votebar'); ?>
-					<?php } ?>				   
-				   </div>
-				   <div class="span11">
-					   <div class="question-text"><?php echo $answer['content']; ?></div>
-				   </div>
-			   </div>
-			   <div class="question-author pull-right"><?php echo $this->escape($answer['create']); ?> <?php _e('By'); ?> <?php echo $this->escape($answer['identity']); ?></div>
-			   <div class="clearfix"></div>
-			</div>
-		   <div class="clearfix"></div>
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h3 class="panel-title"><?php echo $this->escape($question['title']); ?></h3>
 		</div>
-   <?php } ?>
-   <div class="clearfix"></div>
-   </div>
-   <?php } ?>
-   <div class="btn-group"><a class="btn" title="<?php _e('Answers'); ?>" href="<?php echo $this->url('.ask', array('module' => $module, 'controller' => 'answer', 'question' => $question['id'])); ?>"><?php _e('Answers'); ?></a></div>
+		<div class="panel-body">
+			<?php echo $question['content']; ?>
+			<div class="clearfix">
+				<div class="pull-left"><?php echo $this->escape($question['time_create']); ?></div>
+			</div>
+		</div>
+	</div>
+	<?php if (isset($answers) && !empty($answers)) { ?>
+	<div class="list-group">
+		<?php foreach($answers as $answer) { ?>
+		<div class="list-group-item">
+			<h4 class="list-group-item-heading"><?php echo $this->escape($answer['title']); ?></h4>
+			<div class="list-group-item-text">
+				<?php echo $answer['content']; ?>
+				<div class="clearfix">
+					<div class="pull-left"><?php echo $this->escape($answer['time_create']); ?></div>
+				</div>
+			</div>
+		</div>
+		<?php } ?>
+    </div>
+    <?php } ?>
+    <p><a class="btn btn-primary" title="<?php _e('Answer'); ?>" href="<?php echo $this->url('', array('controller' => 'answer', 'action' => 'index', 'slug' => $this->escape($question['slug']))); ?>"><?php _e('Answer'); ?></a></p>
 </div>

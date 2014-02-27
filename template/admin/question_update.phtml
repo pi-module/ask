@@ -1,0 +1,9 @@
+<div class="ask">
+	<div class="well">
+		<p><strong><?php _e('Title'); ?></strong> : <?php echo $this->escape($question['title']); ?></p>
+		<p><strong><?php _e('Slug'); ?></strong> : <?php echo $this->escape($question['slug']); ?></p>
+		<p><strong><?php _e('Content'); ?></strong> : <?php echo $question['content']; ?></p>
+		<p><strong><?php _e('Create'); ?></strong> : <?php echo $this->escape($question['time_create']); ?></p>
+	</div>
+	<?php include $this->templateComponent('form'); ?>
+</div>

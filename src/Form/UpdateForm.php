@@ -16,12 +16,12 @@ namespace Module\Ask\Form;
 use Pi;
 use Pi\Form\Form as BaseForm;
 
-class AskForm extends BaseForm
+class UpdateForm extends BaseForm
 {
     public function getInputFilter()
     {
         if (!$this->filter) {
-            $this->filter = new AskFilter;
+            $this->filter = new UpdateFilter;
         }
         return $this->filter;
     }
@@ -50,7 +50,7 @@ class AskForm extends BaseForm
         $this->add(array(
             'name' => 'content',
             'options' => array(
-                'label' => __('Question'),
+                'label' => __('Content'),
             ),
             'attributes' => array(
                 'type' => 'textarea',

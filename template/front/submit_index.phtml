@@ -1,12 +1,8 @@
 <?php 
-	$this->css($this->assetModule('css/front.css')); 
-	$this->jQuery();
-	$this->bootstrap('js/bootstrap.js');
-?>
-<div class="ask">
-	<h2><?php echo $this->escape($title); ?></h2>
-	<?php include $this->templateComponent('form'); ?>
-</div>
+/*
+$this->css($this->assetModule('css/front.css')); 
+$this->jQuery();
+$this->bootstrap('js/bootstrap.js');
 <script type="text/javascript" >
 $('#searchinput').typeahead({
 	 minLength: 5,
@@ -24,3 +20,9 @@ $('#searchinput').typeahead({
 	 }
 });
 </script>
+*/
+?>
+<div class="ask">
+	<h3><?php echo $this->escape($title); ?></h3>
+	<?php include $this->templateComponent('form'); ?>
+</div>

@@ -1,20 +1,14 @@
 <?php
 /**
- * Ask module config
+ * Pi Engine (http://pialog.org)
  *
- * You may not change or alter any portion of this comment or credits
- * of supporting developers from this source code or any supporting source code
- * which is considered copyrighted (c) material of the original comment or credit authors.
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- *
- * @copyright       Copyright (c) Pi Engine http://www.xoopsengine.org
- * @license         http://www.xoopsengine.org/license New BSD License
- * @author          Hossein Azizabadi <azizabadi@faragostaresh.com>
- * @since           3.0
- * @package         Module\Ask
- * @version         $Id$
+ * @link            http://code.pialog.org for the Pi Engine source repository
+ * @copyright       Copyright (c) Pi Engine http://pialog.org
+ * @license         http://pialog.org/license.txt New BSD License
+ */
+
+/**
+ * @author Hossein Azizabadi <azizabadi@faragostaresh.com>
  */
 
 return array(
@@ -24,8 +18,8 @@ return array(
             'name' => 'admin'
         ),
         array(
-            'title' => __('Show'),
-            'name' => 'show'
+            'title' => __('Front'),
+            'name' => 'front'
         ),
         array(
             'title' => __('Feed'),
@@ -48,28 +42,36 @@ return array(
         ),
         // Show
         'show_perpage' => array(
-            'category' => 'show',
+            'category' => 'front',
             'title' => __('Perpage'),
-            'description' => __('Number of question in each page'),
+            'description' => __('Number of questions in each page'),
             'edit' => 'text',
             'filter' => 'number_int',
             'value' => 10
         ),
-        'show_index' => array(
-            'category' => 'show',
-            'title' => __('Perpage'),
-            'description' => __('Number of last question for show in index controller'),
-            'edit' => 'text',
-            'filter' => 'number_int',
-            'value' => 50
-        ),
         'show_tags' => array(
-            'category' => 'show',
+            'category' => 'front',
             'title' => __('Tags'),
             'description' => __('Number of tags in tag controller'),
             'edit' => 'text',
             'filter' => 'number_int',
             'value' => 50
+        ),
+        'auto_approval' => array(
+            'title' => __('Automatic approval'),
+            'description' => '',
+            'edit' => array(
+                'type' => 'select',
+                'options' => array(
+                    'options' => array(
+                        0 => __('All questions and answers need admin review before publish'),
+                        1 => __('Automatic approval all questions and answers'),
+                    ),
+                ),
+            ),
+            'filter' => 'number_int',
+            'value' => 1,
+            'category' => 'front',
         ),
         // Feed 
         'feed_icon' => array(
@@ -96,22 +98,6 @@ return array(
             'edit' => 'checkbox',
             'filter' => 'number_int',
             'value' => 1
-        ),
-        'vote_type' => array(
-            'category' => 'vote',
-            'title' => __('VoteBar type'),
-            'description' => '',
-            'filter' => 'string',
-            'value' => 'plus',
-            'edit' => array(
-                'type' => 'select',
-                'options' => array(
-                    'options' => array(
-                        'plus' => __('Plus'),
-                        'star' => __('Star'),
-                    ),
-                ),
-            ),
         ),
     ),
 );

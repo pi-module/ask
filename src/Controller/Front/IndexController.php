@@ -1,95 +1,151 @@
 <?php
 /**
- * Ask index controller
+ * Pi Engine (http://pialog.org)
  *
- * You may not change or alter any portion of this comment or credits
- * of supporting developers from this source code or any supporting source code
- * which is considered copyrighted (c) material of the original comment or credit authors.
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- *
- * @copyright       Copyright (c) Pi Engine http://www.xoopsengine.org
- * @license         http://www.xoopsengine.org/license New BSD License
- * @author          Hossein Azizabadi <azizabadi@faragostaresh.com>
- * @since           3.0
- * @package         Module\Ask
- * @version         $Id$
+ * @link            http://code.pialog.org for the Pi Engine source repository
+ * @copyright       Copyright (c) Pi Engine http://pialog.org
+ * @license         http://pialog.org/license.txt New BSD License
+ */
+
+/**
+ * @author Hossein Azizabadi <azizabadi@faragostaresh.com>
  */
 
 namespace Module\Ask\Controller\Front;
 
 use Pi;
 use Pi\Mvc\Controller\ActionController;
-use Module\Ask\HtmlClass;
+use Pi\Paginator\Paginator;
+use Zend\Db\Sql\Predicate\Expression;
 use Zend\Json\Json;
 
 class IndexController extends ActionController
 {
     public function indexAction()
     {
-        // Get page
-        $page = $this->params('page', 1);
-        // Get order
-        $selectOrder = $this->params('order', 'create');
-        if (!in_array($selectOrder, array('create', 'hits', 'point', 'answer'))) {
-            $selectOrder = 'create';
-        }
-        // Get page ID or slug from url
-        $params = $this->params()->fromRoute();
+        // Get info from url
+        $module = $this->params('module');
         // Get config
-        $config = Pi::service('registry')->config->read($params['module']);
-        // Set info
-        $order = array($selectOrder . ' DESC', 'id DESC');
-        $columns = array('id', 'answer', 'author', 'point', 'count', 'hits', 'create', 'title', 'slug', 'tags');
+        $config = Pi::service('registry')->config->read($module);
+        // Set product info
         $where = array('status' => 1, 'type' => 'Q');
-        $limit = intval($config['show_index']);
-        $offset = (int)($page - 1) * $config['show_perpage'];
-        // Get list of story
-        $select = $this->getModel('question')->select()->columns($columns)->where($where)->order($order)->offset($offset)->limit($limit);
+        // Set paginator info
+        $template = array(
+            'controller' => 'index',
+            'action' => 'index',
+        );
+        // Get product List
+        $questions = $this->askList($where);
+        // Get paginator
+        $paginator = $this->askPaginator($template, $where);
+        // Set order link
+        $orderLink = array();
+        $orderLink['answer'] = $this->url('', array(
+            'module'      => $module, 
+            'controller'  => 'index', 
+            'action'      => 'index', 
+            'order'        => 'answer'
+        ));
+        $orderLink['hits'] = $this->url('', array(
+            'module'      => $module, 
+            'controller'  => 'index', 
+            'action'      => 'index', 
+            'order'        => 'hits'
+        ));
+        $orderLink['point'] = $this->url('', array(
+            'module'      => $module, 
+            'controller'  => 'index', 
+            'action'      => 'index', 
+            'order'        => 'point'
+        ));
+        $orderLink['create'] = $this->url('', array(
+            'module'      => $module, 
+            'controller'  => 'index', 
+            'action'      => 'index', 
+            'order'        => 'create'
+        ));
+        $orderLink['active'] = $this->params('order', 'create');
+        // Set view
+        $this->view()->headTitle(__('Ask index seo title'));
+        $this->view()->headDescription(__('ask index seo description'), 'set');
+        $this->view()->headKeywords(__('ask index seo keywords'), 'set');
+        $this->view()->setTemplate('question_list');
+        $this->view()->assign('questions', $questions);
+        $this->view()->assign('paginator', $paginator);
+        $this->view()->assign('config', $config);
+        $this->view()->assign('orderLink', $orderLink);   
+    }
+
+    public function askList($where)
+    {
+        // Set info
+        $question = array();
+        $page = $this->params('page', 1);
+        $module = $this->params('module');
+        $order = $this->params('order', 'create');
+        $offset = (int)($page - 1) * $this->config('show_perpage');
+        $limit = intval($this->config('show_perpage'));
+        $order = $this->setOrder($order);
+        // Get list of question
+        $select = $this->getModel('question')->select()->where($where)->order($order)->offset($offset)->limit($limit);
         $rowset = $this->getModel('question')->selectWith($select);
         foreach ($rowset as $row) {
             $question[$row->id] = $row->toArray();
-            $question[$row->id]['create'] = date('Y/m/d', $question[$row->id]['create']);
+            $question[$row->id]['time_create'] = _date($question[$row->id]['time_create']);
             $question[$row->id]['tags'] = Json::decode($question[$row->id]['tags']);
-            $question[$row->id]['url'] = $this->url('.ask', array('module' => $params['module'], 'controller' => 'question', 'slug' => $question[$row->id]['slug']));
-            $writer = Pi::model('user_account')->find($question[$row->id]['author'])->toArray();
-            $question[$row->id]['identity'] = $writer['identity'];
-            $question[$row->id]['labelpoint'] = HtmlClass::TabLabel($question[$row->id]['point']);
-            $question[$row->id]['labelanswer'] = HtmlClass::TabLabel($question[$row->id]['answer']);
-            $question[$row->id]['labelhits'] = HtmlClass::TabLabel($question[$row->id]['hits']);
+            $question[$row->id]['url'] = $this->url('', array('module' => $module, 'controller' => 'question', 'slug' => $question[$row->id]['slug']));
         }
-        // Set paginator
-        $select = $this->getModel('question')->select()->columns(array('count' => new \Zend\Db\Sql\Predicate\Expression('count(*)')))->where($where);
-        $count = $this->getModel('question')->selectWith($select)->current()->count;
-        $paginator = \Pi\Paginator\Paginator::factory(intval($count));
-        $paginator->setItemCountPerPage($config['show_perpage']);
-        $paginator->setCurrentPageNumber($page);
+        // return product
+        return $question;   
+    }
+
+    public function askPaginator($template, $where)
+    {
+        $template['module'] = $this->params('module');
+        $template['order'] = $this->params('order');
+        $template['page'] = $this->params('page', 1);
+        // get count     
+        $columns = array('count' => new Expression('count(*)'));
+        $select = $this->getModel('question')->select()->where($where)->columns($columns);
+        $template['count'] = $this->getModel('question')->selectWith($select)->current()->count;
+        // paginator
+        $paginator = Paginator::factory(intval($template['count']));
+        $paginator->setItemCountPerPage(intval($this->config('show_perpage')));
+        $paginator->setCurrentPageNumber(intval($template['page']));
         $paginator->setUrlOptions(array(
-            'template' => $this->url('.ask', array('module' => $params['module'], 'controller' => 'index', 'order' => $selectOrder, 'page' => '%page%')),
+            'router'    => $this->getEvent()->getRouter(),
+            'route'     => $this->getEvent()->getRouteMatch()->getMatchedRouteName(),
+            'params'    => array_filter(array(
+                'module'        => $this->getModule(),
+                'controller'    => $template['controller'],
+                'action'        => $template['action'],
+                'order'          => $template['order'],
+            )),
         ));
-        // Tab urls
-        $url = array(
-            'create' => $this->url('.ask', array('module' => $params['module'], 'controller' => 'index', 'order' => 'create')),
-            'vote' => $this->url('.ask', array('module' => $params['module'], 'controller' => 'index', 'order' => 'point')),
-            'hits' => $this->url('.ask', array('module' => $params['module'], 'controller' => 'index', 'order' => 'hits')),
-            'answer' => $this->url('.ask', array('module' => $params['module'], 'controller' => 'index', 'order' => 'answer')),
-        );
-        // Main url
-        $mainurl = array(
-            'title' => __('View Last questions'),
-            'url' => $this->url('.ask', array('module' => $params['module'], 'controller' => 'index')),
-        );
-        // Set view
-        $this->view()->headTitle('ASK');
-        $this->view()->headDescription('ASK', 'set');
-        $this->view()->headKeywords('ASK', 'set');
-        $this->view()->setTemplate('question_list');
-        $this->view()->assign('questions', $question);
-        $this->view()->assign('paginator', $paginator);
-        $this->view()->assign('config', $config);
-        $this->view()->assign('url', $url);
-        $this->view()->assign('mainurl', $mainurl);
-        $this->view()->assign('tabclass', HtmlClass::TabClass($selectOrder));
+        return $paginator;
+    }
+
+    public function setOrder($order = 'create')
+    {
+        // Set order ', '', '', '
+        switch ($order) {
+            case 'answer':
+                $order = array('answer DESC', 'id DESC');
+                break;
+
+            case 'hits':
+                $order = array('hits DESC', 'id DESC');
+                break;     
+                
+            case 'point':
+                $order = array('point DESC', 'id DESC');
+                break; 
+
+            case 'create':
+            default:
+                $order = array('time_create DESC', 'id DESC');
+                break;
+        } 
+        return $order;
     }
 }
