@@ -11,26 +11,49 @@
  * @author Hossein Azizabadi <azizabadi@faragostaresh.com>
  */
 return array(
-// Front section
+    // Admin section
+    'admin' => array(
+        array(
+            'title'         => _a('List of Questions'),
+            'controller'    => 'question',
+            'permission'    => 'question',
+        ),
+        array(
+            'title'         => _a('Tools'),
+            'controller'    => 'tools',
+            'permission'    => 'tools',
+        ),
+    ),
+    // Front section
     'front' => array(
         array(
+            'title'         => _a('Index page'),
             'controller'    => 'index',
+            'permission'    => 'public',
             'block'         => 1,
         ),
         array(
+            'title'         => _a('Answer'),
             'controller'    => 'answer',
+            'permission'    => 'answer',
             'block'         => 1,
         ),
         array(
+            'title'         => _a('Question'),
             'controller'    => 'question',
+            'permission'    => 'public',
             'block'         => 1,
         ),
         array(
+            'title'         => _a('Submit question'),
             'controller'    => 'submit',
+            'permission'    => 'submit',
             'block'         => 1,
         ),
         array(
+            'title'         => _a('Tag'),
             'controller'    => 'tag',
+            'permission'    => 'public',
             'block'         => 1,
         ),
     ),

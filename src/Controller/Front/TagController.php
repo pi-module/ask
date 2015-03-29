@@ -10,48 +10,38 @@
 /**
  * @author Hossein Azizabadi <azizabadi@faragostaresh.com>
  */
-
 namespace Module\Ask\Controller\Front;
 
 use Pi;
+use Pi\Filter;
 use Pi\Mvc\Controller\ActionController;
-use Zend\Json\Json;
 
-class TagController extends ActionController
+class TagController extends IndexController
 {
-    public function indexAction()
+    public function termAction()
     {
-        /*
-           * This is a sample page
-           * This page view is like index and list view and show list of questions from selected tag
-           * And list of question id's needed from tag module
-           * Paginator and story array perhaps needed rewrite for use low memory
-           */
-
         // Get info from url
-        $slug = $this->params('slug');
         $module = $this->params('module');
-        $page = $this->params('page', 1);
-        // Check slug
-        if (empty($slug)) {
-            $this->jump(array('route' => '.ask', 'module' => $module, 'controller' => 'index'), __('The tag not found.'));
+        $slug = $this->params('slug');
+        // Check tag
+        if (!Pi::service('module')->isActive('tag')) {
+            $url = array('', 'module' => $module, 'controller' => 'index', 'action' => 'index');
+            $this->jump($url, __('Tag module not installed.'), 'error');
         }
+        // Get config
+        $config = Pi::service('registry')->config->read($module);
         // Get order
         $selectOrder = $this->params('order', 'create');
         if (!in_array($selectOrder, array('create', 'hits', 'point', 'answer'))) {
             $selectOrder = 'create';
         }
-        // Get page ID or slug from url
-        $params = $this->params()->fromRoute();
-        // Get config
-        $config = Pi::service('registry')->config->read($module);
         // Set offset
         $offset = (int)($page - 1) * $config['show_perpage'];
         // Get photo Id from tag module
         $tags = Pi::service('tag')->getList($module, $slug, null, $config['show_tags'], $offset);
         // Check slug
         if (empty($tags)) {
-            $this->jump(array('route' => '.ask', 'module' => $module, 'controller' => 'index'), __('The tag not found.'));
+            $this->jump(array('', 'module' => $module, 'controller' => 'index'), __('The tag not found.'));
         }
         foreach ($tags as $tag) {
             $tagId[] = $tag['item'];

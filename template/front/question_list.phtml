@@ -1,10 +1,10 @@
-<div class="ask">
+<div class="clearfix">
     <div class="question-list clearfix">
     	<p><a class="btn btn-primary" title="<?php _e('Ask question'); ?>" href="<?php echo $this->url('', array('controller' => 'submit', 'action' => 'index')); ?>"><?php _e('Ask question'); ?></a></p>
         <div class="list-group">
-	    <?php foreach($questions as $question) { ?>
-            <a class="list-group-item" title="<?php echo $this->escape($question['title']); ?>" href="<?php echo $question['url']; ?>"><?php echo $this->escape($question['title']); ?></a>
-	    <?php } ?>
+			<?php foreach($questions as $question) { ?>
+			<a class="list-group-item" title="<?php echo $this->escape($question['title']); ?>" href="<?php echo $question['questionUrl']; ?>"><?php echo $this->escape($question['title']); ?></a>
+			<?php } ?>
 	    </div>
     </div>
     <div class="paginator"><?php echo $this->paginationControl($paginator, 'Sliding', 'paginator.phtml'); ?></div>

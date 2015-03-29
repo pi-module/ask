@@ -10,22 +10,16 @@
 /**
  * @author Hossein Azizabadi <azizabadi@faragostaresh.com>
  */
-
 namespace Module\Ask\Controller\Front;
 
 use Pi;
+use Pi\Filter;
 use Pi\Mvc\Controller\ActionController;
 use Module\Ask\Form\AnswerForm;
 use Module\Ask\Form\AnswerFilter;
 
 class AnswerController extends ActionController
 {
-    protected $questionColumns = array(
-        'id', 'type', 'pid', 'answer', 'uid', 'point', 'count', 'favorite', 'hits', 'status',
-        'time_create', 'time_update', 'title', 'slug', 'content', 'tags', 'seo_title',
-        'seo_keywords','seo_description'
-    );
-
     public function indexAction()
     {
         // Check user is login or not
@@ -36,17 +30,13 @@ class AnswerController extends ActionController
         // Get config
         $config = Pi::service('registry')->config->read($module);
         // Find story
-        $question = $this->getModel('question')->find($slug, 'slug')->toArray();
+        $question = Pi::api('question', 'ask')->getQuestion($slug, 'slug');
         // Check page
         if (!$question || $question['status'] != 1) {
             $message = __('The question not found.');
             $url = array('', 'module' => $module, 'controller' => 'index', 'action' => 'index');
             $this->jump($url, $message);
         }
-        // Set date
-        $question['create'] = _date($question['create']);
-        // Set markup
-        $question['content'] = Pi::service('markup')->render($question['content'], 'html', 'text');
         // get info
         $form = new AnswerForm('Answer');
         if ($this->request->isPost()) {
@@ -55,20 +45,27 @@ class AnswerController extends ActionController
             $form->setData($data);
             if ($form->isValid()) {
                 $values = $form->getData();
-                // Set just category fields
-                foreach (array_keys($values) as $key) {
-                    if (!in_array($key, $this->questionColumns)) {
-                        unset($values[$key]);
-                    }
-                }
-                // Set seo_title
+                // Set title
                 $values['title'] = sprintf(__('Answer to %s'), $question['title']);
-                $values['slug'] = Pi::api('text', 'ask')->slug($values['title'] . ' ' . _date());
-                $values['seo_title'] = Pi::api('text', 'ask')->title($values['title']);
-                $values['seo_keywords'] = Pi::api('text', 'ask')->keywords($values['title']);
-                $values['seo_description'] = Pi::api('text', 'ask')->description($values['title']);
+                // Set time
                 $values['time_create'] = time();
                 $values['time_update'] = time();
+                // Set slug
+                $filter = new Filter\Slug;
+                $values['slug'] = $filter($values['title'] . ' ' . _date($values['time_create']));
+                // Set seo_title
+                $filter = new Filter\HeadTitle;
+                $values['seo_title'] = $filter($values['title']);
+                // Set seo_keywords
+                $filter = new Filter\HeadKeywords;
+                $filter->setOptions(array(
+                    'force_replace_space' => true,
+                ));
+                $values['seo_keywords'] = $filter($values['title']);
+                // Set seo_description
+                $filter = new Filter\HeadDescription;
+                $values['seo_description'] = $filter($values['title']);
+                // Set info
                 $values['uid'] = Pi::user()->getId();
                 $values['status'] = $this->config('auto_approval');
                 $values['type'] = 'A';
@@ -91,15 +88,18 @@ class AnswerController extends ActionController
             $values['pid'] = $question['id'];
             $form->setData($values);
         }
-        // Set header
+        // Set header and title
         $title = sprintf(__('Answer to %s'), $question['title']);
-        $seo_title = Pi::api('text', 'ask')->title($title);
-        $seo_keywords = Pi::api('text', 'ask')->keywords($title);
-        $seo_description = Pi::api('text', 'ask')->description($title);
+        // Set seo_keywords
+        $filter = new Filter\HeadKeywords;
+        $filter->setOptions(array(
+            'force_replace_space' => true
+        ));
+        $seoKeywords = $filter($title);
         // Set view
-        $this->view()->headTitle($seo_title);
-        $this->view()->headDescription($seo_keywords, 'set');
-        $this->view()->headKeywords($seo_description, 'set');
+        $this->view()->headTitle($title);
+        $this->view()->headDescription($title, 'set');
+        $this->view()->headKeywords($seoKeywords, 'set');
         $this->view()->setTemplate('answer_index');
         $this->view()->assign('form', $form);
         $this->view()->assign('title', $title);

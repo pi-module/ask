@@ -10,23 +10,17 @@
 /**
  * @author Hossein Azizabadi <azizabadi@faragostaresh.com>
  */
-
 namespace Module\Ask\Controller\Front;
 
 use Pi;
 use Pi\Mvc\Controller\ActionController;
+use Pi\Filter;
 use Module\Ask\Form\AskForm;
 use Module\Ask\Form\AskFilter;
 use Zend\Json\Json;
 
 class SubmitController extends ActionController
 {
-    protected $questionColumns = array(
-        'id', 'type', 'pid', 'answer', 'uid', 'point', 'count', 'favorite', 'hits', 'status',
-        'time_create', 'time_update', 'title', 'slug', 'content', 'tags', 'seo_title',
-        'seo_keywords','seo_description'
-    );
-
     public function indexAction()
     {
         // Check user is login or not
@@ -39,19 +33,25 @@ class SubmitController extends ActionController
             $form->setData($data);
             if ($form->isValid()) {
                 $values = $form->getData();
-                // Set just category fields
-                foreach (array_keys($values) as $key) {
-                    if (!in_array($key, $this->questionColumns)) {
-                        unset($values[$key]);
-                    }
-                }
-                // Set seo_title
-                $values['slug'] = Pi::api('text', 'ask')->slug($values['title'] . ' ' . _date());
-                $values['seo_title'] = Pi::api('text', 'ask')->title($values['title']);
-                $values['seo_keywords'] = Pi::api('text', 'ask')->keywords($values['title']);
-                $values['seo_description'] = Pi::api('text', 'ask')->description($values['title']);
+                // Set time
                 $values['time_create'] = time();
                 $values['time_update'] = time();
+                // Set slug
+                $filter = new Filter\Slug;
+                $values['slug'] = $filter($values['title'] . ' ' . _date($values['time_create']));
+                // Set seo_title
+                $filter = new Filter\HeadTitle;
+                $values['seo_title'] = $filter($values['title']);
+                // Set seo_keywords
+                $filter = new Filter\HeadKeywords;
+                $filter->setOptions(array(
+                    'force_replace_space' => true,
+                ));
+                $values['seo_keywords'] = $filter($values['title']);
+                // Set seo_description
+                $filter = new Filter\HeadDescription;
+                $values['seo_description'] = $filter($values['title']);
+                // Set info
                 $values['uid'] = Pi::user()->getId();
                 $values['status'] = $this->config('auto_approval');
                 $values['type'] = 'Q';
@@ -69,15 +69,18 @@ class SubmitController extends ActionController
                 $this->jump($url, $message);
             }
         }
-        // Set header
+        // Set header and title
         $title = __('Ask a new Question');
-        $seo_title = Pi::api('text', 'ask')->title($title);
-        $seo_keywords = Pi::api('text', 'ask')->keywords($title);
-        $seo_description = Pi::api('text', 'ask')->description($title);
+        // Set seo_keywords
+        $filter = new Filter\HeadKeywords;
+        $filter->setOptions(array(
+            'force_replace_space' => true
+        ));
+        $seoKeywords = $filter($title);
         // Set view
-        $this->view()->headTitle($seo_title);
-        $this->view()->headDescription($seo_keywords, 'set');
-        $this->view()->headKeywords($seo_description, 'set');
+        $this->view()->headTitle($title);
+        $this->view()->headDescription($title, 'set');
+        $this->view()->headKeywords($seoKeywords, 'set');
         $this->view()->setTemplate('submit_index');
         $this->view()->assign('form', $form);
         $this->view()->assign('title', $title);

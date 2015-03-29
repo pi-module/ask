@@ -1,4 +1,4 @@
-<div class="ask">
+<div class="clearfix">
 	<div class="panel panel-default">
 		<div class="panel-heading">
 			<h3 class="panel-title"><?php echo $this->escape($question['title']); ?></h3>
@@ -6,7 +6,7 @@
 		<div class="panel-body">
 			<?php echo $question['content']; ?>
 			<div class="clearfix">
-				<div class="pull-left"><?php echo $this->escape($question['time_create']); ?></div>
+				<div class="pull-left"><?php echo $this->escape($question['time_create_view']); ?></div>
 			</div>
 		</div>
 	</div>
@@ -18,7 +18,7 @@
 			<div class="list-group-item-text">
 				<?php echo $answer['content']; ?>
 				<div class="clearfix">
-					<div class="pull-left"><?php echo $this->escape($answer['time_create']); ?></div>
+					<div class="pull-left"><?php echo $this->escape($answer['time_create_view']); ?></div>
 				</div>
 			</div>
 		</div>

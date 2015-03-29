@@ -60,18 +60,8 @@ class Ask extends Standard
                     break;
 
                 case 'index':
-                    // Set page
-                    if (isset($parts[0]) && $parts[0] == 'page') {
-                        $matches['page'] = intval($parts[1]);
-                        // Set order
-                        if (isset($parts[2]) && $parts[2] == 'order') {
-                            $matches['order'] = $this->decode($parts[3]);
-                        }
-                    } else {
-                        // Set order
-                        if (isset($parts[0]) && $parts[0] == 'order') {
-                            $matches['order'] = $this->decode($parts[1]);
-                        }
+                    if (isset($parts[0]) && $parts[0] == 'order') {
+                        $matches['order'] = $this->decode($parts[1]);
                     }
                     break;
 
@@ -120,9 +110,6 @@ class Ask extends Standard
         }
         if (!empty($mergedParams['id'])) {
             $url['id'] = $mergedParams['id'];
-        }
-        if (!empty($mergedParams['page'])) {
-            $url['page'] = 'page' . $this->paramDelimiter . $mergedParams['page'];
         }
 
         // Make url

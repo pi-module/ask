@@ -10,14 +10,12 @@
 /**
  * @author Hossein Azizabadi <azizabadi@faragostaresh.com>
  */
-
 namespace Module\Ask\Controller\Front;
 
 use Pi;
 use Pi\Mvc\Controller\ActionController;
 use Pi\Paginator\Paginator;
 use Zend\Db\Sql\Predicate\Expression;
-use Zend\Json\Json;
 
 class IndexController extends ActionController
 {
@@ -32,7 +30,7 @@ class IndexController extends ActionController
         // Set paginator info
         $template = array(
             'controller' => 'index',
-            'action' => 'index',
+            'action'     => 'index',
         );
         // Get product List
         $questions = $this->askList($where);
@@ -44,31 +42,28 @@ class IndexController extends ActionController
             'module'      => $module, 
             'controller'  => 'index', 
             'action'      => 'index', 
-            'order'        => 'answer'
+            'order'       => 'answer'
         ));
         $orderLink['hits'] = $this->url('', array(
             'module'      => $module, 
             'controller'  => 'index', 
             'action'      => 'index', 
-            'order'        => 'hits'
+            'order'       => 'hits'
         ));
         $orderLink['point'] = $this->url('', array(
             'module'      => $module, 
             'controller'  => 'index', 
             'action'      => 'index', 
-            'order'        => 'point'
+            'order'       => 'point'
         ));
         $orderLink['create'] = $this->url('', array(
             'module'      => $module, 
             'controller'  => 'index', 
             'action'      => 'index', 
-            'order'        => 'create'
+            'order'       => 'create'
         ));
         $orderLink['active'] = $this->params('order', 'create');
         // Set view
-        $this->view()->headTitle(__('Ask index seo title'));
-        $this->view()->headDescription(__('ask index seo description'), 'set');
-        $this->view()->headKeywords(__('ask index seo keywords'), 'set');
         $this->view()->setTemplate('question_list');
         $this->view()->assign('questions', $questions);
         $this->view()->assign('paginator', $paginator);
@@ -90,10 +85,7 @@ class IndexController extends ActionController
         $select = $this->getModel('question')->select()->where($where)->order($order)->offset($offset)->limit($limit);
         $rowset = $this->getModel('question')->selectWith($select);
         foreach ($rowset as $row) {
-            $question[$row->id] = $row->toArray();
-            $question[$row->id]['time_create'] = _date($question[$row->id]['time_create']);
-            $question[$row->id]['tags'] = Json::decode($question[$row->id]['tags']);
-            $question[$row->id]['url'] = $this->url('', array('module' => $module, 'controller' => 'question', 'slug' => $question[$row->id]['slug']));
+            $question[$row->id] = Pi::api('question', 'ask')->canonizeQuestion($row);
         }
         // return product
         return $question;   

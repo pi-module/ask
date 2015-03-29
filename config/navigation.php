@@ -12,15 +12,21 @@
  */
 return array(
     'admin' => array(
-        'last' => array(
-            'label'         => __('List of Question'),
+        'question' => array(
+            'label'         => _a('List of Questions'),
+            'permission'    => array(
+                'resource'  => 'question',
+            ),
             'route'         => 'admin',
             'module'        => 'ask',
             'controller'    => 'question',
             'action'        => 'index',
         ),
         'tools' => array(
-            'label'         => __('Tools'),
+            'label'         => _a('Tools'),
+            'permission'    => array(
+                'resource'  => 'tools',
+            ),
             'route'         => 'admin',
             'module'        => 'ask',
             'controller'    => 'tools',

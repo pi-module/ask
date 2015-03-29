@@ -12,9 +12,9 @@
  */
 return array(
     'meta'  => array(
-        'title'         => __('Ask'),
-        'description'   => __('Ask and Answer'),
-        'version'       => '0.0.8',
+        'title'         => _a('Ask'),
+        'description'   => _a('Ask and Answer'),
+        'version'       => '0.1.0',
         'license'       => 'New BSD',
         'logo'          => 'image/logo.png',
         'readme'        => 'docs/readme.txt',
@@ -24,17 +24,18 @@ return array(
     ),
     // Author information
     'author'    => array(
-        'dev'       => 'Hossein Azizabadi',
-        'email'     => 'azizabadi@faragostaresh.com',
-        'architect' => '@voltan',
-        'design'    => '@voltan'
+        'dev'           => 'Hossein Azizabadi',
+        'email'         => 'azizabadi@faragostaresh.com',
+        'architect'     => '@voltan',
+        'design'        => '@voltan'
     ),
     // Resource
-    'resource' => array(
+    'resource'      => array(
         'database'      => 'database.php',
         'config'        => 'config.php',
+        'permission'    => 'permission.php',
         'page'          => 'page.php',
         'navigation'    => 'navigation.php',
         'route'         => 'route.php',
-    ),
+    )
 );

@@ -10,94 +10,114 @@
 /**
  * @author Hossein Azizabadi <azizabadi@faragostaresh.com>
  */
-
 return array(
     'category' => array(
         array(
-            'title' => __('Admin'),
-            'name' => 'admin'
+            'title'  => _a('Admin'),
+            'name'   => 'admin'
         ),
         array(
-            'title' => __('Front'),
-            'name' => 'front'
+            'title'  => _a('Show'),
+            'name'   => 'show'
         ),
         array(
-            'title' => __('Feed'),
-            'name' => 'feed'
+            'title'  => _a('Question'),
+            'name'   => 'question'
         ),
         array(
-            'title' => __('Vote'),
-            'name' => 'vote'
+            'title'  => _a('Feed'),
+            'name'   => 'feed'
+        ),
+        array(
+            'title'  => _a('Vote'),
+            'name'   => 'vote'
         ),
     ),
     'item' => array(
         // Admin
         'admin_perpage' => array(
-            'category' => 'admin',
-            'title' => __('Perpage'),
-            'description' => '',
-            'edit' => 'text',
-            'filter' => 'number_int',
-            'value' => 25
+            'category'     => 'admin',
+            'title'        => _a('Perpage'),
+            'description'  => '',
+            'edit'         => 'text',
+            'filter'       => 'number_int',
+            'value'        => 50
         ),
         // Show
         'show_perpage' => array(
-            'category' => 'front',
-            'title' => __('Perpage'),
-            'description' => __('Number of questions in each page'),
-            'edit' => 'text',
-            'filter' => 'number_int',
-            'value' => 10
+            'category'     => 'show',
+            'title'        => _a('Perpage'),
+            'description'  => _a('Number of questions in each page'),
+            'edit'         => 'text',
+            'filter'       => 'number_int',
+            'value'        => 10
         ),
         'show_tags' => array(
-            'category' => 'front',
-            'title' => __('Tags'),
-            'description' => __('Number of tags in tag controller'),
-            'edit' => 'text',
-            'filter' => 'number_int',
-            'value' => 50
+            'category'     => 'show',
+            'title'        => _a('Tags'),
+            'description'  => _a('Number of tags in tag controller'),
+            'edit'         => 'text',
+            'filter'       => 'number_int',
+            'value'        => 50
+        ),
+        'view_breadcrumbs' => array(
+            'category'     => 'show',
+            'title'        => _a('Show breadcrumbs'),
+            'description'  => '',
+            'edit'         => 'checkbox',
+            'filter'       => 'number_int',
+            'value'        => 1
+        ),
+        // Question
+        'question_answer' => array(
+            'category'     => 'question',
+            'title'        => _a('Can answer'),
+            'description'  => '',
+            'edit'         => 'checkbox',
+            'filter'       => 'number_int',
+            'value'        => 1
         ),
         'auto_approval' => array(
-            'title' => __('Automatic approval'),
-            'description' => '',
-            'edit' => array(
-                'type' => 'select',
-                'options' => array(
+            'title'        => _a('Automatic approval'),
+            'description'  => '',
+            'edit'         => array(
+                'type'     => 'select',
+                'options'     => array(
                     'options' => array(
-                        0 => __('All questions and answers need admin review before publish'),
-                        1 => __('Automatic approval all questions and answers'),
+                        0     => _a('All questions and answers need admin review before publish'),
+                        1     => _a('Automatic approval all questions and answers'),
                     ),
                 ),
             ),
-            'filter' => 'number_int',
-            'value' => 1,
-            'category' => 'front',
+            'filter'       => 'number_int',
+            'value'        => 1,
+            'category'     => 'question',
         ),
         // Feed 
         'feed_icon' => array(
-            'category' => 'feed',
-            'title' => __('Show feed icon'),
-            'description' => '',
-            'edit' => 'checkbox',
-            'filter' => 'number_int',
-            'value' => 1
+            'category'     => 'feed',
+            'title'        => _a('Show feed icon'),
+            'description'  => '',
+            'edit'         => 'checkbox',
+            'filter'       => 'number_int',
+            'value'        => 1
         ),
         'feed_num' => array(
-            'category' => 'feed',
-            'title' => __('Feed number'),
-            'description' => '',
-            'edit' => 'text',
-            'filter' => 'number_int',
-            'value' => 10
+            'category'     => 'feed',
+            'title'        => _a('Feed number'),
+            'description'  => '',
+            'edit'         => 'text',
+            'filter'       => 'number_int',
+            'value'        => 10
         ),
         // Vote
         'vote_bar' => array(
-            'category' => 'vote',
-            'title' => __('Use vote system'),
-            'description' => '',
-            'edit' => 'checkbox',
-            'filter' => 'number_int',
-            'value' => 1
+            'category'     => 'vote',
+            'title'        => _a('Use vote system'),
+            'description'  => '',
+            'edit'         => 'checkbox',
+            'filter'       => 'number_int',
+            'value'        => 1
         ),
     ),
 );

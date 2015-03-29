@@ -10,10 +10,10 @@
 /**
  * @author Hossein Azizabadi <azizabadi@faragostaresh.com>
  */
-
 namespace Module\Ask\Controller\Admin;
 
 use Pi;
+use Pi\Filter;
 use Pi\Mvc\Controller\ActionController;
 use Pi\Paginator\Paginator;
 use Module\Ask\Form\UpdateForm;
@@ -22,12 +22,6 @@ use Zend\Json\Json;
 
 class QuestionController extends ActionController
 {
-    protected $questionColumns = array(
-        'id', 'type', 'pid', 'answer', 'uid', 'point', 'count', 'favorite', 'hits', 'status',
-        'time_create', 'time_update', 'title', 'slug', 'content', 'tags', 'seo_title',
-        'seo_keywords','seo_description'
-    );
-
     public function indexAction()
     {
         // Get page
@@ -38,6 +32,7 @@ class QuestionController extends ActionController
         $offset = (int)($page - 1) * $this->config('admin_perpage');
         $order = array('time_create DESC', 'id DESC');
         $limit = intval($this->config('admin_perpage'));
+        $question = array();
         // Set where
         $where = array();
         if (!empty($status)) {
@@ -48,19 +43,8 @@ class QuestionController extends ActionController
         $rowset = $this->getModel('question')->selectWith($select);
         // Make list
         foreach ($rowset as $row) {
-            $question[$row->id] = $row->toArray();
-            $question[$row->id]['time_create'] = _date($question[$row->id]['time_create']);
-            if ($question[$row->id]['type'] == 'Q' 
-                && $question[$row->id]['status'] == 1
-            ) {
-                $question[$row->id]['url'] = $this->url('ask', array(
-                    'module'     => $module, 
-                    'controller' => 'question', 
-                    'slug'       => $question[$row->id]['slug']
-                ));
-            } else {
-                $question[$row->id]['url'] = '';
-            }
+            $question[$row->id] = Pi::api('question', 'ask')->canonizeQuestion($row);
+            
         }
         // Set paginator
         $count = array('count' => new \Zend\Db\Sql\Predicate\Expression('count(*)'));
@@ -133,17 +117,27 @@ class QuestionController extends ActionController
             $form->setData($data);
             if ($form->isValid()) {
                 $values = $form->getData();
-                // Set just category fields
-                foreach (array_keys($values) as $key) {
-                    if (!in_array($key, $this->questionColumns)) {
-                        unset($values[$key]);
-                    }
-                }
+                // Set slug
+                $slug = ($values['slug']) ? $values['slug'] : $values['title'];
+                $slug = $slug . ' ' . $question['time_create'];
+                $filter = new Filter\Slug;
+                $values['slug'] = $filter($slug);
                 // Set seo_title
-                $values['slug'] = Pi::api('text', 'ask')->slug($values['title'] . ' ' . $question['time_create']);
-                $values['seo_title'] = Pi::api('text', 'ask')->title($values['title']);
-                $values['seo_keywords'] = Pi::api('text', 'ask')->keywords($values['title']);
-                $values['seo_description'] = Pi::api('text', 'ask')->description($values['title']);
+                $title = ($values['seo_title']) ? $values['seo_title'] : $values['title'];
+                $filter = new Filter\HeadTitle;
+                $values['seo_title'] = $filter($title);
+                // Set seo_keywords
+                $keywords = ($values['seo_keywords']) ? $values['seo_keywords'] : $values['title'];
+                $filter = new Filter\HeadKeywords;
+                $filter->setOptions(array(
+                    'force_replace_space' => true,
+                ));
+                $values['seo_keywords'] = $filter($keywords);
+                // Set seo_description
+                $description = ($values['seo_description']) ? $values['seo_description'] : $values['title'];
+                $filter = new Filter\HeadDescription;
+                $values['seo_description'] = $filter($description);
+                // Set time
                 $values['time_update'] = time();
                 // Save values
                 $row = $this->getModel('question')->find($values['id']);
