@@ -1,6 +1,13 @@
 <div class="clearfix">
+	<div class="page-header">
+		<h1><?php echo $this->escape($title); ?></h1>
+	</div>
+	<?php if ($config['question_ask']) { ?>
+    <p>
+    	<a class="btn btn-primary" title="<?php _e('Ask question'); ?>" href="<?php echo $this->url('', array('controller' => 'submit', 'action' => 'index')); ?>"><?php _e('Ask question'); ?></a>
+    </p>
+    <?php } ?>
     <div class="question-list clearfix">
-    	<p><a class="btn btn-primary" title="<?php _e('Ask question'); ?>" href="<?php echo $this->url('', array('controller' => 'submit', 'action' => 'index')); ?>"><?php _e('Ask question'); ?></a></p>
         <div class="list-group">
 			<?php foreach($questions as $question) { ?>
 			<a class="list-group-item" title="<?php echo $this->escape($question['title']); ?>" href="<?php echo $question['questionUrl']; ?>"><?php echo $this->escape($question['title']); ?></a>

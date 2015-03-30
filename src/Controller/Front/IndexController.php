@@ -25,50 +25,23 @@ class IndexController extends ActionController
         $module = $this->params('module');
         // Get config
         $config = Pi::service('registry')->config->read($module);
-        // Set product info
+        // Set question info
         $where = array('status' => 1, 'type' => 'Q');
         // Set paginator info
         $template = array(
             'controller' => 'index',
             'action'     => 'index',
         );
-        // Get product List
+        // Get question List
         $questions = $this->askList($where);
         // Get paginator
         $paginator = $this->askPaginator($template, $where);
-        // Set order link
-        $orderLink = array();
-        $orderLink['answer'] = $this->url('', array(
-            'module'      => $module, 
-            'controller'  => 'index', 
-            'action'      => 'index', 
-            'order'       => 'answer'
-        ));
-        $orderLink['hits'] = $this->url('', array(
-            'module'      => $module, 
-            'controller'  => 'index', 
-            'action'      => 'index', 
-            'order'       => 'hits'
-        ));
-        $orderLink['point'] = $this->url('', array(
-            'module'      => $module, 
-            'controller'  => 'index', 
-            'action'      => 'index', 
-            'order'       => 'point'
-        ));
-        $orderLink['create'] = $this->url('', array(
-            'module'      => $module, 
-            'controller'  => 'index', 
-            'action'      => 'index', 
-            'order'       => 'create'
-        ));
-        $orderLink['active'] = $this->params('order', 'create');
         // Set view
         $this->view()->setTemplate('question_list');
         $this->view()->assign('questions', $questions);
         $this->view()->assign('paginator', $paginator);
         $this->view()->assign('config', $config);
-        $this->view()->assign('orderLink', $orderLink);   
+        $this->view()->assign('title', __('List of all questions'));
     }
 
     public function askList($where)
@@ -87,7 +60,7 @@ class IndexController extends ActionController
         foreach ($rowset as $row) {
             $question[$row->id] = Pi::api('question', 'ask')->canonizeQuestion($row);
         }
-        // return product
+        // return question
         return $question;   
     }
 

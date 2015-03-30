@@ -44,7 +44,7 @@
 				<?php } ?>
 			</td>
 			<td><span class="label <?php echo $labelTypeClass; ?>"><?php echo $titleType; ?></span></td>
-			<td><?php echo $this->escape($question['time_create']); ?></td>
+			<td><?php echo $this->escape($question['time_create_view']); ?></td>
 			<td>
 				<?php if($question['status'] == 1) { ?>
 				<button id="button-<?php echo $question['id']; ?>" type="button" class="btn btn-warning btn-xs" data-toggle="button" data-link="<?php echo $this->url('', array('action' => 'accept', 'id' => $question['id'], 'status' => '2')); ?>"><i class="fa fa-times"></i> <?php _e('Reject'); ?></button>

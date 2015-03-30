@@ -46,16 +46,16 @@ class UpdateForm extends BaseForm
                 'description' => '',
             )
         ));
-        // content	  
+        // content
         $this->add(array(
             'name' => 'content',
             'options' => array(
-                'label' => __('Content'),
+                'label' => __('Question'),
+                'editor' => 'html',
+                'set' => '',
             ),
             'attributes' => array(
-                'type' => 'textarea',
-                'rows' => '5',
-                'cols' => '40',
+                'type' => 'editor',
                 'description' => '',
             )
         ));
@@ -63,12 +63,13 @@ class UpdateForm extends BaseForm
         if (Pi::service('module')->isActive('tag')) {
             $this->add(array(
                 'name' => 'tag',
+                'type' => 'tag',
                 'options' => array(
                     'label' => __('Tags'),
                 ),
                 'attributes' => array(
-                    'type' => 'text',
-                    'description' => '',
+                    'id'          => 'tag',
+                    'description' => __('Use `|` as delimiter to separate tag terms'),
                 )
             ));
         }

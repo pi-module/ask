@@ -58,7 +58,21 @@ class Question extends AbstractApi
         $question['time_create_view'] = _date($question['time_create']);
         $question['time_update_view'] = _date($question['time_update']);
         // Set tags
-        $question['tags'] = Json::decode($question['tags']);
+        if (!empty($question['tag'])) {
+            $tags = Json::decode($question['tag']);
+            foreach ($tags as $tag) {
+                $tagList[] = array(
+                    'term' => $tag,
+                    'url'  => Pi::url(Pi::service('url')->assemble('ask', array(
+                        'module'        => $this->getModule(),
+                        'controller'    => 'tag',
+                        'action'        => 'term',
+                        'slug'          => urlencode($tag),
+                    ))),
+                );
+            }
+            $question['tag'] = $tagList;
+        }
         // Set info for Q and A
         switch ($question['type']) {
             case 'Q':

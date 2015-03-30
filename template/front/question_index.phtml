@@ -1,14 +1,28 @@
 <div class="clearfix">
-	<div class="panel panel-default">
-		<div class="panel-heading">
-			<h3 class="panel-title"><?php echo $this->escape($question['title']); ?></h3>
+	<div class="page-header">
+		<h1><?php echo $this->escape($question['title']); ?></h1>
+	</div>
+	<div class="clearfix"><?php echo $question['content']; ?></div>
+	<div class="clearfix">
+        <?php if ($config['show_info']) { ?>
+		<div class="col-md-6 col-sm-12 col-xs-12">
+			<ul class="list-inline">
+				<li><i class="fa fa-clock-o"></i> <?php _e('Time'); ?>: <?php echo $this->escape($question['time_create_view']); ?></li>
+				<li><i class="fa fa-eye"></i> <?php _e('Read'); ?>: <?php echo _number($this->escape($question['hits'])); ?> <?php _e('Times'); ?></li>
+			</ul>
 		</div>
-		<div class="panel-body">
-			<?php echo $question['content']; ?>
-			<div class="clearfix">
-				<div class="pull-left"><?php echo $this->escape($question['time_create_view']); ?></div>
-			</div>
+        <?php } ?>
+		<?php if (isset($question['tag']) && !empty($question['tag'])) { ?>
+		<div class="tagList col-md-6 col-sm-12 col-xs-12">
+			<?php foreach($question['tag'] as $tag) { ?>
+			<span class="tagItem">
+				<a title="<?php echo $this->escape($tag['term']); ?>" href="<?php echo $this->escape($tag['url']); ?>">
+					<i class="fa fa-tag"></i> <?php echo $this->escape($tag['term']); ?>
+				</a>
+			</span>
+			<?php } ?>
 		</div>
+		<?php } ?>
 	</div>
 	<?php if (isset($answers) && !empty($answers)) { ?>
 	<div class="list-group">
@@ -18,12 +32,16 @@
 			<div class="list-group-item-text">
 				<?php echo $answer['content']; ?>
 				<div class="clearfix">
-					<div class="pull-left"><?php echo $this->escape($answer['time_create_view']); ?></div>
+					<div class="pull-right"><?php echo $this->escape($answer['time_create_view']); ?></div>
 				</div>
 			</div>
 		</div>
 		<?php } ?>
     </div>
     <?php } ?>
-    <p><a class="btn btn-primary" title="<?php _e('Answer'); ?>" href="<?php echo $this->url('', array('controller' => 'answer', 'action' => 'index', 'slug' => $this->escape($question['slug']))); ?>"><?php _e('Answer'); ?></a></p>
+    <?php if ($config['question_answer']) { ?>
+    <p>
+    	<a class="btn btn-primary" title="<?php _e('Answer'); ?>" href="<?php echo $this->url('', array('controller' => 'answer', 'action' => 'index', 'slug' => $this->escape($question['slug']))); ?>"><?php _e('Answer'); ?></a>
+    </p>
+    <?php } ?>
 </div>

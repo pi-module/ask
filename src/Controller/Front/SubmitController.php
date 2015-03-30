@@ -23,6 +23,15 @@ class SubmitController extends ActionController
 {
     public function indexAction()
     {
+        // Get info from url
+        $module = $this->params('module');
+        // Get config
+        $config = Pi::service('registry')->config->read($module);
+        // Check ask
+        if (!$config['question_ask']) {
+            $url = array('', 'module' => $module, 'controller' => 'index', 'action' => 'index');
+            $this->jump($url, __('Ask question not active'), 'error');
+        }
         // Check user is login or not
         Pi::service('authentication')->requireLogin();
         // Set form
@@ -33,6 +42,11 @@ class SubmitController extends ActionController
             $form->setData($data);
             if ($form->isValid()) {
                 $values = $form->getData();
+                // Tag
+                if (!empty($values['tag'])) {
+                    $tag = explode('|', $values['tag']);
+                    $values['tag'] = json::encode($tag);
+                }
                 // Set time
                 $values['time_create'] = time();
                 $values['time_update'] = time();
@@ -59,6 +73,10 @@ class SubmitController extends ActionController
                 $row = $this->getModel('question')->createRow();
                 $row->assign($values);
                 $row->save();
+                // Tag
+                if (isset($tag) && is_array($tag) && Pi::service('module')->isActive('tag')) {
+                    Pi::service('tag')->add($this->params('module'), $row->id, '', $tag);
+                }
                 // Check it save or not
                 if ($this->config('auto_approval')) {
                     $message = __('Your ask new question successfully, Other users can view and answer it');                 
@@ -84,8 +102,6 @@ class SubmitController extends ActionController
         $this->view()->setTemplate('submit_index');
         $this->view()->assign('form', $form);
         $this->view()->assign('title', $title);
-        $this->view()->assign('message', $message);
-        $this->view()->assign('class', $class);
     }
 
     public function searchAction()

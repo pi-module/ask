@@ -14,7 +14,7 @@ CREATE TABLE `{question}` (
 	`title` varchar(255) NOT NULL default '',
     `slug` varchar(255) NOT NULL default '',
 	`content` text,
-	`tags` varchar(255) NOT NULL default '',
+	`tag` varchar(255) NOT NULL default '',
 	`seo_title` varchar(255) NOT NULL default '',
 	`seo_keywords` varchar(255) NOT NULL default '',
 	`seo_description` varchar(255) NOT NULL default '',

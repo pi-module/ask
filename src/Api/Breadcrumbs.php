@@ -49,9 +49,23 @@ class Breadcrumbs extends AbstractBreadcrumbs
                         'href'  => $moduleData['moduleUrl'],
                         'label' => $moduleData['title'],
                     );
-                    $result[] = array(
-                        'label' => $params['slug'],
-                    );
+
+                    if (!empty($params['slug'])) {
+                        $result[] = array(
+                            'label' => __('Tag list'),
+                            'href'  => Pi::url(Pi::service('url')->assemble('ask', array(
+                                'controller' => 'tag',
+                                'action'     => 'list',
+                            ))),
+                        );
+                        $result[] = array(
+                            'label' => $params['slug'],
+                        );
+                    } else {
+                        $result[] = array(
+                            'label' => __('Tag list'),
+                        );
+                    }
                     break;
 
                 case 'question':

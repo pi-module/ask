@@ -52,6 +52,14 @@ return array(
             'filter'       => 'number_int',
             'value'        => 10
         ),
+        'show_info' => array(
+            'category'     => 'show',
+            'title'        => _a('Show information'),
+            'description'  => '',
+            'edit'         => 'checkbox',
+            'filter'       => 'number_int',
+            'value'        => 1
+        ),
         'show_tags' => array(
             'category'     => 'show',
             'title'        => _a('Tags'),
@@ -69,6 +77,14 @@ return array(
             'value'        => 1
         ),
         // Question
+        'question_ask' => array(
+            'category'     => 'question',
+            'title'        => _a('Can ask'),
+            'description'  => '',
+            'edit'         => 'checkbox',
+            'filter'       => 'number_int',
+            'value'        => 1
+        ),
         'question_answer' => array(
             'category'     => 'question',
             'title'        => _a('Can answer'),

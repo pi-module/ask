@@ -28,7 +28,7 @@ class Ask extends Standard
     );
 
     protected $controllerList = array(
-        'answer', 'index', 'question', 'submit'
+        'answer', 'index', 'question', 'submit', 'tag'
     );
 
     /**
@@ -69,6 +69,22 @@ class Ask extends Standard
                     if (!empty($parts[1])) {
                         $matches['slug'] = $this->decode($parts[1]);
                     }
+                    break;
+
+                case 'tag':
+                    switch ($parts[1]) {
+                        case 'term':
+                            $matches['action'] = 'term';
+                            if (!empty($parts[2])) {
+                                $matches['slug'] = urldecode($parts[2]);
+                            }
+                            break;
+                        
+                        case 'list':
+                            $matches['action'] = 'list';
+                            break;
+                    }
+
                     break;
             }
         }

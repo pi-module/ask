@@ -22,7 +22,7 @@ class Question extends Model
      */
     protected $columns = array(
         'id', 'type', 'pid', 'answer', 'uid', 'point', 'count', 'favorite', 'hits', 'status',
-        'time_create', 'time_update', 'title', 'slug', 'content', 'tags', 'seo_title',
+        'time_create', 'time_update', 'title', 'slug', 'content', 'tag', 'seo_title',
         'seo_keywords','seo_description'
     );
 }

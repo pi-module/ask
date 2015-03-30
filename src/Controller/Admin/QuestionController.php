@@ -108,8 +108,7 @@ class QuestionController extends ActionController
         $id = $this->params('id');
         $module = $this->params('module');
         // find item
-        $question = $this->getModel('question')->find($id)->toArray();
-        $question['time_create'] = _date($question['time_create']);
+        $question = Pi::api('question', 'ask')->getQuestion($id);
         $form = new UpdateForm('question');
         if ($this->request->isPost()) {
             $data = $this->request->getPost();
@@ -117,6 +116,11 @@ class QuestionController extends ActionController
             $form->setData($data);
             if ($form->isValid()) {
                 $values = $form->getData();
+                // Tag
+                if (!empty($values['tag'])) {
+                    $tag = explode('|', $values['tag']);
+                    $values['tag'] = json::encode($tag);
+                }
                 // Set slug
                 $slug = ($values['slug']) ? $values['slug'] : $values['title'];
                 $slug = $slug . ' ' . $question['time_create'];
@@ -143,12 +147,24 @@ class QuestionController extends ActionController
                 $row = $this->getModel('question')->find($values['id']);
                 $row->assign($values);
                 $row->save();
+                // Tag
+                if (isset($tag) && is_array($tag) && Pi::service('module')->isActive('tag')) {
+                    Pi::service('tag')->update($module, $row->id, '', $tag);
+                }
                 // Check it save or not
                 $message = __('Your selected item edit successfully');
                 $url = array('', 'module' => $module, 'controller' => 'question', 'action' => 'index');
                 $this->jump($url, $message);
             }
         } else {
+            // Get tag list
+            if (Pi::service('module')->isActive('tag')) {
+                $tag = Pi::service('tag')->get($module, $question['id'], '');
+                if (is_array($tag)) {
+                    $question['tag'] = implode('|', $tag);
+                }
+            }
+            // Set to form
             $form->setData($question);
         }
         // Set view

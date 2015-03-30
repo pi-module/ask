@@ -22,13 +22,18 @@ class AnswerController extends ActionController
 {
     public function indexAction()
     {
-        // Check user is login or not
-        Pi::service('authentication')->requireLogin();
         // Get info from url
         $slug = $this->params('slug');
         $module = $this->params('module');
         // Get config
         $config = Pi::service('registry')->config->read($module);
+        // Check ask
+        if (!$config['question_answer']) {
+            $url = array('', 'module' => $module, 'controller' => 'index', 'action' => 'index');
+            $this->jump($url, __('Answer question not active'), 'error');
+        }
+        // Check user is login or not
+        Pi::service('authentication')->requireLogin();
         // Find story
         $question = Pi::api('question', 'ask')->getQuestion($slug, 'slug');
         // Check page

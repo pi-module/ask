@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2014-02-27 12:00+0330\n"
+"POT-Creation-Date: 2015-03-30 11:04+0330\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -15,257 +15,230 @@ msgstr ""
 "X-Poedit-Basepath: .\n"
 "X-Poedit-SearchPath-0: /var/www/html/local/pi/pi-2.5.0/usr/module/ask\n"
 
-#: /var/www/html/local/pi/pi-develop/usr/module/ask/src/Form/AnswerForm.php:48
-#: /var/www/html/local/pi/pi-develop/usr/module/ask/template/admin/question_index.phtml:31
-#: /var/www/html/local/pi/pi-develop/usr/module/ask/template/front/question_index.phtml:28
-msgid "Answer"
-msgstr "پاسخ"
-
-#: /var/www/html/local/pi/pi-develop/usr/module/ask/src/Form/AnswerForm.php:62
-#: /var/www/html/local/pi/pi-develop/usr/module/ask/src/Form/AskForm.php:80
-#: /var/www/html/local/pi/pi-develop/usr/module/ask/src/Form/UpdateForm.php:80
-msgid "Submit"
-msgstr "ارسال"
-
-#: /var/www/html/local/pi/pi-develop/usr/module/ask/src/Form/AskForm.php:42
-#: /var/www/html/local/pi/pi-develop/usr/module/ask/src/Form/UpdateForm.php:42
-#: /var/www/html/local/pi/pi-develop/usr/module/ask/template/admin/question_index.phtml:14
-msgid "Title"
-msgstr "عنوان"
-
-#: /var/www/html/local/pi/pi-develop/usr/module/ask/src/Form/AskForm.php:53
-#: /var/www/html/local/pi/pi-develop/usr/module/ask/src/Form/UpdateForm.php:53
-#: /var/www/html/local/pi/pi-develop/usr/module/ask/template/admin/question_index.phtml:28
-msgid "Question"
-msgstr "سوال"
-
-#: /var/www/html/local/pi/pi-develop/usr/module/ask/src/Form/AskForm.php:67
-#: /var/www/html/local/pi/pi-develop/usr/module/ask/src/Form/UpdateForm.php:67
-#: /var/www/html/local/pi/pi-develop/usr/module/ask/config/config.php:54
-msgid "Tags"
-msgstr "برچسب ها"
-
-#: /var/www/html/local/pi/pi-develop/usr/module/ask/src/Controller/Feed/IndexController.php:25
-msgid "Ask feed"
-msgstr "خوراک سوالات"
-
-#: /var/www/html/local/pi/pi-develop/usr/module/ask/src/Controller/Feed/IndexController.php:26
-msgid "Recent Questions."
-msgstr "آخرین سوالات ارسال شده"
-
-#: /var/www/html/local/pi/pi-develop/usr/module/ask/src/Controller/Admin/QuestionController.php:102
-#, php-format
-msgid "%s question accept successfully"
-msgstr "%s با موفقیت تایید شد"
-
-#: /var/www/html/local/pi/pi-develop/usr/module/ask/src/Controller/Admin/QuestionController.php:107
-#, php-format
-msgid "Error in accept %s question"
-msgstr "خطا در تایید %s"
-
-#: /var/www/html/local/pi/pi-develop/usr/module/ask/src/Controller/Admin/QuestionController.php:113
-#: /var/www/html/local/pi/pi-develop/usr/module/ask/src/Controller/Admin/QuestionController.php:176
-msgid "Please select question"
-msgstr "لطفا یک سوال انتخاب کنید"
-
-#: /var/www/html/local/pi/pi-develop/usr/module/ask/src/Controller/Admin/QuestionController.php:153
-msgid "Your selected item edit successfully"
-msgstr "آیتم انتخابی شما با موفقیت ویرایش شد"
-
-#: /var/www/html/local/pi/pi-develop/usr/module/ask/src/Controller/Admin/QuestionController.php:174
-msgid "Your selected question deleted"
-msgstr "سوال انتخابی شما حذف شد"
-
-#: /var/www/html/local/pi/pi-develop/usr/module/ask/src/Controller/Front/IndexController.php:69
-msgid "Ask index seo title"
-msgstr "فهرست پرسش و پاسخ های ارسالی"
-
-#: /var/www/html/local/pi/pi-develop/usr/module/ask/src/Controller/Front/IndexController.php:70
-msgid "ask index seo description"
-msgstr "فهرست پرسش و پاسخ های ارسالی"
-
-#: /var/www/html/local/pi/pi-develop/usr/module/ask/src/Controller/Front/IndexController.php:71
-msgid "ask index seo keywords"
-msgstr "فهرست,پرسش,پاسخ,سوال,جواب"
-
-#: /var/www/html/local/pi/pi-develop/usr/module/ask/src/Controller/Front/SubmitController.php:64
-msgid "Your ask new question successfully, Other users can view and answer it"
-msgstr ""
-"پرسش شما با موفقیت ارسال شد، کاربران دیگر می توانند آن را بخوانند و پاسخ دهند"
-
-#: /var/www/html/local/pi/pi-develop/usr/module/ask/src/Controller/Front/SubmitController.php:66
-msgid ""
-"Your ask new question successfully, But it need review and publish by "
-"website admin"
-msgstr ""
-"پرسش شما با موفقیت ارسال شد، بعد از بررسی و تایید مدیر در وب سایت منتشر می "
-"شود"
-
-#: /var/www/html/local/pi/pi-develop/usr/module/ask/src/Controller/Front/SubmitController.php:73
-msgid "Ask a new Question"
-msgstr "پرسیدن سوال جدید"
-
-#: /var/www/html/local/pi/pi-develop/usr/module/ask/src/Controller/Front/TagController.php:37
-#: /var/www/html/local/pi/pi-develop/usr/module/ask/src/Controller/Front/TagController.php:54
-msgid "The tag not found."
-msgstr "برچسب یافت نشد"
-
-#: /var/www/html/local/pi/pi-develop/usr/module/ask/src/Controller/Front/TagController.php:96
-msgid "Back to question list"
-msgstr "برگشت به فهرست سوالات"
-
-#: /var/www/html/local/pi/pi-develop/usr/module/ask/src/Controller/Front/QuestionController.php:33
-#: /var/www/html/local/pi/pi-develop/usr/module/ask/src/Controller/Front/AnswerController.php:42
-msgid "The question not found."
-msgstr "سوال یافت نشد"
-
-#: /var/www/html/local/pi/pi-develop/usr/module/ask/src/Controller/Front/AnswerController.php:65
-#: /var/www/html/local/pi/pi-develop/usr/module/ask/src/Controller/Front/AnswerController.php:95
-#, php-format
-msgid "Answer to %s"
-msgstr "پاسخ به %s"
-
-#: /var/www/html/local/pi/pi-develop/usr/module/ask/src/Controller/Front/AnswerController.php:83
-msgid ""
-"Your new answer to this question save successfully, and show under question"
-msgstr "پاسخ شما به این پرسش با موفقیت ثبت شد، و در زیر سوال نمایش داده می شود"
-
-#: /var/www/html/local/pi/pi-develop/usr/module/ask/src/Controller/Front/AnswerController.php:85
-msgid ""
-"Your new answer to this question save successfully, But it need review and "
-"publish by website admin"
-msgstr ""
-"پاسخ شما به این پرسش با موفقیت ثبت شد، بعد از بررسی و تایید مدیر نمایش داده "
-"می شود"
-
-#: /var/www/html/local/pi/pi-develop/usr/module/ask/config/navigation.php:16
-msgid "List of Question"
-msgstr "فهرست سوالات"
-
-#: /var/www/html/local/pi/pi-develop/usr/module/ask/config/navigation.php:23
-msgid "Tools"
-msgstr "ابزار"
-
-#: /var/www/html/local/pi/pi-develop/usr/module/ask/config/module.php:15
-msgid "Ask"
-msgstr "پرسش و پاسخ"
-
-#: /var/www/html/local/pi/pi-develop/usr/module/ask/config/module.php:16
-msgid "Ask and Answer"
-msgstr "سیستم ارسال پرسش و درج پاسخ"
-
-#: /var/www/html/local/pi/pi-develop/usr/module/ask/config/config.php:17
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/ask/config/config.php:16
 msgid "Admin"
 msgstr "مدیریت"
 
-#: /var/www/html/local/pi/pi-develop/usr/module/ask/config/config.php:21
-msgid "Front"
-msgstr "کاربر"
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/ask/config/config.php:20
+msgid "Show"
+msgstr "نمایش"
 
-#: /var/www/html/local/pi/pi-develop/usr/module/ask/config/config.php:25
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/ask/config/config.php:24
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/ask/config/page.php:42
+msgid "Question"
+msgstr "سوال"
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/ask/config/config.php:28
 msgid "Feed"
 msgstr "خوراک"
 
-#: /var/www/html/local/pi/pi-develop/usr/module/ask/config/config.php:29
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/ask/config/config.php:32
 msgid "Vote"
 msgstr "رای"
 
-#: /var/www/html/local/pi/pi-develop/usr/module/ask/config/config.php:37
-#: /var/www/html/local/pi/pi-develop/usr/module/ask/config/config.php:46
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/ask/config/config.php:40
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/ask/config/config.php:49
 msgid "Perpage"
 msgstr "تعداد هر هر صفحه"
 
-#: /var/www/html/local/pi/pi-develop/usr/module/ask/config/config.php:47
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/ask/config/config.php:50
 msgid "Number of questions in each page"
 msgstr "تعداد سوالات در هر صفحه"
 
-#: /var/www/html/local/pi/pi-develop/usr/module/ask/config/config.php:55
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/ask/config/config.php:57
+msgid "Show information"
+msgstr "نمایش اطلاعات"
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/ask/config/config.php:65
+msgid "Tags"
+msgstr "برچسب ها"
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/ask/config/config.php:66
 msgid "Number of tags in tag controller"
 msgstr "تعداد برچسب ها"
 
-#: /var/www/html/local/pi/pi-develop/usr/module/ask/config/config.php:61
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/ask/config/config.php:73
+msgid "Show breadcrumbs"
+msgstr "نمایش ناوبری"
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/ask/config/config.php:82
+msgid "Can ask"
+msgstr "امکان پرسیدن سوال"
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/ask/config/config.php:90
+msgid "Can answer"
+msgstr "امکان پاسخ به سوال"
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/ask/config/config.php:97
 msgid "Automatic approval"
 msgstr "تایید خودکار"
 
-#: /var/www/html/local/pi/pi-develop/usr/module/ask/config/config.php:67
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/ask/config/config.php:103
 msgid "All questions and answers need admin review before publish"
 msgstr "تمام سوالات و پاسخ خا به تایید مدیر برای انتشار نیاز دارند"
 
-#: /var/www/html/local/pi/pi-develop/usr/module/ask/config/config.php:68
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/ask/config/config.php:104
 msgid "Automatic approval all questions and answers"
 msgstr "تایید خودکار پرسش و پاسخ های ارسالی"
 
-#: /var/www/html/local/pi/pi-develop/usr/module/ask/config/config.php:79
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/ask/config/config.php:115
 msgid "Show feed icon"
 msgstr "نمایش آیکن خوارک"
 
-#: /var/www/html/local/pi/pi-develop/usr/module/ask/config/config.php:87
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/ask/config/config.php:123
 msgid "Feed number"
 msgstr "تعداد خوراک"
 
-#: /var/www/html/local/pi/pi-develop/usr/module/ask/config/config.php:96
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/ask/config/config.php:132
 msgid "Use vote system"
 msgstr "استفاده از سیستم رای"
 
-#: /var/www/html/local/pi/pi-develop/usr/module/ask/template/admin/question_update.phtml:4
-msgid "Content"
-msgstr "متن"
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/ask/config/module.php:15
+msgid "Ask"
+msgstr "پرسش و پاسخ"
 
-#: /var/www/html/local/pi/pi-develop/usr/module/ask/template/admin/question_update.phtml:5
-msgid "Slug"
-msgstr "اسلاگ"
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/ask/config/module.php:16
+msgid "Ask and Answer"
+msgstr "سیستم ارسال پرسش و درج پاسخ"
 
-#: /var/www/html/local/pi/pi-develop/usr/module/ask/template/admin/question_update.phtml:6
-#: /var/www/html/local/pi/pi-develop/usr/module/ask/template/admin/question_index.phtml:16
-msgid "Create"
-msgstr "ایجاد"
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/ask/config/navigation.php:16
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/ask/config/page.php:17
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/ask/config/permission.php:39
+msgid "List of Questions"
+msgstr "فهرست سوالات"
 
-#: /var/www/html/local/pi/pi-develop/usr/module/ask/template/admin/question_index.phtml:10
-msgid "List of questions and answers"
-msgstr "فهرست سوالات و پاسخ ها"
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/ask/config/navigation.php:26
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/ask/config/page.php:22
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/ask/config/permission.php:45
+msgid "Tools"
+msgstr "ابزار"
 
-#: /var/www/html/local/pi/pi-develop/usr/module/ask/template/admin/question_index.phtml:13
-msgid "ID"
-msgstr "شناسه"
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/ask/config/page.php:30
+msgid "Index page"
+msgstr "صفحه اول"
 
-#: /var/www/html/local/pi/pi-develop/usr/module/ask/template/admin/question_index.phtml:15
-msgid "Type"
-msgstr "نوع"
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/ask/config/page.php:36
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/ask/config/permission.php:30
+msgid "Answer"
+msgstr "پاسخ"
 
-#: /var/www/html/local/pi/pi-develop/usr/module/ask/template/admin/question_index.phtml:17
-msgid "Action"
-msgstr "عملکرد"
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/ask/config/page.php:48
+msgid "Submit question"
+msgstr "ارسال سوال"
 
-#: /var/www/html/local/pi/pi-develop/usr/module/ask/template/admin/question_index.phtml:49
-#: /var/www/html/local/pi/pi-develop/usr/module/ask/template/admin/question_index.phtml:74
-msgid "Reject"
-msgstr "رد کردن"
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/ask/config/page.php:54
+msgid "Tag"
+msgstr "برچسب"
 
-#: /var/www/html/local/pi/pi-develop/usr/module/ask/template/admin/question_index.phtml:51
-#: /var/www/html/local/pi/pi-develop/usr/module/ask/template/admin/question_index.phtml:79
-msgid "Accept"
-msgstr "تایید"
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/ask/config/permission.php:17
+msgid "Global public resource"
+msgstr "دسترسی های عمومی"
 
-#: /var/www/html/local/pi/pi-develop/usr/module/ask/template/admin/question_index.phtml:53
-msgid "Edit"
-msgstr "ویرایش"
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/ask/config/permission.php:24
+msgid "Submit"
+msgstr "ارسال"
 
-#: /var/www/html/local/pi/pi-develop/usr/module/ask/template/admin/question_index.phtml:54
-msgid "Delete"
-msgstr "حذف"
+#~ msgid "Title"
+#~ msgstr "عنوان"
 
-#: /var/www/html/local/pi/pi-develop/usr/module/ask/template/admin/question_index.phtml:61
-msgid "Published"
-msgstr "منتشر شده"
+#~ msgid "Ask feed"
+#~ msgstr "خوراک سوالات"
 
-#: /var/www/html/local/pi/pi-develop/usr/module/ask/template/admin/question_index.phtml:62
-msgid "Pending review"
-msgstr "در انتظار تایید"
+#~ msgid "Recent Questions."
+#~ msgstr "آخرین سوالات ارسال شده"
 
-#: /var/www/html/local/pi/pi-develop/usr/module/ask/template/admin/question_index.phtml:68
-msgid "Accept in process"
-msgstr "تایید در حال انجام است"
+#~ msgid "%s question accept successfully"
+#~ msgstr "%s با موفقیت تایید شد"
 
-#: /var/www/html/local/pi/pi-develop/usr/module/ask/template/front/question_list.phtml:3
-msgid "Ask question"
-msgstr "پرسیدن سوال"
+#~ msgid "Error in accept %s question"
+#~ msgstr "خطا در تایید %s"
+
+#~ msgid "Please select question"
+#~ msgstr "لطفا یک سوال انتخاب کنید"
+
+#~ msgid "Your selected item edit successfully"
+#~ msgstr "آیتم انتخابی شما با موفقیت ویرایش شد"
+
+#~ msgid "Your selected question deleted"
+#~ msgstr "سوال انتخابی شما حذف شد"
+
+#~ msgid "Ask index seo title"
+#~ msgstr "فهرست پرسش و پاسخ های ارسالی"
+
+#~ msgid "ask index seo description"
+#~ msgstr "فهرست پرسش و پاسخ های ارسالی"
+
+#~ msgid "ask index seo keywords"
+#~ msgstr "فهرست,پرسش,پاسخ,سوال,جواب"
+
+#~ msgid "Your ask new question successfully, Other users can view and answer it"
+#~ msgstr "پرسش شما با موفقیت ارسال شد، کاربران دیگر می توانند آن را بخوانند و پاسخ دهند"
+
+#~ msgid "Your ask new question successfully, But it need review and publish by website admin"
+#~ msgstr "پرسش شما با موفقیت ارسال شد، بعد از بررسی و تایید مدیر در وب سایت منتشر می شود"
+
+#~ msgid "Ask a new Question"
+#~ msgstr "پرسیدن سوال جدید"
+
+#~ msgid "The tag not found."
+#~ msgstr "برچسب یافت نشد"
+
+#~ msgid "Back to question list"
+#~ msgstr "برگشت به فهرست سوالات"
+
+#~ msgid "The question not found."
+#~ msgstr "سوال یافت نشد"
+
+#~ msgid "Answer to %s"
+#~ msgstr "پاسخ به %s"
+
+#~ msgid "Your new answer to this question save successfully, and show under question"
+#~ msgstr "پاسخ شما به این پرسش با موفقیت ثبت شد، و در زیر سوال نمایش داده می شود"
+
+#~ msgid "Your new answer to this question save successfully, But it need review and publish by website admin"
+#~ msgstr "پاسخ شما به این پرسش با موفقیت ثبت شد، بعد از بررسی و تایید مدیر نمایش داده می شود"
+
+#~ msgid "Front"
+#~ msgstr "کاربر"
+
+#~ msgid "Content"
+#~ msgstr "متن"
+
+#~ msgid "Slug"
+#~ msgstr "اسلاگ"
+
+#~ msgid "Create"
+#~ msgstr "ایجاد"
+
+#~ msgid "List of questions and answers"
+#~ msgstr "فهرست سوالات و پاسخ ها"
+
+#~ msgid "ID"
+#~ msgstr "شناسه"
+
+#~ msgid "Type"
+#~ msgstr "نوع"
+
+#~ msgid "Action"
+#~ msgstr "عملکرد"
+
+#~ msgid "Reject"
+#~ msgstr "رد کردن"
+
+#~ msgid "Accept"
+#~ msgstr "تایید"
+
+#~ msgid "Edit"
+#~ msgstr "ویرایش"
+
+#~ msgid "Delete"
+#~ msgstr "حذف"
+
+#~ msgid "Published"
+#~ msgstr "منتشر شده"
+
+#~ msgid "Pending review"
+#~ msgstr "در انتظار تایید"
+
+#~ msgid "Accept in process"
+#~ msgstr "تایید در حال انجام است"

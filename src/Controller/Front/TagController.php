@@ -30,72 +30,88 @@ class TagController extends IndexController
         }
         // Get config
         $config = Pi::service('registry')->config->read($module);
-        // Get order
-        $selectOrder = $this->params('order', 'create');
-        if (!in_array($selectOrder, array('create', 'hits', 'point', 'answer'))) {
-            $selectOrder = 'create';
-        }
-        // Set offset
-        $offset = (int)($page - 1) * $config['show_perpage'];
-        // Get photo Id from tag module
-        $tags = Pi::service('tag')->getList($module, $slug, null, $config['show_tags'], $offset);
         // Check slug
-        if (empty($tags)) {
-            $this->jump(array('', 'module' => $module, 'controller' => 'index'), __('The tag not found.'));
+        if (!isset($slug) || empty($slug)) {
+            $url = array('', 'module' => $module, 'controller' => 'index', 'action' => 'index');
+            $this->jump($url, __('The tag not set.'), 'error');
         }
+        // Get id from tag module
+        $tagId = array();
+        $tags = Pi::service('tag')->getList($slug, $module);
         foreach ($tags as $tag) {
             $tagId[] = $tag['item'];
         }
-        // Set info
-        $order = array($selectOrder . ' DESC', 'id DESC');
-        $columns = array('id', 'answer', 'author', 'point', 'count', 'hits', 'create', 'title', 'slug', 'tags');
-        $where = array('status' => 1, 'type' => 'Q', 'id' => $tagId);
-        $limit = intval($config['show_index']);
-        // Get list of story
-        $select = $this->getModel('question')->select()->columns($columns)->where($where)->order($order)->offset($offset)->limit($limit);
-        $rowset = $this->getModel('question')->selectWith($select);
-        foreach ($rowset as $row) {
-            $question[$row->id] = $row->toArray();
-            $question[$row->id]['create'] = date('Y/m/d', $question[$row->id]['create']);
-            $question[$row->id]['tags'] = Json::decode($question[$row->id]['tags']);
-            $question[$row->id]['url'] = $this->url('.ask', array('module' => $module, 'controller' => 'question', 'slug' => $question[$row->id]['slug']));
-            $writer = Pi::model('user_account')->find($question[$row->id]['author'])->toArray();
-            $question[$row->id]['identity'] = $writer['identity'];
-            $question[$row->id]['labelpoint'] = HtmlClass::TabLabel($question[$row->id]['point']);
-            $question[$row->id]['labelanswer'] = HtmlClass::TabLabel($question[$row->id]['answer']);
-            $question[$row->id]['labelhits'] = HtmlClass::TabLabel($question[$row->id]['hits']);
+        // Check slug
+        if (empty($tagId)) {
+            $url = array('', 'module' => $module, 'controller' => 'index', 'action' => 'index');
+            $this->jump($url, __('The tag not found.'), 'error');
         }
-        // Set paginator
-        $select = $this->getModel('question')->select()->columns(array('count' => new \Zend\Db\Sql\Predicate\Expression('count(*)')))->where($where);
-        $count = $this->getModel('question')->selectWith($select)->current()->count;
-        $paginator = \Pi\Paginator\Paginator::factory(intval($count));
-        $paginator->setItemCountPerPage($config['show_perpage']);
-        $paginator->setCurrentPageNumber($page);
-        $paginator->setUrlOptions(array(
-            'template' => $this->url('.ask', array('module' => $module, 'controller' => 'tag', 'slug' => urlencode($slug), 'order' => $selectOrder, 'page' => '%page%')),
+        // Set question info
+        $where = array('status' => 1, 'type' => 'Q', 'id' => $tagId);
+        // Set paginator info
+        $template = array(
+            'controller' => 'tag',
+            'action'     => 'term',
+        );
+        // Get question List
+        $questions = $this->askList($where);
+        // Get paginator
+        $paginator = $this->askPaginator($template, $where);
+        // Set header and title
+        $title = sprintf(__('All questions from %s'), $slug);
+        // Set seo_keywords
+        $filter = new Filter\HeadKeywords;
+        $filter->setOptions(array(
+            'force_replace_space' => true
         ));
-        // Tab urls
-        $url = array(
-            'create' => $this->url('.ask', array('module' => $module, 'controller' => 'tag', 'slug' => urlencode($slug), 'order' => 'create')),
-            'vote' => $this->url('.ask', array('module' => $module, 'controller' => 'tag', 'slug' => urlencode($slug), 'order' => 'point')),
-            'hits' => $this->url('.ask', array('module' => $module, 'controller' => 'tag', 'slug' => urlencode($slug), 'order' => 'hits')),
-            'answer' => $this->url('.ask', array('module' => $module, 'controller' => 'tag', 'slug' => urlencode($slug), 'order' => 'answer')),
-        );
-        // Main url
-        $mainurl = array(
-            'title' => __('Back to question list'),
-            'url' => $this->url('.ask', array('module' => $module, 'controller' => 'index')),
-        );
+        $seoKeywords = $filter($title);
         // Set view
-        $this->view()->headTitle($slug);
-        $this->view()->headDescription($slug, 'set');
-        $this->view()->headKeywords($slug, 'set');
+        $this->view()->headTitle($title);
+        $this->view()->headDescription($title, 'set');
+        $this->view()->headKeywords($seoKeywords, 'set');
         $this->view()->setTemplate('question_list');
-        $this->view()->assign('questions', $question);
+        $this->view()->assign('questions', $questions);
         $this->view()->assign('paginator', $paginator);
         $this->view()->assign('config', $config);
-        $this->view()->assign('url', $url);
-        $this->view()->assign('mainurl', $mainurl);
-        $this->view()->assign('tabclass', HtmlClass::TabClass($selectOrder));
+        $this->view()->assign('title', $title);
+    }
+
+    public function listAction()
+    {
+        // Get info from url
+        $module = $this->params('module');
+        $tagList = array();
+        // Check tag module install or not
+        if (Pi::service('module')->isActive('tag')) {
+            $where = array('module' => $module);
+            $order = array('count DESC', 'id DESC');
+            $select = Pi::model('stats', 'tag')->select()->where($where)->order($order);
+            $rowset = Pi::model('stats', 'tag')->selectWith($select);
+            foreach ($rowset as $row) {
+                $tag = Pi::model('tag', 'tag')->find($row->term, 'term');
+                $tagList[$row->id] = $row->toArray();
+                $tagList[$row->id]['term'] = $tag['term'];
+                $tagList[$row->id]['url'] = Pi::url($this->url('', array(
+                    'controller'  => 'tag', 
+                    'action'      => 'term', 
+                    'slug'        => urldecode($tag['term'])
+                )));
+            }
+        }
+        // Set header and title
+        $title = __('List of all used tags');
+        // Set seo_keywords
+        $filter = new Filter\HeadKeywords;
+        $filter->setOptions(array(
+            'force_replace_space' => true
+        ));
+        $seoKeywords = $filter($title);
+        // Set view
+        $this->view()->headTitle($title);
+        $this->view()->headDescription($title, 'set');
+        $this->view()->headKeywords($seoKeywords, 'set');
+        $this->view()->setTemplate('tag_list');
+        $this->view()->assign('title', $title);
+        $this->view()->assign('tagList', $tagList);
     }
 }
