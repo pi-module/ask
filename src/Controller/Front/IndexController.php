@@ -67,8 +67,9 @@ class IndexController extends ActionController
     public function askPaginator($template, $where)
     {
         $template['module'] = $this->params('module');
-        $template['order'] = $this->params('order');
+        //$template['order'] = $this->params('order');
         $template['page'] = $this->params('page', 1);
+        $template['slug'] = $this->params('slug');
         // get count     
         $columns = array('count' => new Expression('count(*)'));
         $select = $this->getModel('question')->select()->where($where)->columns($columns);
@@ -84,7 +85,8 @@ class IndexController extends ActionController
                 'module'        => $this->getModule(),
                 'controller'    => $template['controller'],
                 'action'        => $template['action'],
-                'order'          => $template['order'],
+                //'order'          => $template['order'],
+                'slug'          => urlencode($template['slug']),
             )),
         ));
         return $paginator;

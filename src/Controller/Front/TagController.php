@@ -33,7 +33,7 @@ class TagController extends IndexController
         // Check slug
         if (!isset($slug) || empty($slug)) {
             $url = array('', 'module' => $module, 'controller' => 'index', 'action' => 'index');
-            $this->jump($url, __('The tag not set.'), 'error');
+            //$this->jump($url, __('The tag not set.'), 'error');
         }
         // Get id from tag module
         $tagId = array();
@@ -44,7 +44,7 @@ class TagController extends IndexController
         // Check slug
         if (empty($tagId)) {
             $url = array('', 'module' => $module, 'controller' => 'index', 'action' => 'index');
-            $this->jump($url, __('The tag not found.'), 'error');
+            //$this->jump($url, __('The tag not found.'), 'error');
         }
         // Set question info
         $where = array('status' => 1, 'type' => 'Q', 'id' => $tagId);

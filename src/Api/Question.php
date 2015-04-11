@@ -60,6 +60,7 @@ class Question extends AbstractApi
         // Set tags
         if (!empty($question['tag'])) {
             $tags = Json::decode($question['tag']);
+            $tags = array_unique($tags);
             foreach ($tags as $tag) {
                 $tagList[] = array(
                     'term' => $tag,
@@ -67,7 +68,7 @@ class Question extends AbstractApi
                         'module'        => $this->getModule(),
                         'controller'    => 'tag',
                         'action'        => 'term',
-                        'slug'          => urlencode($tag),
+                        'slug'          => $tag,
                     ))),
                 );
             }

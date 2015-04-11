@@ -119,7 +119,7 @@ class Ask extends Standard
             $url['action'] = $mergedParams['action'];
         }
         if (!empty($mergedParams['slug'])) {
-            $url['slug'] = $mergedParams['slug'];
+            $url['slug'] = urlencode($mergedParams['slug']);
         }
         if (!empty($mergedParams['order'])) {
             $url['order'] = 'order' . $this->paramDelimiter . $mergedParams['order'];
