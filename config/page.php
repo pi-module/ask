@@ -38,6 +38,12 @@ return array(
             'block'         => 1,
         ),
         array(
+            'title'         => _a('Project page'),
+            'controller'    => 'project',
+            'permission'    => 'public',
+            'block'         => 1,
+        ),
+        array(
             'title'         => _a('Answer'),
             'controller'    => 'answer',
             'permission'    => 'answer',

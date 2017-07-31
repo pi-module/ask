@@ -31,5 +31,6 @@ class Project extends Model
         'seo_title',
         'seo_keywords',
         'seo_description',
+        'manager',
     );
 }

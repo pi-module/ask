@@ -25,6 +25,7 @@ class SubmitController extends ActionController
     {
         // Get info from url
         $module = $this->params('module');
+        $slug = $this->params('slug');
         // Get config
         $config = Pi::service('registry')->config->read($module);
         // Check ask
@@ -34,6 +35,22 @@ class SubmitController extends ActionController
         }
         // Check user is login or not
         Pi::service('authentication')->requireLogin();
+        // Check project
+        if ($config['project_active'] && !empty($slug)) {
+            // Get topic information from model
+            $project = Pi::api('project', 'ask')->getProject($slug, 'slug');
+            // Check slug set
+            if (empty($project) || $project['status'] != 1) {
+                $this->getResponse()->setStatusCode(404);
+                $this->terminate(__('Project not set.'), '', 'error-404');
+                $this->view()->setLayout('layout-simple');
+                return;
+            }
+        } elseif ($config['project_active'] && empty($slug)) {
+            $url = array('', 'module' => $module, 'controller' => 'index', 'action' => 'index');
+            $this->jump($url, __('Please select project for ask question'), 'error');
+        }
+
         // Set form
         $form = new AskForm('Ask');
         if ($this->request->isPost()) {
@@ -52,7 +69,8 @@ class SubmitController extends ActionController
                 $values['time_update'] = time();
                 // Set slug
                 $filter = new Filter\Slug;
-                $values['slug'] = $filter($values['title'] . ' ' . _date($values['time_create']));
+                $slug = sprintf('%s-%s', $values['title'], _date($values['time_create'], array('pattern' => 'yyyy MM dd H I')));
+                $values['slug'] = $filter($slug);
                 // Set seo_title
                 $filter = new Filter\HeadTitle;
                 $values['seo_title'] = $filter($values['title']);
@@ -69,6 +87,10 @@ class SubmitController extends ActionController
                 $values['uid'] = Pi::user()->getId();
                 $values['status'] = $this->config('auto_approval');
                 $values['type'] = 'Q';
+                // Check project
+                if (isset($project) && !empty($project)) {
+                    $values['project_id'] = $project['id'];
+                }
                 // Save values
                 $row = $this->getModel('question')->createRow();
                 $row->assign($values);
@@ -83,12 +105,21 @@ class SubmitController extends ActionController
                 } else {
                     $message = __('Your ask new question successfully, But it need review and publish by website admin');                  
                 }
-                $url = array('', 'module' => $module, 'controller' => 'index', 'action' => 'index');
+                if (isset($project) && !empty($project)) {
+                    $url = array('', 'module' => $module, 'controller' => 'project', 'slug' => $project['slug']);
+                } else {
+                    $url = array('', 'module' => $module, 'controller' => 'index', 'action' => 'index');
+                }
                 $this->jump($url, $message);
             }
         }
         // Set header and title
-        $title = __('Ask a new Question');
+        if (isset($project) && !empty($project)) {
+            $title = sprintf(__('Ask a new Question on %s project'), $project['title']);
+        } else {
+            $title = __('Ask a new Question');
+        }
+
         // Set seo_keywords
         $filter = new Filter\HeadKeywords;
         $filter->setOptions(array(
@@ -99,7 +130,7 @@ class SubmitController extends ActionController
         $this->view()->headTitle($title);
         $this->view()->headDescription($title, 'set');
         $this->view()->headKeywords($seoKeywords, 'set');
-        $this->view()->setTemplate('submit_index');
+        $this->view()->setTemplate('submit-index');
         $this->view()->assign('form', $form);
         $this->view()->assign('title', $title);
     }

@@ -1,0 +1,19 @@
+<?php $this->css($this->assetModule('css/front.css')); ?>
+<div class="clearfix">
+    <div class="page-header">
+        <h1><?php echo $this->escape($title); ?></h1>
+    </div>
+    <div class="clearfix row">
+        <div class="col-md-8">
+            <?php echo $this->form($form, 'vertical'); ?>
+        </div>
+        <div class="col-md-4">
+            <h4><?php _e('Roles to ask question'); ?></h4>
+            <ul class="list-group">
+                <li class="list-group-item"><?php _e('Please check website roles before ask question'); ?></li>
+                <li class="list-group-item"><?php _e('Please dont submit duplicate question'); ?></li>
+                <li class="list-group-item"><?php _e('All questions will review by admin or project manager'); ?></li>
+            </ul>
+        </div>
+    </div>
+</div>

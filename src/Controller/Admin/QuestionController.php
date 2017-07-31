@@ -44,7 +44,6 @@ class QuestionController extends ActionController
         // Make list
         foreach ($rowset as $row) {
             $question[$row->id] = Pi::api('question', 'ask')->canonizeQuestion($row);
-            
         }
         // Set paginator
         $count = array('count' => new \Zend\Db\Sql\Predicate\Expression('count(*)'));
@@ -123,7 +122,7 @@ class QuestionController extends ActionController
                 }
                 // Set slug
                 $slug = ($values['slug']) ? $values['slug'] : $values['title'];
-                $slug = $slug . ' ' . $question['time_create'];
+                $slug = sprintf('%s-%s', $slug, _date($question['time_create'], array('pattern' => 'yyyy MM dd H I')));
                 $filter = new Filter\Slug;
                 $values['slug'] = $filter($slug);
                 // Set seo_title

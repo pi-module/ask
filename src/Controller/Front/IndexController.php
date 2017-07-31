@@ -25,23 +25,33 @@ class IndexController extends ActionController
         $module = $this->params('module');
         // Get config
         $config = Pi::service('registry')->config->read($module);
-        // Set question info
-        $where = array('status' => 1, 'type' => 'Q');
-        // Set paginator info
-        $template = array(
-            'controller' => 'index',
-            'action'     => 'index',
-        );
-        // Get question List
-        $questions = $this->askList($where);
-        // Get paginator
-        $paginator = $this->askPaginator($template, $where);
-        // Set view
-        $this->view()->setTemplate('question_list');
-        $this->view()->assign('questions', $questions);
-        $this->view()->assign('paginator', $paginator);
-        $this->view()->assign('config', $config);
-        $this->view()->assign('title', __('List of all questions'));
+        // Check
+        if ($config['project_active']) {
+            $projects = Pi::api('project', 'ask')->getProjectList();
+            // Set view
+            $this->view()->setTemplate('project-list');
+            $this->view()->assign('projects', $projects);
+            $this->view()->assign('config', $config);
+            $this->view()->assign('title', __('List of all projects'));
+        } else {
+            // Set question info
+            $where = array('status' => 1, 'type' => 'Q');
+            // Set paginator info
+            $template = array(
+                'controller' => 'index',
+                'action'     => 'index',
+            );
+            // Get question List
+            $questions = $this->askList($where);
+            // Get paginator
+            $paginator = $this->askPaginator($template, $where);
+            // Set view
+            $this->view()->setTemplate('question-list');
+            $this->view()->assign('questions', $questions);
+            $this->view()->assign('paginator', $paginator);
+            $this->view()->assign('config', $config);
+            $this->view()->assign('title', __('List of all questions'));
+        }
     }
 
     public function askList($where)

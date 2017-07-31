@@ -1,0 +1,16 @@
+.question-list {
+    margin-top: 15px;
+}
+
+.question-single {
+    padding-bottom: 5px;
+    margin-bottom: 5px;
+    border-bottom: 1px solid #ddd;
+}
+
+.question-single .question-single-title h3 {
+    padding: 5px 0;
+    margin: 0;
+}
+
+.question-single .question-single-time {}

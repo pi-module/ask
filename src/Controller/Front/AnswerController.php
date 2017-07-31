@@ -57,7 +57,9 @@ class AnswerController extends ActionController
                 $values['time_update'] = time();
                 // Set slug
                 $filter = new Filter\Slug;
-                $values['slug'] = $filter($values['title'] . ' ' . _date($values['time_create']));
+                $slug = sprintf('%s-%s', $values['title'], _date($values['time_create']));
+                $values['slug'] = $filter($slug);
+
                 // Set seo_title
                 $filter = new Filter\HeadTitle;
                 $values['seo_title'] = $filter($values['title']);

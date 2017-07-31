@@ -28,7 +28,7 @@ class Ask extends Standard
     );
 
     protected $controllerList = array(
-        'answer', 'index', 'question', 'submit', 'tag'
+        'answer', 'index', 'question', 'submit', 'tag', 'project'
     );
 
     /**
@@ -66,6 +66,18 @@ class Ask extends Standard
                     break;
 
                 case 'question':
+                    if (!empty($parts[1])) {
+                        $matches['slug'] = $this->decode($parts[1]);
+                    }
+                    break;
+
+                case 'project':
+                    if (!empty($parts[1])) {
+                        $matches['slug'] = $this->decode($parts[1]);
+                    }
+                    break;
+
+                case 'submit':
                     if (!empty($parts[1])) {
                         $matches['slug'] = $this->decode($parts[1]);
                     }

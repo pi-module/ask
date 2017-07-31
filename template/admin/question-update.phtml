@@ -5,5 +5,5 @@
 		<p><strong><?php _e('Description'); ?></strong> : <?php echo $question['text_description']; ?></p>
 		<p><strong><?php _e('Create'); ?></strong> : <?php echo $this->escape($question['time_create_view']); ?></p>
 	</div>
-	<?php include $this->templateComponent('form'); ?>
+    <?php echo $this->form($form); ?>
 </div>

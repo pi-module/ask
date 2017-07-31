@@ -24,6 +24,7 @@ class Question extends Model
         'id',
         'type',
         'question_id',
+        'project_id',
         'answer',
         'uid', 'point',
         'count',

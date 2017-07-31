@@ -1,0 +1,15 @@
+<?php $this->css($this->assetModule('css/front.css')); ?>
+<div class="clearfix">
+    <div class="page-header">
+        <h1><?php echo $this->escape($title); ?></h1>
+    </div>
+    <div class="project-list clearfix">
+        <div class="list-group">
+            <?php foreach($projects as $project) { ?>
+                <a class="list-group-item" title="<?php echo $this->escape($project['title']); ?>" href="<?php echo $project['projectUrl']; ?>">
+                    <?php echo $this->escape($project['title']); ?>
+                </a>
+            <?php } ?>
+        </div>
+    </div>
+</div>

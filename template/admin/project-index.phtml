@@ -1,7 +1,42 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: voltan
- * Date: 7/31/17
- * Time: 10:26 AM
- */
+<?php $this->css($this->assetModule('css/admin.css')); ?>
+<div class="clearfix">
+    <?php if (!empty($projects)) { ?>
+        <h3><?php _e('List of projects') ?></h3>
+        <table id="project-list" class="table table-striped table-bordered table-condensed">
+            <tr>
+                <th><?php _e('ID'); ?></th>
+                <th><?php _e('Title'); ?></th>
+                <th><?php _e('Action'); ?></th>
+            </tr>
+            <?php foreach($projects as $project) { ?>
+                <?php if($project['status'] == 1) {
+                    $labelIdClass = 'label-success';
+                } else {
+                    $labelIdClass = 'label-warning';
+                } ?>
+                <tr>
+                    <td>
+                        <span id="label-<?php echo $project['id']; ?>" class="label <?php echo $labelIdClass; ?>">
+                            <?php echo $this->escape($project['id']); ?>
+                        </span>
+                    </td>
+                    <td><?php echo $this->escape($project['title']); ?></td>
+                    <td>
+                        <a class="btn btn-success btn-xs" title="<?php _e('View'); ?>" href="<?php echo $project['projectUrl']; ?>"><i class="fa fa-eye"></i> <?php _e('View'); ?></a>
+                        <a class="btn btn-primary btn-xs" title="<?php _e('Edit'); ?>" href="<?php echo $this->url('', array(
+                            'action' => 'update',
+                            'id' => $project['id'])); ?>"><i class="fa fa-pencil-square-o"></i> <?php _e('Edit'); ?></a>
+                    </td>
+                </tr>
+            <?php } ?>
+        </table>
+        <p>
+            <span class="label label-success"><?php _e('Published'); ?></span>
+            <span class="label label-warning"><?php _e('Pending review'); ?></span>
+        </p>
+    <?php } else { ?>
+        <div class="alert alert-danger" role="alert">
+            <?php _e('No project create yet'); ?>
+        </div>
+    <?php } ?>
+</div>

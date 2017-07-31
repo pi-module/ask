@@ -50,8 +50,6 @@ class Question extends AbstractApi
         if (empty($question)) {
             return '';
         }
-        // Get config
-        $config = Pi::service('registry')->config->read($this->getModule());
         // boject to array
         $question = $question->toArray();
         // Set times
@@ -74,6 +72,17 @@ class Question extends AbstractApi
             }
             $question['tag'] = $tagList;
         }
+        // Set user
+        $question['user'] = Pi::user()->get($question['uid'], array(
+            'id', 'identity', 'name', 'email'
+        ));
+        /* $question['user']['avatar'] = Pi::service('user')->avatar($question['user']['id'], 'large', array(
+            'alt' => $question['user']['name'],
+            'class' => 'img-circle',
+        ));
+        $question['user']['profileUrl'] = Pi::url(Pi::service('user')->getUrl('profile', array(
+            'id' => $question['user']['id'],
+        ))); */
         // Set info for Q and A
         switch ($question['type']) {
             case 'Q':

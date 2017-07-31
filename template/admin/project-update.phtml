@@ -1,7 +1,5 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: voltan
- * Date: 7/31/17
- * Time: 10:26 AM
- */
+<?php $this->css($this->assetModule('css/admin.css')); ?>
+<div id="author-form" class="clearfix">
+    <h3><?php echo $this->escape($title); ?></h3>
+    <?php echo $this->form($form); ?>
+</div>

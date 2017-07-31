@@ -51,8 +51,10 @@ CREATE TABLE `{project}` (
   `seo_title`        VARCHAR(255)        NOT NULL DEFAULT '',
   `seo_keywords`     VARCHAR(255)        NOT NULL DEFAULT '',
   `seo_description`  VARCHAR(255)        NOT NULL DEFAULT '',
+  `manager`               INT(10) UNSIGNED     NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `title` (`title`),
   KEY `status` (`status`),
-  KEY `time_create` (`time_create`)
+  KEY `time_create` (`time_create`),
+  KEY `manager` (`manager`)
 );
