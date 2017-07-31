@@ -59,6 +59,32 @@ class AskForm extends BaseForm
                 'description' => '',
             )
         ));
+        // main_image
+        $this->add(array(
+            'name' => 'main_image',
+            'type' => 'Module\Media\Form\Element\Media',
+            'options' => array(
+                'label' => __('Main image'),
+                'media_gallery' => false,
+                'media_season' => false,
+                'media_season_recommended' => false,
+                'is_freemium' => true,
+                'can_connect_lists' => false,
+            ),
+        ));
+        // additional_images
+        /* $this->add(array(
+            'name' => 'additional_images',
+            'type' => 'Module\Media\Form\Element\Media',
+            'options' => array(
+                'label' => __('Additional images'),
+                'media_gallery' => true,
+                'media_season' => false,
+                'media_season_recommended' => false,
+                'is_freemium' => true,
+                'can_connect_lists' => false,
+            ),
+        )); */
         // tag
         if (Pi::service('module')->isActive('tag')) {
             $this->add(array(

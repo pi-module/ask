@@ -61,6 +61,16 @@ class ProjectFilter extends InputFilter
                 ),
             ),
         ));
+        //main_image
+        $this->add(array(
+            'name' => 'main_image',
+            'required' => false,
+        ));
+        // additional_images
+        $this->add(array(
+            'name' => 'additional_images',
+            'required' => false,
+        ));
         // status
         $this->add(array(
             'name' => 'status',

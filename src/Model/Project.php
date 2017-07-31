@@ -32,5 +32,7 @@ class Project extends Model
         'seo_keywords',
         'seo_description',
         'manager',
+        'main_image',
+        'additional_images',
     );
 }

@@ -45,6 +45,16 @@ class AskFilter extends InputFilter
                 ),
             ),
         ));
+        //main_image
+        $this->add(array(
+            'name' => 'main_image',
+            'required' => false,
+        ));
+        // additional_images
+        /* $this->add(array(
+            'name' => 'additional_images',
+            'required' => false,
+        )); */
         // tag
         if (Pi::service('module')->isActive('tag')) {
             $this->add(array(

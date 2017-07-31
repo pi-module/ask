@@ -16,6 +16,7 @@
         <div class="clearfix">
             <?php echo $project['text_description']; ?>
         </div>
+        <?php echo Pi::api('doc','media')->getSingleLinkUrl($project['main_image'])->thumb('thumbnail'); ?>
     <?php } else { ?>
         <div class="page-header clearfix">
             <h1 class="pull-left"><?php echo $this->escape($title); ?></h1>
