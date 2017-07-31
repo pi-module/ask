@@ -35,9 +35,9 @@ class AskFilter extends InputFilter
                 ),
             ),
         ));
-        // content
+        // text_description
         $this->add(array(
-            'name' => 'content',
+            'name' => 'text_description',
             'required' => true,
             'filters' => array(
                 array(

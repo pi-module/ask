@@ -25,6 +25,10 @@ return array(
             'name'   => 'question'
         ),
         array(
+            'title'  => _a('Project'),
+            'name'   => 'project'
+        ),
+        array(
             'title'  => _a('Feed'),
             'name'   => 'feed'
         ),
@@ -71,6 +75,15 @@ return array(
         'view_breadcrumbs' => array(
             'category'     => 'show',
             'title'        => _a('Show breadcrumbs'),
+            'description'  => '',
+            'edit'         => 'checkbox',
+            'filter'       => 'number_int',
+            'value'        => 1
+        ),
+        // Project
+        'project_active' => array(
+            'category'     => 'project',
+            'title'        => _a('Active project system'),
             'description'  => '',
             'edit'         => 'checkbox',
             'filter'       => 'number_int',

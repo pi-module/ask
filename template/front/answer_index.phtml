@@ -1,7 +1,9 @@
 <div class="clearfix">
 	<div class="well">
 		<h4><?php echo $this->escape($title); ?></h4>
-		<div class="question-content"><?php echo $question['content']; ?></div>
+		<div class="question-content">
+            <?php echo $question['text_description']; ?>
+        </div>
 	</div>
 	<?php include $this->templateComponent('form'); ?>
 </div>

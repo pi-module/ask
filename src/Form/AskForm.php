@@ -46,9 +46,9 @@ class AskForm extends BaseForm
                 'description' => '',
             )
         ));
-        // content
+        // text_description
         $this->add(array(
-            'name' => 'content',
+            'name' => 'text_description',
             'options' => array(
                 'label' => __('Question'),
                 'editor' => 'html',

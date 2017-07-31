@@ -22,6 +22,38 @@ return array(
             'controller'    => 'question',
             'action'        => 'index',
         ),
+        'project' => array(
+            'label'         => _a('projects'),
+            'permission'    => array(
+                'resource'  => 'project',
+            ),
+            'route'         => 'admin',
+            'module'        => 'ask',
+            'controller'    => 'project',
+            'action'        => 'index',
+            'pages' => array(
+                'project' => array(
+                    'label'         => _a('projects'),
+                    'permission'    => array(
+                        'resource'  => 'project',
+                    ),
+                    'route'         => 'admin',
+                    'module'        => 'ask',
+                    'controller'    => 'project',
+                    'action'        => 'index',
+                ),
+                'update' => array(
+                    'label'         => _a('New project'),
+                    'permission'    => array(
+                        'resource'  => 'project',
+                    ),
+                    'route'         => 'admin',
+                    'module'        => 'ask',
+                    'controller'    => 'project',
+                    'action'        => 'update',
+                ),
+            ),
+        ),
         'tools' => array(
             'label'         => _a('Tools'),
             'permission'    => array(

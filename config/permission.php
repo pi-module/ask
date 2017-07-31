@@ -41,6 +41,12 @@ return array(
                 //'admin',
             ),
         ),
+        'project'       => array(
+            'title'         => _a('projects'),
+            'access'        => array(
+                //'admin',
+            ),
+        ),
         'tools'       => array(
             'title'         => _a('Tools'),
             'access'        => array(

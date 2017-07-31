@@ -77,8 +77,8 @@ class Question extends AbstractApi
         // Set info for Q and A
         switch ($question['type']) {
             case 'Q':
-                // Set content
-                $question['content'] = Pi::service('markup')->render($question['content'], 'html', 'html');
+                // Set text_description
+                $question['text_description'] = Pi::service('markup')->render($question['text_description'], 'html', 'html');
                 // Set question url
                 $question['questionUrl'] = Pi::url(Pi::service('url')->assemble('ask', array(
                     'module'        => $this->getModule(),
@@ -88,8 +88,8 @@ class Question extends AbstractApi
                 break;
             
             case 'A':
-                // Set content
-                $question['content'] = Pi::service('markup')->render($question['content'], 'html', 'text');
+                // Set text_description
+                $question['text_description'] = Pi::service('markup')->render($question['text_description'], 'html', 'text');
                 // Set question url
                 $question['questionUrl'] = '#';
                 break;

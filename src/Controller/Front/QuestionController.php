@@ -51,7 +51,7 @@ class QuestionController extends ActionController
         // Get answers
         if ($question['answer'] > 0) {
             $answers = array();
-            $where = array('status' => 1, 'pid' => $question['id'], 'type' => 'A');
+            $where = array('status' => 1, 'question_id' => $question['id'], 'type' => 'A');
             $order = array('point DESC', 'id DESC');
             $select = $this->getModel('question')->select()->where($where)->order($order);
             $rowset = $this->getModel('question')->selectWith($select);

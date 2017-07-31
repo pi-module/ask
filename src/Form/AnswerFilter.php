@@ -25,14 +25,14 @@ class AnswerFilter extends InputFilter
             'name' => 'id',
             'required' => false,
         ));
-        // pid
+        // question_id
         $this->add(array(
-            'name' => 'pid',
+            'name' => 'question_id',
             'required' => true,
         ));
-        // content
+        // text_description
         $this->add(array(
-            'name' => 'content',
+            'name' => 'text_description',
             'required' => true,
             'filters' => array(
                 array(

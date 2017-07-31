@@ -27,7 +27,7 @@ class Search extends AbstractSearch
      */
     protected $searchIn = array(
         'title',
-        'content',
+        'text_description',
         'tags',
     );
 
@@ -35,12 +35,12 @@ class Search extends AbstractSearch
      * {@inheritDoc}
      */
     protected $meta = array(
-        'id'            => 'id',
-        'title'         => 'title',
-        'content'       => 'content',
-        'time_create'   => 'time',
-        'uid'           => 'uid',
-        'slug'          => 'slug',
+        'id'               => 'id',
+        'title'            => 'title',
+        'text_description' => 'content',
+        'time_create'      => 'time',
+        'uid'              => 'uid',
+        'slug'             => 'slug',
     );
 
     /**

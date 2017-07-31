@@ -2,7 +2,9 @@
 	<div class="page-header">
 		<h1><?php echo $this->escape($question['title']); ?></h1>
 	</div>
-	<div class="clearfix"><?php echo $question['content']; ?></div>
+	<div class="clearfix">
+        <?php echo $question['text_description']; ?>
+    </div>
 	<div class="clearfix">
         <?php if ($config['show_info']) { ?>
 		<div class="col-md-6 col-sm-12 col-xs-12">
@@ -30,7 +32,7 @@
 		<div class="list-group-item">
 			<h4 class="list-group-item-heading"><?php echo $this->escape($answer['title']); ?></h4>
 			<div class="list-group-item-text">
-				<?php echo $answer['content']; ?>
+				<?php echo $answer['text_description']; ?>
 				<div class="clearfix">
 					<div class="pull-right"><?php echo $this->escape($answer['time_create_view']); ?></div>
 				</div>

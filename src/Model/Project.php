@@ -15,31 +15,21 @@ namespace Module\Ask\Model;
 
 use Pi\Application\Model\Model;
 
-class Question extends Model
+class Project extends Model
 {
     /**
      * {@inheritDoc}
      */
     protected $columns = array(
         'id',
-        'type',
-        'question_id',
-        'answer',
-        'uid', 'point',
-        'count',
-        'favorite',
-        'hits',
-        'status',
-        'time_create',
-        'time_update',
         'title',
         'slug',
         'text_description',
-        'tag',
+        'time_create',
+        'time_update',
+        'status',
         'seo_title',
         'seo_keywords',
         'seo_description',
-        'main_image',
-        'additional_images',
     );
 }

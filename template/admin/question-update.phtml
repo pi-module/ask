@@ -2,7 +2,7 @@
 	<div class="well">
 		<p><strong><?php _e('Title'); ?></strong> : <?php echo $this->escape($question['title']); ?></p>
 		<p><strong><?php _e('Slug'); ?></strong> : <?php echo $this->escape($question['slug']); ?></p>
-		<p><strong><?php _e('Content'); ?></strong> : <?php echo $question['content']; ?></p>
+		<p><strong><?php _e('Description'); ?></strong> : <?php echo $question['text_description']; ?></p>
 		<p><strong><?php _e('Create'); ?></strong> : <?php echo $this->escape($question['time_create_view']); ?></p>
 	</div>
 	<?php include $this->templateComponent('form'); ?>

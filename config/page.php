@@ -19,6 +19,11 @@ return array(
             'permission'    => 'question',
         ),
         array(
+            'title'         => _a('projects'),
+            'controller'    => 'project',
+            'permission'    => 'project',
+        ),
+        array(
             'title'         => _a('Tools'),
             'controller'    => 'tools',
             'permission'    => 'tools',

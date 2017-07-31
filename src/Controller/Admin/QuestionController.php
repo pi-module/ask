@@ -64,7 +64,7 @@ class QuestionController extends ActionController
             )),
         ));
         // Set view
-        $this->view()->setTemplate('question_index');
+        $this->view()->setTemplate('question-index');
         $this->view()->assign('questions', $question);
         $this->view()->assign('paginator', $paginator);
     }
@@ -168,7 +168,7 @@ class QuestionController extends ActionController
             $form->setData($question);
         }
         // Set view
-        $this->view()->setTemplate('question_update');
+        $this->view()->setTemplate('question-update');
         $this->view()->assign('form', $form);
         $this->view()->assign('question', $question);
     }

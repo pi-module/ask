@@ -19,6 +19,6 @@ class ToolsController extends ActionController
 {
     public function indexAction()
     {
-        $this->view()->setTemplate('tools_index');
+        $this->view()->setTemplate('tools-index');
     }
 }

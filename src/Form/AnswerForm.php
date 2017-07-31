@@ -35,15 +35,16 @@ class AnswerForm extends BaseForm
                 'type' => 'hidden',
             ),
         ));
-        // pid
+        // question_id
         $this->add(array(
-            'name' => 'pid',
+            'name' => 'question_id',
             'attributes' => array(
                 'type' => 'hidden',
             ),
         ));
+        // text_description
         $this->add(array(
-            'name' => 'content',
+            'name' => 'text_description',
             'options' => array(
                 'label' => __('Answer'),
             ),

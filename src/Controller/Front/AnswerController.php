@@ -90,7 +90,7 @@ class AnswerController extends ActionController
                 $this->jump($url, $message);
             }
         } else {
-            $values['pid'] = $question['id'];
+            $values['question_id'] = $question['id'];
             $form->setData($values);
         }
         // Set header and title
