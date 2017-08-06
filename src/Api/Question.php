@@ -76,18 +76,18 @@ class Question extends AbstractApi
         $question['user'] = Pi::user()->get($question['uid'], array(
             'id', 'identity', 'name', 'email'
         ));
-        /* $question['user']['avatar'] = Pi::service('user')->avatar($question['user']['id'], 'large', array(
+        $question['user']['avatar'] = Pi::service('user')->avatar($question['user']['id'], 'large', array(
             'alt' => $question['user']['name'],
-            'class' => 'img-circle',
+            'class' => 'img-responsive img-circle',
         ));
         $question['user']['profileUrl'] = Pi::url(Pi::service('user')->getUrl('profile', array(
             'id' => $question['user']['id'],
-        ))); */
+        )));
         // Set info for Q and A
         switch ($question['type']) {
             case 'Q':
                 // Set text_description
-                $question['text_description'] = Pi::service('markup')->render($question['text_description'], 'html', 'html');
+                $question['text_description'] = Pi::service('markup')->render($question['text_description'], 'html', 'text');
                 // Set question url
                 $question['questionUrl'] = Pi::url(Pi::service('url')->assemble('ask', array(
                     'module'        => $this->getModule(),

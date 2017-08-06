@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2015-03-30 11:09+0330\n"
+"POT-Creation-Date: 2017-08-06 12:09+0430\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -9,79 +9,85 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.7.5\n"
+"X-Generator: Poedit 1.8.12\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-KeywordsList: __;_e\n"
-"X-Poedit-Basepath: .\n"
-"X-Poedit-SearchPath-0: /var/www/html/local/pi/pi-2.5.0/usr/module/ask\n"
+"X-Poedit-Basepath: ../..\n"
+"X-Poedit-SearchPath-0: .\n"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/ask/src/Api/Breadcrumbs.php:55
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/ask/src/Api/Breadcrumbs.php:66
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/ask/template/front/tag_list.phtml:4
+#: src/Api/Breadcrumbs.php:66 src/Api/Breadcrumbs.php:77
+#: template/front/tag_list.phtml:4
 msgid "Tag list"
 msgstr "فهرست برچسب ها"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/ask/src/Api/Breadcrumbs.php:93
+#: src/Api/Breadcrumbs.php:118
 msgid "Answer to question"
 msgstr "پاسخ به سوال"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/ask/src/Api/Breadcrumbs.php:103
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/ask/src/Controller/Front/SubmitController.php:91
+#: src/Api/Breadcrumbs.php:135 src/Controller/Front/SubmitController.php:120
 msgid "Ask a new Question"
 msgstr "پرسیدن سوال جدید"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/ask/src/Controller/Admin/QuestionController.php:86
+#: src/Controller/Admin/ProjectController.php:89
+msgid "Project data saved successfully."
+msgstr "اطلاعات پروژه با موفقیت ذخیره شد"
+
+#: src/Controller/Admin/ProjectController.php:101
+msgid "Add project"
+msgstr "پروژه جدید"
+
+#: src/Controller/Admin/QuestionController.php:85
 #, php-format
 msgid "%s question accept successfully"
 msgstr "%s با موفقیت تایید شد"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/ask/src/Controller/Admin/QuestionController.php:91
+#: src/Controller/Admin/QuestionController.php:90
 #, php-format
 msgid "Error in accept %s question"
 msgstr "خطا در تایید %s"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/ask/src/Controller/Admin/QuestionController.php:97
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/ask/src/Controller/Admin/QuestionController.php:186
+#: src/Controller/Admin/QuestionController.php:96
+#: src/Controller/Admin/QuestionController.php:185
 msgid "Please select question"
 msgstr "لطفا یک سوال انتخاب کنید"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/ask/src/Controller/Admin/QuestionController.php:155
+#: src/Controller/Admin/QuestionController.php:154
 msgid "Your selected item edit successfully"
 msgstr "آیتم انتخابی شما با موفقیت ویرایش شد"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/ask/src/Controller/Admin/QuestionController.php:184
+#: src/Controller/Admin/QuestionController.php:183
 msgid "Your selected question deleted"
 msgstr "سوال انتخابی شما حذف شد"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/ask/src/Controller/Feed/IndexController.php:25
+#: src/Controller/Feed/IndexController.php:25
 msgid "Ask feed"
 msgstr "خوراک سوالات"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/ask/src/Controller/Feed/IndexController.php:26
+#: src/Controller/Feed/IndexController.php:26
 msgid "Recent Questions."
 msgstr "آخرین سوالات ارسال شده"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/ask/src/Controller/Front/AnswerController.php:33
+#: src/Controller/Front/AnswerController.php:33
 msgid "Answer question not active"
 msgstr "امکان پاسخ به سوال فعال نیست"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/ask/src/Controller/Front/AnswerController.php:41
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/ask/src/Controller/Front/QuestionController.php:33
+#: src/Controller/Front/AnswerController.php:41
+#: src/Controller/Front/QuestionController.php:33
 msgid "The question not found."
 msgstr "سوال یافت نشد"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/ask/src/Controller/Front/AnswerController.php:54
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/ask/src/Controller/Front/AnswerController.php:97
+#: src/Controller/Front/AnswerController.php:54
+#: src/Controller/Front/AnswerController.php:99
 #, php-format
 msgid "Answer to %s"
 msgstr "پاسخ به %s"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/ask/src/Controller/Front/AnswerController.php:85
+#: src/Controller/Front/AnswerController.php:87
 msgid ""
 "Your new answer to this question save successfully, and show under question"
 msgstr "پاسخ شما به این پرسش با موفقیت ثبت شد، و در زیر سوال نمایش داده می شود"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/ask/src/Controller/Front/AnswerController.php:87
+#: src/Controller/Front/AnswerController.php:89
 msgid ""
 "Your new answer to this question save successfully, But it need review and "
 "publish by website admin"
@@ -89,20 +95,34 @@ msgstr ""
 "پاسخ شما به این پرسش با موفقیت ثبت شد، بعد از بررسی و تایید مدیر نمایش داده "
 "می شود"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/ask/src/Controller/Front/IndexController.php:44
+#: src/Controller/Front/IndexController.php:35
+msgid "List of all projects"
+msgstr "فهرست پروژه ها"
+
+#: src/Controller/Front/IndexController.php:53
+#: src/Controller/Front/ProjectController.php:55
 msgid "List of all questions"
 msgstr "فهرست تمام سوالات"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/ask/src/Controller/Front/SubmitController.php:33
+#: src/Controller/Front/ProjectController.php:34
+#: src/Controller/Front/SubmitController.php:45
+msgid "Project not set."
+msgstr "پروژه تنظیم نشده است"
+
+#: src/Controller/Front/SubmitController.php:34
 msgid "Ask question not active"
 msgstr "امکان پرسیدن سوال فعال نیست"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/ask/src/Controller/Front/SubmitController.php:82
+#: src/Controller/Front/SubmitController.php:51
+msgid "Please select project for ask question"
+msgstr "لطفا یک پروژه برای ارسال سوال انتخاب نمایید"
+
+#: src/Controller/Front/SubmitController.php:104
 msgid "Your ask new question successfully, Other users can view and answer it"
 msgstr ""
 "پرسش شما با موفقیت ارسال شد، کاربران دیگر می توانند آن را بخوانند و پاسخ دهند"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/ask/src/Controller/Front/SubmitController.php:84
+#: src/Controller/Front/SubmitController.php:106
 msgid ""
 "Your ask new question successfully, But it need review and publish by "
 "website admin"
@@ -110,148 +130,287 @@ msgstr ""
 "پرسش شما با موفقیت ارسال شد، بعد از بررسی و تایید مدیر در وب سایت منتشر می "
 "شود"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/ask/src/Controller/Front/TagController.php:29
+#: src/Controller/Front/SubmitController.php:118
+#, php-format
+msgid "Ask a new Question on %s project"
+msgstr "ارسال سوال جدید در پروژه %s"
+
+#: src/Controller/Front/TagController.php:29
 msgid "Tag module not installed."
 msgstr "ماژول برچسب نصب نشده است"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/ask/src/Controller/Front/TagController.php:36
-msgid "The tag not set."
-msgstr "برچسب یافت نشد"
-
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/ask/src/Controller/Front/TagController.php:47
-msgid "The tag not found."
-msgstr "برچسب یافت نشد"
-
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/ask/src/Controller/Front/TagController.php:61
+#: src/Controller/Front/TagController.php:61
 #, php-format
 msgid "All questions from %s"
 msgstr "همه سوالات در مورد %s"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/ask/src/Controller/Front/TagController.php:102
+#: src/Controller/Front/TagController.php:102
 msgid "List of all used tags"
 msgstr "فهرست تمام برچسب های استفاده شده"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/ask/src/Form/AnswerForm.php:48
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/ask/template/admin/question_index.phtml:32
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/ask/template/front/question_index.phtml:44
+#: src/Form/AnswerForm.php:49 template/admin/question-index.phtml:32
+#: template/front/question-index.phtml:104
+#: template/front/question-index.phtml:108
+#: template/front/question-list.phtml:73
 msgid "Answer"
 msgstr "پاسخ"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/ask/src/Form/AnswerForm.php:62
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/ask/src/Form/AskForm.php:81
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/ask/src/Form/UpdateForm.php:81
+#: src/Form/AnswerForm.php:63 src/Form/AskForm.php:107
+#: src/Form/ProjectForm.php:180 src/Form/UpdateForm.php:81
 msgid "Submit"
 msgstr "ارسال"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/ask/src/Form/AskForm.php:42
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/ask/src/Form/UpdateForm.php:42
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/ask/template/admin/question_index.phtml:15
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/ask/template/admin/question_update.phtml:3
+#: src/Form/AskForm.php:42 src/Form/ProjectForm.php:42
+#: src/Form/UpdateForm.php:42 template/admin/project-index.phtml:8
+#: template/admin/question-index.phtml:15
+#: template/admin/question-update.phtml:3
 msgid "Title"
 msgstr "عنوان"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/ask/src/Form/AskForm.php:53
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/ask/src/Form/UpdateForm.php:53
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/ask/template/admin/question_index.phtml:29
+#: src/Form/AskForm.php:53 src/Form/UpdateForm.php:53
+#: template/admin/question-index.phtml:29
 msgid "Question"
 msgstr "سوال"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/ask/src/Form/AskForm.php:68
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/ask/src/Form/UpdateForm.php:68
+#: src/Form/AskForm.php:67 src/Form/ProjectForm.php:78
+msgid "Main image"
+msgstr "تصویر اصلی"
+
+#: src/Form/AskForm.php:94 src/Form/UpdateForm.php:68
 msgid "Tags"
 msgstr "برچسب ها"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/ask/src/Form/AskForm.php:72
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/ask/src/Form/UpdateForm.php:72
+#: src/Form/AskForm.php:98 src/Form/UpdateForm.php:72
 msgid "Use `|` as delimiter to separate tag terms"
 msgstr "با استفاده از `|` کلمات را از هم جدا کنید"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/ask/template/admin/question_index.phtml:11
-msgid "List of questions and answers"
-msgstr "فهرست سوالات و پاسخ ها"
+#: src/Form/ProjectForm.php:53
+msgid "slug"
+msgstr "اسلاگ"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/ask/template/admin/question_index.phtml:14
-msgid "ID"
-msgstr "شناسه"
+#: src/Form/ProjectForm.php:57
+msgid "Used on URL value : must be unique, short, and user oriented"
+msgstr "در آدرس URL صفحه استفاده می شود، باید یکتا، کوتاه و مفید باشد"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/ask/template/admin/question_index.phtml:16
-msgid "Type"
-msgstr "نوع"
+#: src/Form/ProjectForm.php:64 template/admin/question-update.phtml:5
+msgid "Description"
+msgstr "توضیحات"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/ask/template/admin/question_index.phtml:17
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/ask/template/admin/question_update.phtml:6
-msgid "Create"
-msgstr "ایجاد"
+#: src/Form/ProjectForm.php:91
+msgid "Additional images"
+msgstr "تصاویر اضافی"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/ask/template/admin/question_index.phtml:18
-msgid "Action"
-msgstr "عملکرد"
+#: src/Form/ProjectForm.php:104
+msgid "Status"
+msgstr "وضعیت"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/ask/template/admin/question_index.phtml:50
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/ask/template/admin/question_index.phtml:78
-msgid "Reject"
-msgstr "رد کردن"
-
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/ask/template/admin/question_index.phtml:52
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/ask/template/admin/question_index.phtml:83
-msgid "Accept"
-msgstr "تایید"
-
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/ask/template/admin/question_index.phtml:54
-msgid "Edit"
-msgstr "ویرایش"
-
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/ask/template/admin/question_index.phtml:55
-msgid "Delete"
-msgstr "حذف"
-
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/ask/template/admin/question_index.phtml:62
+#: src/Form/ProjectForm.php:106 template/admin/project-index.phtml:34
+#: template/admin/question-index.phtml:62
 msgid "Published"
 msgstr "منتشر شده"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/ask/template/admin/question_index.phtml:63
+#: src/Form/ProjectForm.php:107 template/admin/project-index.phtml:35
+#: template/admin/question-index.phtml:63
 msgid "Pending review"
 msgstr "در انتظار تایید"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/ask/template/admin/question_index.phtml:66
+#: src/Form/ProjectForm.php:108
+msgid "Draft"
+msgstr "پیش نویس"
+
+#: src/Form/ProjectForm.php:109
+msgid "Private"
+msgstr "خصوصی"
+
+#: src/Form/ProjectForm.php:110
+msgid "Remove"
+msgstr "حذف شده"
+
+#: src/Form/ProjectForm.php:121
+msgid "Manager"
+msgstr "مدیر"
+
+#: src/Form/ProjectForm.php:125
+msgid "Project manager user id"
+msgstr "شناسه کاربری مدیر پروژه"
+
+#: src/Form/ProjectForm.php:133
+msgid "SEO options"
+msgstr "گزینه های سئو"
+
+#: src/Form/ProjectForm.php:140
+msgid "Meta Title"
+msgstr "عنوان متا ( Meta Title )"
+
+#: src/Form/ProjectForm.php:146
+msgid ""
+"Displayed in search Engine result pages as Title : between 10 to 70 "
+"character. If empty, will be popuated automaticaly by main title value"
+msgstr ""
+
+#: src/Form/ProjectForm.php:153
+msgid "Meta Keywords"
+msgstr "کلمات کلیدی متا ( Meta Keywords )"
+
+#: src/Form/ProjectForm.php:159
+msgid ""
+"Not used anymore by search engines : between 5 to 12 words / left it empty, "
+"it will be automaticaly populated with main title values"
+msgstr ""
+
+#: src/Form/ProjectForm.php:166
+msgid "Meta Description"
+msgstr "توضیحات متا (Meta Keywords )"
+
+#: src/Form/ProjectForm.php:172
+msgid ""
+"Displayed in search Engine result pages : quick summary to incitate user to "
+"click, between 80 to 160 character"
+msgstr ""
+
+#: template/admin/project-index.phtml:4
+msgid "List of projects"
+msgstr "فهرست پروژه ها"
+
+#: template/admin/project-index.phtml:7 template/admin/question-index.phtml:14
+msgid "ID"
+msgstr "شناسه"
+
+#: template/admin/project-index.phtml:9 template/admin/question-index.phtml:18
+msgid "Action"
+msgstr "عملکرد"
+
+#: template/admin/project-index.phtml:25 template/front/question-list.phtml:78
+msgid "View"
+msgstr "نمایش"
+
+#: template/admin/project-index.phtml:26 template/admin/project-index.phtml:28
+#: template/admin/question-index.phtml:54
+msgid "Edit"
+msgstr "ویرایش"
+
+#: template/admin/project-index.phtml:39
+msgid "No project create yet"
+msgstr "هنوز هیچ پروژه ای ایجاد نشده است"
+
+#: template/admin/question-index.phtml:11
+msgid "List of questions and answers"
+msgstr "فهرست سوالات و پاسخ ها"
+
+#: template/admin/question-index.phtml:16
+msgid "Type"
+msgstr "نوع"
+
+#: template/admin/question-index.phtml:17
+#: template/admin/question-update.phtml:6
+msgid "Create"
+msgstr "ایجاد"
+
+#: template/admin/question-index.phtml:50
+#: template/admin/question-index.phtml:78
+msgid "Reject"
+msgstr "رد کردن"
+
+#: template/admin/question-index.phtml:52
+#: template/admin/question-index.phtml:83
+msgid "Accept"
+msgstr "تایید"
+
+#: template/admin/question-index.phtml:55
+msgid "Delete"
+msgstr "حذف"
+
+#: template/admin/question-index.phtml:66
 msgid "No question submit yet"
 msgstr "هنوز هیچ سوالی ارسال نشده است"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/ask/template/admin/question_index.phtml:72
+#: template/admin/question-index.phtml:72
 msgid "Accept in process"
 msgstr "تایید در حال انجام است"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/ask/template/admin/question_update.phtml:4
+#: template/admin/question-update.phtml:4
 msgid "Slug"
 msgstr "اسلاگ"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/ask/template/admin/question_update.phtml:5
-msgid "Content"
-msgstr "متن"
-
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/ask/template/front/question_index.phtml:10
+#: template/front/answer-index.phtml:19 template/front/question-index.phtml:27
+#: template/front/question-index.phtml:82
 msgid "Time"
 msgstr "زمان ارسال"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/ask/template/front/question_index.phtml:11
+#: template/front/answer-index.phtml:20 template/front/question-index.phtml:28
 msgid "Read"
 msgstr "نمایش"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/ask/template/front/question_index.phtml:11
+#: template/front/answer-index.phtml:20 template/front/question-index.phtml:28
 msgid "Times"
 msgstr "بار"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/ask/template/front/question_list.phtml:7
+#: template/front/question-index.phtml:13
+#: template/front/question-index.phtml:76
+msgid "View profile"
+msgstr "نمایش پروفایل"
+
+#: template/front/question-index.phtml:62
+msgid "Answers"
+msgstr "فهرست پاسخ ها"
+
+#: template/front/question-list.phtml:20
+msgid "Contact to manager"
+msgstr "تماس با مدیر پروژه"
+
+#: template/front/question-list.phtml:34 template/front/question-list.phtml:38
+#: template/front/question-list.phtml:53 template/front/question-list.phtml:56
 msgid "Ask question"
 msgstr "پرسیدن سوال"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/ask/template/front/tag_list.phtml:18
+#: template/front/question-list.phtml:63
+msgid "List of questions"
+msgstr "فهرست سوالات"
+
+#: template/front/question-list.phtml:84
+msgid "Vote"
+msgstr "رای"
+
+#: template/front/question-list.phtml:100
+msgid "On"
+msgstr "در"
+
+#: template/front/question-list.phtml:102
+msgid "By"
+msgstr "به وسیله"
+
+#: template/front/submit-index.phtml:11
+msgid "Roles to ask question"
+msgstr "قوانی ارسال سوال"
+
+#: template/front/submit-index.phtml:13
+msgid "Please check website roles before ask question"
+msgstr "لطفا قوانین وب سایت را مطالعه بفرمایید"
+
+#: template/front/submit-index.phtml:14
+msgid "Please dont submit duplicate question"
+msgstr "لطفا سوال تکراری ارسال نفرمایید"
+
+#: template/front/submit-index.phtml:15
+msgid "All questions will review by admin or project manager"
+msgstr "تمام سوالات توسط مدیر وب سایت یا مدیر پروژه بررسی می شود"
+
+#: template/front/tag_list.phtml:18
 msgid ""
 "No keyword has been used as tag on this part yet. please check this page "
 "later"
 msgstr ""
 "هیچ اطلاعاتی از کلمات کلیدی به عنوان برچسب هنوز در سیستم درج نشده است. لطفا "
 "بعدا از این صفحه را بررسی فرمایید. "
+
+#~ msgid "The tag not set."
+#~ msgstr "برچسب یافت نشد"
+
+#~ msgid "The tag not found."
+#~ msgstr "برچسب یافت نشد"
+
+#~ msgid "Content"
+#~ msgstr "متن"
 
 #~ msgid "Ask index seo title"
 #~ msgstr "فهرست پرسش و پاسخ های ارسالی"
@@ -279,9 +438,6 @@ msgstr ""
 
 #~ msgid "Feed"
 #~ msgstr "خوراک"
-
-#~ msgid "Vote"
-#~ msgstr "رای"
 
 #~ msgid "Perpage"
 #~ msgstr "تعداد هر هر صفحه"

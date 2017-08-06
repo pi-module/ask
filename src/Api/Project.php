@@ -63,6 +63,19 @@ class Project extends AbstractApi
             'controller'    => 'project',
             'slug'          => $project['slug'],
         )));
+        // Set project manager
+        if ($project['manager'] > 0) {
+            $project['user'] = Pi::user()->get($project['manager'], array(
+                'id', 'identity', 'name', 'email'
+            ));
+            $project['user']['avatar'] = Pi::service('user')->avatar($project['user']['id'], 'large', array(
+                'alt' => $project['user']['name'],
+                'class' => 'img-responsive img-circle',
+            ));
+            $project['user']['profileUrl'] = Pi::url(Pi::service('user')->getUrl('profile', array(
+                'id' => $project['user']['id'],
+            )));
+        }
         // return question
         return $project;
     }

@@ -4,12 +4,26 @@
         <h1><?php echo $this->escape($title); ?></h1>
     </div>
     <div class="project-list clearfix">
-        <div class="list-group">
-            <?php foreach($projects as $project) { ?>
-                <a class="list-group-item" title="<?php echo $this->escape($project['title']); ?>" href="<?php echo $project['projectUrl']; ?>">
-                    <?php echo $this->escape($project['title']); ?>
-                </a>
-            <?php } ?>
-        </div>
+        <?php foreach($projects as $project) { ?>
+            <div class="project-list-single">
+                <div class="media">
+                    <?php if ($project['main_image']) { ?>
+                        <div class="media-left col-md-3">
+                            <a title="<?php echo $this->escape($project['title']); ?>" href="<?php echo $project['projectUrl']; ?>">
+                                <img class="img-responsive media-object" src="<?php echo Pi::api('doc','media')->getSingleLinkUrl($project['main_image'])->thumb('thumbnail'); ?>">
+                            </a>
+                        </div>
+                    <?php } ?>
+                    <div class="media-body">
+                        <a title="<?php echo $this->escape($project['title']); ?>" href="<?php echo $project['projectUrl']; ?>">
+                            <h2 class="media-heading"><?php echo $this->escape($project['title']); ?></h2>
+                        </a>
+                        <div class="clearfix">
+                            <?php echo mb_substr(strip_tags($project['text_description']), 0, 300, 'utf-8' ) . "..."; ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <?php } ?>
     </div>
 </div>

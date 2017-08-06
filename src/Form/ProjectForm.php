@@ -54,7 +54,7 @@ class ProjectForm extends BaseForm
             ),
             'attributes' => array(
                 'type' => 'text',
-                'description' => __('Used as story URL value : must be unique, short, and user oriented'),
+                'description' => __('Used on URL value : must be unique, short, and user oriented'),
             )
         ));
         // text_description

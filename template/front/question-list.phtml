@@ -1,22 +1,50 @@
 <?php $this->css($this->assetModule('css/front.css')); ?>
 <div class="clearfix">
     <?php if (isset($project) && !empty($project)) { ?>
-        <div class="page-header clearfix">
-            <h1 class="pull-left"><?php echo $this->escape($project['title']); ?></h1>
-            <?php if ($config['question_ask']) { ?>
-                <p class="pull-right">
-                    <a class="btn btn-primary btn-xs" title="<?php _e('Ask question'); ?>" href="<?php echo Pi::url($this->url('', array(
+        <div class="row clearfix">
+            <div class="col-md-12">
+                <div class="page-header">
+                    <h1><?php echo $this->escape($project['title']); ?></h1>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <?php if (isset($project['user'])) { ?>
+                    <div class="clearfix thumbnail">
+                        <div class="col-md-4">
+                            <?php echo $project['user']['avatar']; ?>
+                        </div>
+                        <div class="col-md-8">
+                            <h5><?php echo $this->escape($project['user']['name']); ?></h5>
+                            <div class="clearfix">
+                                <a href="<?php echo $project['user']['profileUrl'] ?>">
+                                    <?php _e('Contact to manager'); ?>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                <?php } ?>
+                <?php if ($project['main_image']) { ?>
+                    <div class="clearfix thumbnail">
+                        <div class="clearfix text-center">
+                            <img class="img-responsive" src="<?php echo Pi::api('doc','media')->getSingleLinkUrl($project['main_image'])->thumb('medium'); ?>">
+                        </div>
+                    </div>
+                <?php } ?>
+                <div class="btn-group btn-group-justified">
+                    <a class="btn btn-success" title="<?php _e('Ask question'); ?>" href="<?php echo Pi::url($this->url('', array(
                         'controller' => 'submit',
                         'action' => 'index',
                         'slug' => $project['slug']
-                    ))); ?>"><?php _e('Ask question'); ?></a>
-                </p>
-            <?php } ?>
+                    ))); ?>"><i class="fa fa-paper-plane" aria-hidden="true"></i> <?php _e('Ask question'); ?></a>
+                </div>
+            </div>
+            <div class="col-md-9">
+                <div class="clearfix">
+                    <?php echo $project['text_description']; ?>
+                </div>
+            </div>
         </div>
-        <div class="clearfix">
-            <?php echo $project['text_description']; ?>
-        </div>
-        <?php echo Pi::api('doc','media')->getSingleLinkUrl($project['main_image'])->thumb('thumbnail'); ?>
+        <hr />
     <?php } else { ?>
         <div class="page-header clearfix">
             <h1 class="pull-left"><?php echo $this->escape($title); ?></h1>
@@ -31,6 +59,9 @@
         </div>
     <?php } ?>
     <div class="question-list clearfix">
+        <div class="page-header">
+            <h2><?php _e('List of questions'); ?></h2>
+        </div>
         <?php foreach($questions as $question) { ?>
             <div class="question-single clearfix">
                 <div class="col-md-2">
@@ -56,7 +87,7 @@
                         </ul>
                     </div>
                 </div>
-                <div class="col-md-9 clearfix">
+                <div class="col-md-10 clearfix">
                     <div class="question-single-title">
                         <h3>
                             <a title="<?php echo $this->escape($question['title']); ?>" href="<?php echo $question['questionUrl']; ?>">

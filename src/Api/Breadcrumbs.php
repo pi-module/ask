@@ -44,6 +44,17 @@ class Breadcrumbs extends AbstractBreadcrumbs
                     );
                     break;
 
+                case 'project':
+                    $project = Pi::api('project', 'ask')->getProject($params['slug'], 'slug');
+                    $result[] = array(
+                        'href'  => $moduleData['moduleUrl'],
+                        'label' => $moduleData['title'],
+                    );
+                    $result[] = array(
+                        'label' => $project['title'],
+                    );
+                    break;
+
                 case 'tag':
                     $result[] = array(
                         'href'  => $moduleData['moduleUrl'],
@@ -74,6 +85,13 @@ class Breadcrumbs extends AbstractBreadcrumbs
                         'href'  => $moduleData['moduleUrl'],
                         'label' => $moduleData['title'],
                     );
+                    if ($question['project_id'] > 0) {
+                        $project = Pi::api('project', 'ask')->getProject($question['project_id']);
+                        $result[] = array(
+                            'href'  => $project['projectUrl'],
+                            'label' => $project['title'],
+                        );
+                    }
                     $result[] = array(
                         'label' => $question['title'],
                     );
@@ -85,9 +103,16 @@ class Breadcrumbs extends AbstractBreadcrumbs
                         'href'  => $moduleData['moduleUrl'],
                         'label' => $moduleData['title'],
                     );
+                    if ($question['project_id'] > 0) {
+                        $project = Pi::api('project', 'ask')->getProject($question['project_id']);
+                        $result[] = array(
+                            'href'  => $project['projectUrl'],
+                            'label' => $project['title'],
+                        );
+                    }
                     $result[] = array(
                         'href'  => $question['questionUrl'],
-                        'label' => $question['title'],
+                        'label' => mb_substr(strip_tags($question['title']), 0, 50, 'utf-8' ) . "...",
                     );
                     $result[] = array(
                         'label' => __('Answer to question'),
@@ -99,6 +124,13 @@ class Breadcrumbs extends AbstractBreadcrumbs
                         'href'  => $moduleData['moduleUrl'],
                         'label' => $moduleData['title'],
                     );
+                    if (!empty($params['slug'])) {
+                        $project = Pi::api('project', 'ask')->getProject($params['slug'], 'slug');
+                        $result[] = array(
+                            'href'  => $project['projectUrl'],
+                            'label' => $project['title'],
+                        );
+                    }
                     $result[] = array(
                         'label' => __('Ask a new Question'),
                     );

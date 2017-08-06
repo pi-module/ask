@@ -59,7 +59,6 @@ class AnswerController extends ActionController
                 $filter = new Filter\Slug;
                 $slug = sprintf('%s-%s', $values['title'], _date($values['time_create']));
                 $values['slug'] = $filter($slug);
-
                 // Set seo_title
                 $filter = new Filter\HeadTitle;
                 $values['seo_title'] = $filter($values['title']);
@@ -77,7 +76,10 @@ class AnswerController extends ActionController
                 $values['status'] = $this->config('auto_approval');
                 $values['type'] = 'A';
                 // Update answer
-                $this->getModel('question')->update(array('answer' => $question['answer'] + 1), array('id' => $question['id']));
+                $this->getModel('question')->update(
+                    array('answer' => $question['answer'] + 1),
+                    array('id' => $question['id'])
+                );
                 // Save values
                 $row = $this->getModel('question')->createRow();
                 $row->assign($values);
@@ -107,9 +109,10 @@ class AnswerController extends ActionController
         $this->view()->headTitle($title);
         $this->view()->headDescription($title, 'set');
         $this->view()->headKeywords($seoKeywords, 'set');
-        $this->view()->setTemplate('answer_index');
+        $this->view()->setTemplate('answer-index');
         $this->view()->assign('form', $form);
         $this->view()->assign('title', $title);
         $this->view()->assign('question', $question);
+        $this->view()->assign('config', $config);
     }
 }

@@ -1,0 +1,34 @@
+<?php $this->css($this->assetModule('css/front.css')); ?>
+<div class="clearfix">
+    <div class="row clearfix">
+        <div class="col-md-12">
+            <div class="page-header">
+                <h1><?php echo $this->escape($title); ?></h1>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <?php if ($question['main_image']) { ?>
+                <div class="clearfix thumbnail">
+                    <div class="clearfix text-center">
+                        <img class="img-responsive" src="<?php echo Pi::api('doc','media')->getSingleLinkUrl($question['main_image'])->thumb('medium'); ?>">
+                    </div>
+                </div>
+            <?php } ?>
+            <?php if ($config['show_info']) { ?>
+                <ul class="list-group">
+                    <li class="list-group-item"><i class="fa fa-clock-o"></i> <?php _e('Time'); ?>: <?php echo $this->escape($question['time_create_view']); ?></li>
+                    <li class="list-group-item"><i class="fa fa-eye"></i> <?php _e('Read'); ?>: <?php echo _number($this->escape($question['hits'])); ?> <?php _e('Times'); ?></li>
+                </ul>
+            <?php } ?>
+        </div>
+        <div class="col-md-9">
+            <div class="clearfix">
+                <?php echo $question['text_description']; ?>
+            </div>
+        </div>
+    </div>
+    <br />
+    <div class="well">
+        <?php echo $this->form($form, 'vertical'); ?>
+    </div>
+</div>

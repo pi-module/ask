@@ -1,0 +1,111 @@
+<?php $this->css($this->assetModule('css/front.css')); ?>
+<div class="clearfix">
+    <div class="row clearfix">
+        <div class="col-md-3">
+            <div class="clearfix thumbnail <?php if ($question['is_manager']) { echo 'question-is-manager';} ?>">
+                <div class="col-md-4">
+                    <?php echo $question['user']['avatar']; ?>
+                </div>
+                <div class="col-md-8">
+                    <h5><?php echo $this->escape($question['user']['name']); ?></h5>
+                    <div class="clearfix">
+                        <a href="<?php echo $question['user']['profileUrl'] ?>">
+                            <?php _e('View profile'); ?>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <?php if ($question['main_image']) { ?>
+                <div class="clearfix thumbnail">
+                    <div class="clearfix text-center">
+                        <img class="img-responsive" src="<?php echo Pi::api('doc','media')->getSingleLinkUrl($question['main_image'])->thumb('medium'); ?>">
+                    </div>
+                </div>
+            <?php } ?>
+            <?php if ($config['show_info']) { ?>
+                <ul class="list-group">
+                    <li class="list-group-item"><i class="fa fa-clock-o"></i> <?php _e('Time'); ?>: <?php echo $this->escape($question['time_create_view']); ?></li>
+                    <li class="list-group-item"><i class="fa fa-eye"></i> <?php _e('Read'); ?>: <?php echo _number($this->escape($question['hits'])); ?> <?php _e('Times'); ?></li>
+                </ul>
+            <?php } ?>
+        </div>
+        <div class="col-md-8">
+            <div class="page-header">
+                <h1><?php echo $this->escape($question['title']); ?></h1>
+            </div>
+            <div class="clearfix">
+                <?php echo $question['text_description']; ?>
+            </div>
+            <?php if (isset($question['tag']) && !empty($question['tag'])) { ?>
+                <div class="tagList clearfix">
+                    <?php foreach($question['tag'] as $tag) { ?>
+                        <span class="tagItem">
+				            <a title="<?php echo $this->escape($tag['term']); ?>" href="<?php echo $this->escape($tag['url']); ?>">
+					            <i class="fa fa-tag"></i> <?php echo $this->escape($tag['term']); ?>
+				            </a>
+			            </span>
+                    <?php } ?>
+                </div>
+            <?php } ?>
+        </div>
+        <div class="col-md-1">
+            <div class="question-vote">
+                <?php if (isset($question['vote']) && !empty($question['vote'])) {
+                    $vote = $question['vote'];
+                    include $this->template('votebar', 'front', 'vote');
+                } ?>
+            </div>
+        </div>
+    </div>
+    <?php if (isset($answers) && !empty($answers)) { ?>
+        <div class="page-header">
+            <h3><?php _e('Answers'); ?></h3>
+        </div>
+        <div class="answer-list">
+            <?php foreach($answers as $answer) { ?>
+                <div class="answer-single row">
+                    <div class="col-md-3">
+                        <div class="clearfix thumbnail <?php if ($question['is_manager']) { echo 'question-is-manager';} ?>">
+                            <div class="col-md-4">
+                                <?php echo $answer['user']['avatar']; ?>
+                            </div>
+                            <div class="col-md-8">
+                                <h5><?php echo $this->escape($answer['user']['name']); ?></h5>
+                                <div class="clearfix">
+                                    <a href="<?php echo $answer['user']['profileUrl'] ?>">
+                                        <?php _e('View profile'); ?>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <ul class="list-group">
+                            <li class="list-group-item"><i class="fa fa-clock-o"></i> <?php _e('Time'); ?>: <?php echo $this->escape($answer['time_create_view']); ?></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="clearfix">
+                            <?php echo $answer['text_description']; ?>
+                        </div>
+                    </div>
+                    <div class="col-md-1">
+                        <div class="question-vote">
+                            <?php if (isset($answer['vote']) && !empty($answer['vote'])) {
+                                $vote = $answer['vote'];
+                                include $this->template('votebar', 'front', 'vote');
+                            } ?>
+                        </div>
+                    </div>
+                </div>
+            <?php } ?>
+        </div>
+    <?php } ?>
+    <?php if ($config['question_answer']) { ?>
+        <div class="btn-group btn-group-justified" role="group">
+            <a class="btn btn-success" title="<?php _e('Answer'); ?>" href="<?php echo Pi::url($this->url('', array(
+                'controller' => 'answer',
+                'action' => 'index',
+                'slug' => $question['slug']
+            ))); ?>"><i class="fa fa-paper-plane" aria-hidden="true"></i> <?php _e('Answer'); ?></a>
+        </div>
+    <?php } ?>
+</div>

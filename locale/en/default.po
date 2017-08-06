@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2015-03-29 11:13+0330\n"
+"POT-Creation-Date: 2017-08-06 12:35+0430\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -9,189 +9,389 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.7.5\n"
+"X-Generator: Poedit 1.8.12\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-KeywordsList: __;_e\n"
-"X-Poedit-Basepath: .\n"
-"X-Poedit-SearchPath-0: /var/www/html/local/pi/pi-2.5.0/usr/module/ask\n"
+"X-Poedit-Basepath: ../..\n"
+"X-Poedit-SearchPath-0: .\n"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/ask/src/Controller/Admin/QuestionController.php:102
+#: src/Api/Breadcrumbs.php:66 src/Api/Breadcrumbs.php:77
+#: template/front/tag_list.phtml:4
+msgid "Tag list"
+msgstr ""
+
+#: src/Api/Breadcrumbs.php:118
+msgid "Answer to question"
+msgstr ""
+
+#: src/Api/Breadcrumbs.php:135 src/Controller/Front/SubmitController.php:120
+msgid "Ask a new Question"
+msgstr ""
+
+#: src/Controller/Admin/ProjectController.php:89
+msgid "Project data saved successfully."
+msgstr ""
+
+#: src/Controller/Admin/ProjectController.php:101
+msgid "Add project"
+msgstr ""
+
+#: src/Controller/Admin/QuestionController.php:85
 #, php-format
 msgid "%s question accept successfully"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/ask/src/Controller/Admin/QuestionController.php:107
+#: src/Controller/Admin/QuestionController.php:90
 #, php-format
 msgid "Error in accept %s question"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/ask/src/Controller/Admin/QuestionController.php:113
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/ask/src/Controller/Admin/QuestionController.php:176
+#: src/Controller/Admin/QuestionController.php:96
+#: src/Controller/Admin/QuestionController.php:185
 msgid "Please select question"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/ask/src/Controller/Admin/QuestionController.php:153
+#: src/Controller/Admin/QuestionController.php:154
 msgid "Your selected item edit successfully"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/ask/src/Controller/Admin/QuestionController.php:174
+#: src/Controller/Admin/QuestionController.php:183
 msgid "Your selected question deleted"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/ask/src/Controller/Feed/IndexController.php:25
+#: src/Controller/Feed/IndexController.php:25
 msgid "Ask feed"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/ask/src/Controller/Feed/IndexController.php:26
+#: src/Controller/Feed/IndexController.php:26
 msgid "Recent Questions."
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/ask/src/Controller/Front/AnswerController.php:42
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/ask/src/Controller/Front/QuestionController.php:33
+#: src/Controller/Front/AnswerController.php:33
+msgid "Answer question not active"
+msgstr ""
+
+#: src/Controller/Front/AnswerController.php:41
+#: src/Controller/Front/QuestionController.php:33
 msgid "The question not found."
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/ask/src/Controller/Front/AnswerController.php:65
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/ask/src/Controller/Front/AnswerController.php:95
+#: src/Controller/Front/AnswerController.php:54
+#: src/Controller/Front/AnswerController.php:101
 #, php-format
 msgid "Answer to %s"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/ask/src/Controller/Front/AnswerController.php:83
+#: src/Controller/Front/AnswerController.php:89
 msgid ""
 "Your new answer to this question save successfully, and show under question"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/ask/src/Controller/Front/AnswerController.php:85
+#: src/Controller/Front/AnswerController.php:91
 msgid ""
 "Your new answer to this question save successfully, But it need review and "
 "publish by website admin"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/ask/src/Controller/Front/IndexController.php:69
-msgid "Ask index seo title"
+#: src/Controller/Front/IndexController.php:35
+msgid "List of all projects"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/ask/src/Controller/Front/IndexController.php:70
-msgid "ask index seo description"
+#: src/Controller/Front/IndexController.php:53
+#: src/Controller/Front/ProjectController.php:55
+msgid "List of all questions"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/ask/src/Controller/Front/IndexController.php:71
-msgid "ask index seo keywords"
+#: src/Controller/Front/ProjectController.php:34
+#: src/Controller/Front/SubmitController.php:45
+msgid "Project not set."
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/ask/src/Controller/Front/SubmitController.php:64
+#: src/Controller/Front/SubmitController.php:34
+msgid "Ask question not active"
+msgstr ""
+
+#: src/Controller/Front/SubmitController.php:51
+msgid "Please select project for ask question"
+msgstr ""
+
+#: src/Controller/Front/SubmitController.php:104
 msgid "Your ask new question successfully, Other users can view and answer it"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/ask/src/Controller/Front/SubmitController.php:66
+#: src/Controller/Front/SubmitController.php:106
 msgid ""
 "Your ask new question successfully, But it need review and publish by "
 "website admin"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/ask/src/Controller/Front/SubmitController.php:73
-msgid "Ask a new Question"
+#: src/Controller/Front/SubmitController.php:118
+#, php-format
+msgid "Ask a new Question on %s project"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/ask/src/Controller/Front/TagController.php:37
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/ask/src/Controller/Front/TagController.php:54
-msgid "The tag not found."
+#: src/Controller/Front/TagController.php:29
+msgid "Tag module not installed."
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/ask/src/Controller/Front/TagController.php:96
-msgid "Back to question list"
+#: src/Controller/Front/TagController.php:61
+#, php-format
+msgid "All questions from %s"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/ask/src/Form/AnswerForm.php:48
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/ask/template/admin/question_index.phtml:31
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/ask/template/front/question_index.phtml:28
+#: src/Controller/Front/TagController.php:102
+msgid "List of all used tags"
+msgstr ""
+
+#: src/Form/AnswerForm.php:49 template/admin/question-index.phtml:32
+#: template/front/question-index.phtml:104
+#: template/front/question-index.phtml:108
+#: template/front/question-list.phtml:73
 msgid "Answer"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/ask/src/Form/AnswerForm.php:62
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/ask/src/Form/AskForm.php:80
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/ask/src/Form/UpdateForm.php:80
+#: src/Form/AnswerForm.php:63 src/Form/AskForm.php:107
+#: src/Form/ProjectForm.php:180 src/Form/UpdateForm.php:81
 msgid "Submit"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/ask/src/Form/AskForm.php:42
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/ask/src/Form/UpdateForm.php:42
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/ask/template/admin/question_index.phtml:14
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/ask/template/admin/question_update.phtml:3
+#: src/Form/AskForm.php:42 src/Form/ProjectForm.php:42
+#: src/Form/UpdateForm.php:42 template/admin/project-index.phtml:8
+#: template/admin/question-index.phtml:15
+#: template/admin/question-update.phtml:3
 msgid "Title"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/ask/src/Form/AskForm.php:53
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/ask/template/admin/question_index.phtml:28
+#: src/Form/AskForm.php:53 src/Form/UpdateForm.php:53
+#: template/admin/question-index.phtml:29
 msgid "Question"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/ask/src/Form/AskForm.php:67
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/ask/src/Form/UpdateForm.php:67
+#: src/Form/AskForm.php:67 src/Form/ProjectForm.php:78
+msgid "Main image"
+msgstr ""
+
+#: src/Form/AskForm.php:94 src/Form/UpdateForm.php:68
 msgid "Tags"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/ask/src/Form/UpdateForm.php:53
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/ask/template/admin/question_update.phtml:5
-msgid "Content"
+#: src/Form/AskForm.php:98 src/Form/UpdateForm.php:72
+msgid "Use `|` as delimiter to separate tag terms"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/ask/template/admin/question_index.phtml:10
-msgid "List of questions and answers"
+#: src/Form/ProjectForm.php:53
+msgid "slug"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/ask/template/admin/question_index.phtml:13
-msgid "ID"
+#: src/Form/ProjectForm.php:57
+msgid "Used on URL value : must be unique, short, and user oriented"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/ask/template/admin/question_index.phtml:15
-msgid "Type"
+#: src/Form/ProjectForm.php:64 template/admin/question-update.phtml:5
+msgid "Description"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/ask/template/admin/question_index.phtml:16
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/ask/template/admin/question_update.phtml:6
-msgid "Create"
+#: src/Form/ProjectForm.php:91
+msgid "Additional images"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/ask/template/admin/question_index.phtml:17
-msgid "Action"
+#: src/Form/ProjectForm.php:104
+msgid "Status"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/ask/template/admin/question_index.phtml:49
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/ask/template/admin/question_index.phtml:74
-msgid "Reject"
-msgstr ""
-
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/ask/template/admin/question_index.phtml:51
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/ask/template/admin/question_index.phtml:79
-msgid "Accept"
-msgstr ""
-
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/ask/template/admin/question_index.phtml:53
-msgid "Edit"
-msgstr ""
-
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/ask/template/admin/question_index.phtml:54
-msgid "Delete"
-msgstr ""
-
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/ask/template/admin/question_index.phtml:61
+#: src/Form/ProjectForm.php:106 template/admin/project-index.phtml:34
+#: template/admin/question-index.phtml:62
 msgid "Published"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/ask/template/admin/question_index.phtml:62
+#: src/Form/ProjectForm.php:107 template/admin/project-index.phtml:35
+#: template/admin/question-index.phtml:63
 msgid "Pending review"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/ask/template/admin/question_index.phtml:68
+#: src/Form/ProjectForm.php:108
+msgid "Draft"
+msgstr ""
+
+#: src/Form/ProjectForm.php:109
+msgid "Private"
+msgstr ""
+
+#: src/Form/ProjectForm.php:110
+msgid "Remove"
+msgstr ""
+
+#: src/Form/ProjectForm.php:121
+msgid "Manager"
+msgstr ""
+
+#: src/Form/ProjectForm.php:125
+msgid "Project manager user id"
+msgstr ""
+
+#: src/Form/ProjectForm.php:133
+msgid "SEO options"
+msgstr ""
+
+#: src/Form/ProjectForm.php:140
+msgid "Meta Title"
+msgstr ""
+
+#: src/Form/ProjectForm.php:146
+msgid ""
+"Displayed in search Engine result pages as Title : between 10 to 70 "
+"character. If empty, will be popuated automaticaly by main title value"
+msgstr ""
+
+#: src/Form/ProjectForm.php:153
+msgid "Meta Keywords"
+msgstr ""
+
+#: src/Form/ProjectForm.php:159
+msgid ""
+"Not used anymore by search engines : between 5 to 12 words / left it empty, "
+"it will be automaticaly populated with main title values"
+msgstr ""
+
+#: src/Form/ProjectForm.php:166
+msgid "Meta Description"
+msgstr ""
+
+#: src/Form/ProjectForm.php:172
+msgid ""
+"Displayed in search Engine result pages : quick summary to incitate user to "
+"click, between 80 to 160 character"
+msgstr ""
+
+#: template/admin/project-index.phtml:4
+msgid "List of projects"
+msgstr ""
+
+#: template/admin/project-index.phtml:7 template/admin/question-index.phtml:14
+msgid "ID"
+msgstr ""
+
+#: template/admin/project-index.phtml:9 template/admin/question-index.phtml:18
+msgid "Action"
+msgstr ""
+
+#: template/admin/project-index.phtml:25 template/front/question-list.phtml:78
+msgid "View"
+msgstr ""
+
+#: template/admin/project-index.phtml:26 template/admin/project-index.phtml:28
+#: template/admin/question-index.phtml:54
+msgid "Edit"
+msgstr ""
+
+#: template/admin/project-index.phtml:39
+msgid "No project create yet"
+msgstr ""
+
+#: template/admin/question-index.phtml:11
+msgid "List of questions and answers"
+msgstr ""
+
+#: template/admin/question-index.phtml:16
+msgid "Type"
+msgstr ""
+
+#: template/admin/question-index.phtml:17
+#: template/admin/question-update.phtml:6
+msgid "Create"
+msgstr ""
+
+#: template/admin/question-index.phtml:50
+#: template/admin/question-index.phtml:78
+msgid "Reject"
+msgstr ""
+
+#: template/admin/question-index.phtml:52
+#: template/admin/question-index.phtml:83
+msgid "Accept"
+msgstr ""
+
+#: template/admin/question-index.phtml:55
+msgid "Delete"
+msgstr ""
+
+#: template/admin/question-index.phtml:66
+msgid "No question submit yet"
+msgstr ""
+
+#: template/admin/question-index.phtml:72
 msgid "Accept in process"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/ask/template/admin/question_update.phtml:4
+#: template/admin/question-update.phtml:4
 msgid "Slug"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/ask/template/front/question_list.phtml:3
+#: template/front/answer-index.phtml:19 template/front/question-index.phtml:27
+#: template/front/question-index.phtml:82
+msgid "Time"
+msgstr ""
+
+#: template/front/answer-index.phtml:20 template/front/question-index.phtml:28
+msgid "Read"
+msgstr ""
+
+#: template/front/answer-index.phtml:20 template/front/question-index.phtml:28
+msgid "Times"
+msgstr ""
+
+#: template/front/question-index.phtml:13
+#: template/front/question-index.phtml:76
+msgid "View profile"
+msgstr ""
+
+#: template/front/question-index.phtml:62
+msgid "Answers"
+msgstr ""
+
+#: template/front/question-list.phtml:20
+msgid "Contact to manager"
+msgstr ""
+
+#: template/front/question-list.phtml:34 template/front/question-list.phtml:38
+#: template/front/question-list.phtml:53 template/front/question-list.phtml:56
 msgid "Ask question"
+msgstr ""
+
+#: template/front/question-list.phtml:63
+msgid "List of questions"
+msgstr ""
+
+#: template/front/question-list.phtml:84
+msgid "Vote"
+msgstr ""
+
+#: template/front/question-list.phtml:100
+msgid "On"
+msgstr ""
+
+#: template/front/question-list.phtml:102
+msgid "By"
+msgstr ""
+
+#: template/front/submit-index.phtml:11
+msgid "Roles to ask question"
+msgstr ""
+
+#: template/front/submit-index.phtml:13
+msgid "Please check website roles before ask question"
+msgstr ""
+
+#: template/front/submit-index.phtml:14
+msgid "Please dont submit duplicate question"
+msgstr ""
+
+#: template/front/submit-index.phtml:15
+msgid "All questions will review by admin or project manager"
+msgstr ""
+
+#: template/front/tag_list.phtml:18
+msgid ""
+"No keyword has been used as tag on this part yet. please check this page "
+"later"
 msgstr ""

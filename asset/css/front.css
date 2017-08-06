@@ -14,3 +14,23 @@
 }
 
 .question-single .question-single-time {}
+
+.project-list-single {
+    padding-bottom: 5px;
+    margin-bottom: 5px;
+    border-bottom: 1px solid #ddd;
+}
+
+.answer-single {
+    padding-bottom: 5px;
+    margin-bottom: 5px;
+    border-bottom: 1px solid #ddd;
+}
+
+.question-is-manager {
+    background: #DFF0D8;
+}
+
+.question-vote {
+    text-align: left !important;
+}

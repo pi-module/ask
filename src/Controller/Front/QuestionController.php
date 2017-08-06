@@ -34,19 +34,25 @@ class QuestionController extends ActionController
         }
         // Update Hits
         $this->getModel('question')->increment('hits', array('id' => $question['id']));
-        // Update Hits
-        $this->getModel('question')->update(array('hits' => $question['hits'] + 1), array('id' => $question['id']));
         // Set vote
-        if (Pi::service('module')->isActive('vote')) {
-            $vote = array(
+        if (Pi::service('module')->isActive('vote') && $config['vote_bar']) {
+            $question['vote'] = array(
                 'point'  => $question['point'],
                 'count'  => $question['count'],
                 'item'   => $question['id'],
                 'table'  => 'question',
                 'module' => $module,
                 'type'   => 'plus',
+                'class'  => 'btn-group-vertical',
             );
-            $this->view()->assign('vote', $vote);
+        }
+        // Get project
+        $question['is_manager'] = false;
+        if ($question['project_id'] > 0) {
+            $question['project'] = Pi::api('project', 'ask')->getProject($question['project_id']);
+            if ($question['project']['user']['id'] == $question['user']['id']) {
+                $question['is_manager'] = true;
+            }
         }
         // Get answers
         if ($question['answer'] > 0) {
@@ -57,7 +63,13 @@ class QuestionController extends ActionController
             $rowset = $this->getModel('question')->selectWith($select);
             foreach ($rowset as $row) {
                 $answers[$row->id] = Pi::api('question', 'ask')->canonizeQuestion($row);
-                if (Pi::service('module')->isActive('vote')) {
+
+                $answers[$row->id]['is_manager'] = false;
+                if ($question['project']['user']['id'] == $answers[$row->id]['user']['id']) {
+                    $answers[$row->id]['is_manager'] = true;
+                }
+
+                if (Pi::service('module')->isActive('vote') && $config['vote_bar']) {
                     $answers[$row->id]['vote'] = array(
                         'point'  => $answers[$row->id]['point'],
                         'count'  => $answers[$row->id]['count'],
@@ -65,6 +77,7 @@ class QuestionController extends ActionController
                         'table'  => 'question',
                         'module' => $module,
                         'type'   => 'plus',
+                        'class'  => 'btn-group-vertical',
                     );
                 }
             }
@@ -74,7 +87,7 @@ class QuestionController extends ActionController
         $this->view()->headTitle($question['seo_title']);
         $this->view()->headDescription($question['seo_keywords'], 'set');
         $this->view()->headKeywords($question['seo_description'], 'set');
-        $this->view()->setTemplate('question_index');
+        $this->view()->setTemplate('question-index');
         $this->view()->assign('question', $question);
         $this->view()->assign('config', $config);
     }

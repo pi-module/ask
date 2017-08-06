@@ -51,11 +51,11 @@ class AskForm extends BaseForm
             'name' => 'text_description',
             'options' => array(
                 'label' => __('Question'),
-                'editor' => 'html',
-                'set' => '',
             ),
             'attributes' => array(
-                'type' => 'editor',
+                'type' => 'textarea',
+                'rows' => '10',
+                'cols' => '40',
                 'description' => '',
             )
         ));
