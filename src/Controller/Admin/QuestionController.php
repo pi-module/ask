@@ -19,6 +19,7 @@ use Pi\Paginator\Paginator;
 use Module\Ask\Form\UpdateForm;
 use Module\Ask\Form\UpdateFilter;
 use Zend\Json\Json;
+use Zend\Db\Sql\Predicate\Expression;
 
 class QuestionController extends ActionController
 {
@@ -26,8 +27,8 @@ class QuestionController extends ActionController
     {
         // Get page
         $page = $this->params('page', 1);
-        $module = $this->params('module');
         $status = $this->params('status');
+        $type = $this->params('type');
         // Set info
         $offset = (int)($page - 1) * $this->config('admin_perpage');
         $order = array('time_create DESC', 'id DESC');
@@ -38,15 +39,26 @@ class QuestionController extends ActionController
         if (!empty($status)) {
             $where['status'] = $status;
         }
+        if (!empty($type) && $type == 'question') {
+            $where['type'] = 'Q';
+        } elseif (!empty($type) && $type == 'answer') {
+            $where['type'] = 'A';
+        }
         // Set select
         $select = $this->getModel('question')->select()->where($where)->order($order)->offset($offset)->limit($limit);
         $rowset = $this->getModel('question')->selectWith($select);
         // Make list
         foreach ($rowset as $row) {
             $question[$row->id] = Pi::api('question', 'ask')->canonizeQuestion($row);
+            $question[$row->id]['user_url'] = Pi::url($this->url('', array(
+                'module' => 'user',
+                'controller' => 'edit',
+                'action' => 'index',
+                'uid' => $row->uid,
+            )));
         }
         // Set paginator
-        $count = array('count' => new \Zend\Db\Sql\Predicate\Expression('count(*)'));
+        $count = array('count' => new Expression('count(*)'));
         $select = $this->getModel('question')->select()->where($where)->columns($count);
         $count = $this->getModel('question')->selectWith($select)->current()->count;
         $paginator = Paginator::factory(intval($count));
@@ -60,6 +72,7 @@ class QuestionController extends ActionController
                 'controller'    => 'question',
                 'action'        => 'index',
                 'status'        => $status,
+                'type'          => $type,
             )),
         ));
         // Set view
@@ -106,12 +119,23 @@ class QuestionController extends ActionController
         // Get id
         $id = $this->params('id');
         $module = $this->params('module');
-        // find item
-        $question = Pi::api('question', 'ask')->getQuestion($id);
-        $form = new UpdateForm('question');
+        // Get config
+        $config = Pi::service('registry')->config->read($module);
+        // Set option
+        $option = array(
+            'project_active' => $config['project_active'],
+        );
+        // Get question
+        if ($id) {
+            $question = Pi::api('question', 'ask')->getQuestion($id);
+        } else {
+            $question = array();
+        }
+        // form
+        $form = new UpdateForm('question', $option);
         if ($this->request->isPost()) {
             $data = $this->request->getPost();
-            $form->setInputFilter(new UpdateFilter);
+            $form->setInputFilter(new UpdateFilter($option));
             $form->setData($data);
             if ($form->isValid()) {
                 $values = $form->getData();
@@ -141,9 +165,20 @@ class QuestionController extends ActionController
                 $filter = new Filter\HeadDescription;
                 $values['seo_description'] = $filter($description);
                 // Set time
-                $values['time_update'] = time();
+                if (!empty($values['id'])) {
+                    $values['time_update'] = time();
+                } else {
+                    $values['time_create'] = time();
+                    $values['time_update'] = time();
+                    $values['uid'] = Pi::user()->getId();
+                    $values['type'] = 'Q';
+                }
                 // Save values
-                $row = $this->getModel('question')->find($values['id']);
+                if (!empty($values['id'])) {
+                    $row = $this->getModel('question')->find($values['id']);
+                } else {
+                    $row = $this->getModel('question')->createRow();
+                }
                 $row->assign($values);
                 $row->save();
                 // Tag
@@ -152,19 +187,21 @@ class QuestionController extends ActionController
                 }
                 // Check it save or not
                 $message = __('Your selected item edit successfully');
-                $url = array('', 'module' => $module, 'controller' => 'question', 'action' => 'index');
+                $url = array('', 'module' => $module, 'controller' => 'question', 'action' => 'index', 'type' => 'all');
                 $this->jump($url, $message);
             }
         } else {
-            // Get tag list
-            if (Pi::service('module')->isActive('tag')) {
-                $tag = Pi::service('tag')->get($module, $question['id'], '');
-                if (is_array($tag)) {
-                    $question['tag'] = implode('|', $tag);
+            if ($id) {
+                // Get tag list
+                if (Pi::service('module')->isActive('tag')) {
+                    $tag = Pi::service('tag')->get($module, $question['id'], '');
+                    if (is_array($tag)) {
+                        $question['tag'] = implode('|', $tag);
+                    }
                 }
+                // Set to form
+                $form->setData($question);
             }
-            // Set to form
-            $form->setData($question);
         }
         // Set view
         $this->view()->setTemplate('question-update');
@@ -180,9 +217,9 @@ class QuestionController extends ActionController
         $row = $this->getModel('question')->find($id);
         if ($row) {
             $row->delete();
-            $this->jump(array('action' => 'index'), __('Your selected question deleted'));
+            $this->jump(array('action' => 'index', 'type' => 'all'), __('Your selected question deleted'));
         } else {
-            $this->jump(array('action' => 'index'), __('Please select question'));	
+            $this->jump(array('action' => 'index', 'type' => 'all'), __('Please select question'));
         }	
     }
 }

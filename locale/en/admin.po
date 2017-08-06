@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2017-08-06 12:35+0430\n"
+"POT-Creation-Date: 2017-08-06 13:38+0430\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -23,7 +23,7 @@ msgstr ""
 msgid "Show"
 msgstr ""
 
-#: config/config.php:24 config/page.php:53
+#: config/config.php:24 config/page.php:48
 msgid "Question"
 msgstr ""
 
@@ -111,36 +111,48 @@ msgstr ""
 msgid "List of Questions"
 msgstr ""
 
-#: config/navigation.php:26 config/navigation.php:36 config/page.php:22
+#: config/navigation.php:29
+msgid "List of all Questions and Answers"
+msgstr ""
+
+#: config/navigation.php:42
+msgid "List of just Questions"
+msgstr ""
+
+#: config/navigation.php:55
+msgid "List of just Answers"
+msgstr ""
+
+#: config/navigation.php:68
+msgid "New question"
+msgstr ""
+
+#: config/navigation.php:80 config/navigation.php:90 config/page.php:22
 #: config/permission.php:45
 msgid "projects"
 msgstr ""
 
-#: config/navigation.php:46
+#: config/navigation.php:100
 msgid "New project"
 msgstr ""
 
-#: config/navigation.php:58 config/page.php:27 config/permission.php:51
-msgid "Tools"
-msgstr ""
-
-#: config/page.php:35
+#: config/page.php:30
 msgid "Index page"
 msgstr ""
 
-#: config/page.php:41
+#: config/page.php:36
 msgid "Project page"
 msgstr ""
 
-#: config/page.php:47 config/permission.php:30
+#: config/page.php:42 config/permission.php:30
 msgid "Answer"
 msgstr ""
 
-#: config/page.php:59
+#: config/page.php:54
 msgid "Submit question"
 msgstr ""
 
-#: config/page.php:65
+#: config/page.php:60
 msgid "Tag"
 msgstr ""
 

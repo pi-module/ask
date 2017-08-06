@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2017-08-06 12:07+0430\n"
+"POT-Creation-Date: 2017-08-06 13:36+0430\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -111,16 +111,32 @@ msgstr "سیستم ارسال پرسش و درج پاسخ"
 msgid "List of Questions"
 msgstr "فهرست سوالات"
 
-#: config/navigation.php:26 config/navigation.php:36 config/page.php:22
+#: config/navigation.php:29
+msgid "List of all Questions and Answers"
+msgstr "فهرست سوالات و پاسخ ها"
+
+#: config/navigation.php:42
+msgid "List of just Questions"
+msgstr "فهرست سوال ها"
+
+#: config/navigation.php:55
+msgid "List of just Answers"
+msgstr "فهرست پاسخ ها"
+
+#: config/navigation.php:68
+msgid "New question"
+msgstr "سوال جدید"
+
+#: config/navigation.php:80 config/navigation.php:90 config/page.php:22
 #: config/permission.php:45
 msgid "projects"
 msgstr "پروژه ها"
 
-#: config/navigation.php:46
+#: config/navigation.php:100
 msgid "New project"
 msgstr "پروژه جدید"
 
-#: config/navigation.php:58 config/page.php:27 config/permission.php:51
+#: config/navigation.php:112 config/page.php:27 config/permission.php:51
 msgid "Tools"
 msgstr "ابزار"
 

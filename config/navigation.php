@@ -21,6 +21,60 @@ return array(
             'module'        => 'ask',
             'controller'    => 'question',
             'action'        => 'index',
+            'params'        => array(
+                'type'    => 'all',
+            ),
+            'pages' => array(
+                'all' => array(
+                    'label'         => _a('List of all Questions and Answers'),
+                    'permission'    => array(
+                        'resource'  => 'question',
+                    ),
+                    'route'         => 'admin',
+                    'module'        => 'ask',
+                    'controller'    => 'question',
+                    'action'        => 'index',
+                    'params'        => array(
+                        'type'    => 'all',
+                    ),
+                ),
+                'question' => array(
+                    'label'         => _a('List of just Questions'),
+                    'permission'    => array(
+                        'resource'  => 'question',
+                    ),
+                    'route'         => 'admin',
+                    'module'        => 'ask',
+                    'controller'    => 'question',
+                    'action'        => 'index',
+                    'params'        => array(
+                        'type'    => 'question',
+                    ),
+                ),
+                'answer' => array(
+                    'label'         => _a('List of just Answers'),
+                    'permission'    => array(
+                        'resource'  => 'question',
+                    ),
+                    'route'         => 'admin',
+                    'module'        => 'ask',
+                    'controller'    => 'question',
+                    'action'        => 'index',
+                    'params'        => array(
+                        'type'    => 'answer',
+                    ),
+                ),
+                'update' => array(
+                    'label'         => _a('New question'),
+                    'permission'    => array(
+                        'resource'  => 'question',
+                    ),
+                    'route'         => 'admin',
+                    'module'        => 'ask',
+                    'controller'    => 'question',
+                    'action'        => 'update',
+                ),
+            ),
         ),
         'project' => array(
             'label'         => _a('projects'),
@@ -53,16 +107,6 @@ return array(
                     'action'        => 'update',
                 ),
             ),
-        ),
-        'tools' => array(
-            'label'         => _a('Tools'),
-            'permission'    => array(
-                'resource'  => 'tools',
-            ),
-            'route'         => 'admin',
-            'module'        => 'ask',
-            'controller'    => 'tools',
-            'action'        => 'index',
         ),
     ),
 );

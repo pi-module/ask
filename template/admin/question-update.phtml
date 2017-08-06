@@ -1,9 +1,19 @@
 <div class="clearfix">
-	<div class="well">
-		<p><strong><?php _e('Title'); ?></strong> : <?php echo $this->escape($question['title']); ?></p>
-		<p><strong><?php _e('Slug'); ?></strong> : <?php echo $this->escape($question['slug']); ?></p>
-		<p><strong><?php _e('Description'); ?></strong> : <?php echo $question['text_description']; ?></p>
-		<p><strong><?php _e('Create'); ?></strong> : <?php echo $this->escape($question['time_create_view']); ?></p>
-	</div>
+    <?php if (!empty($question)) { ?>
+        <ul class="list-group">
+            <li class="list-group-item">
+                <strong><?php _e('Title'); ?></strong> : <?php echo $this->escape($question['title']); ?>
+            </li>
+            <li class="list-group-item">
+                <strong><?php _e('Slug'); ?></strong> : <?php echo $this->escape($question['slug']); ?>
+            </li>
+            <li class="list-group-item">
+                <strong><?php _e('Create'); ?></strong> : <?php echo $this->escape($question['time_create_view']); ?>
+            </li>
+            <li class="list-group-item">
+                <strong><?php _e('Description'); ?></strong> : <?php echo $question['text_description']; ?>
+            </li>
+        </ul>
+    <?php } ?>
     <?php echo $this->form($form); ?>
 </div>

@@ -18,7 +18,7 @@ use Zend\InputFilter\InputFilter;
 
 class UpdateFilter extends InputFilter
 {
-    public function __construct()
+    public function __construct($option = array())
     {
         // id
         $this->add(array(
@@ -35,6 +35,22 @@ class UpdateFilter extends InputFilter
                 ),
             ),
         ));
+        // slug
+        $this->add(array(
+            'name' => 'slug',
+            'required' => false,
+            'filters' => array(
+                array(
+                    'name' => 'StringTrim',
+                ),
+            ),
+            'validators' => array(
+                new \Module\Ask\Validator\SlugDuplicate(array(
+                    'module' => Pi::service('module')->current(),
+                    'table' => 'question',
+                )),
+            ),
+        ));
         // text_description
         $this->add(array(
             'name' => 'text_description',
@@ -44,6 +60,43 @@ class UpdateFilter extends InputFilter
                     'name' => 'StringTrim',
                 ),
             ),
+        ));
+        //main_image
+        $this->add(array(
+            'name' => 'main_image',
+            'required' => false,
+        ));
+        // additional_images
+        /* $this->add(array(
+            'name' => 'additional_images',
+            'required' => false,
+        )); */
+        // status
+        $this->add(array(
+            'name' => 'status',
+            'required' => true,
+        ));
+        // project_id
+        if ($option['project_active']) {
+            $this->add(array(
+                'name' => 'project_id',
+                'required' => true,
+            ));
+        }
+        // seo_title
+        $this->add(array(
+            'name' => 'seo_title',
+            'required' => false,
+        ));
+        // seo_keywords
+        $this->add(array(
+            'name' => 'seo_keywords',
+            'required' => false,
+        ));
+        // seo_description
+        $this->add(array(
+            'name' => 'seo_description',
+            'required' => false,
         ));
         // tag
         if (Pi::service('module')->isActive('tag')) {

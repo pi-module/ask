@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2017-08-06 12:09+0430\n"
+"POT-Creation-Date: 2017-08-06 13:36+0430\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -36,26 +36,26 @@ msgstr "اطلاعات پروژه با موفقیت ذخیره شد"
 msgid "Add project"
 msgstr "پروژه جدید"
 
-#: src/Controller/Admin/QuestionController.php:85
+#: src/Controller/Admin/QuestionController.php:98
 #, php-format
 msgid "%s question accept successfully"
 msgstr "%s با موفقیت تایید شد"
 
-#: src/Controller/Admin/QuestionController.php:90
+#: src/Controller/Admin/QuestionController.php:103
 #, php-format
 msgid "Error in accept %s question"
 msgstr "خطا در تایید %s"
 
-#: src/Controller/Admin/QuestionController.php:96
-#: src/Controller/Admin/QuestionController.php:185
+#: src/Controller/Admin/QuestionController.php:109
+#: src/Controller/Admin/QuestionController.php:222
 msgid "Please select question"
 msgstr "لطفا یک سوال انتخاب کنید"
 
-#: src/Controller/Admin/QuestionController.php:154
+#: src/Controller/Admin/QuestionController.php:189
 msgid "Your selected item edit successfully"
 msgstr "آیتم انتخابی شما با موفقیت ویرایش شد"
 
-#: src/Controller/Admin/QuestionController.php:183
+#: src/Controller/Admin/QuestionController.php:220
 msgid "Your selected question deleted"
 msgstr "سوال انتخابی شما حذف شد"
 
@@ -77,17 +77,17 @@ msgid "The question not found."
 msgstr "سوال یافت نشد"
 
 #: src/Controller/Front/AnswerController.php:54
-#: src/Controller/Front/AnswerController.php:99
+#: src/Controller/Front/AnswerController.php:101
 #, php-format
 msgid "Answer to %s"
 msgstr "پاسخ به %s"
 
-#: src/Controller/Front/AnswerController.php:87
+#: src/Controller/Front/AnswerController.php:89
 msgid ""
 "Your new answer to this question save successfully, and show under question"
 msgstr "پاسخ شما به این پرسش با موفقیت ثبت شد، و در زیر سوال نمایش داده می شود"
 
-#: src/Controller/Front/AnswerController.php:89
+#: src/Controller/Front/AnswerController.php:91
 msgid ""
 "Your new answer to this question save successfully, But it need review and "
 "publish by website admin"
@@ -148,7 +148,7 @@ msgstr "همه سوالات در مورد %s"
 msgid "List of all used tags"
 msgstr "فهرست تمام برچسب های استفاده شده"
 
-#: src/Form/AnswerForm.php:49 template/admin/question-index.phtml:32
+#: src/Form/AnswerForm.php:49 template/admin/question-index.phtml:26
 #: template/front/question-index.phtml:104
 #: template/front/question-index.phtml:108
 #: template/front/question-list.phtml:73
@@ -156,43 +156,44 @@ msgid "Answer"
 msgstr "پاسخ"
 
 #: src/Form/AnswerForm.php:63 src/Form/AskForm.php:107
-#: src/Form/ProjectForm.php:180 src/Form/UpdateForm.php:81
+#: src/Form/ProjectForm.php:180 src/Form/UpdateForm.php:202
 msgid "Submit"
 msgstr "ارسال"
 
 #: src/Form/AskForm.php:42 src/Form/ProjectForm.php:42
-#: src/Form/UpdateForm.php:42 template/admin/project-index.phtml:8
+#: src/Form/UpdateForm.php:48 template/admin/project-index.phtml:8
 #: template/admin/question-index.phtml:15
-#: template/admin/question-update.phtml:3
+#: template/admin/question-update.phtml:5
 msgid "Title"
 msgstr "عنوان"
 
-#: src/Form/AskForm.php:53 src/Form/UpdateForm.php:53
-#: template/admin/question-index.phtml:29
+#: src/Form/AskForm.php:53 src/Form/UpdateForm.php:70
+#: template/admin/question-index.phtml:23
 msgid "Question"
 msgstr "سوال"
 
 #: src/Form/AskForm.php:67 src/Form/ProjectForm.php:78
+#: src/Form/UpdateForm.php:84
 msgid "Main image"
 msgstr "تصویر اصلی"
 
-#: src/Form/AskForm.php:94 src/Form/UpdateForm.php:68
+#: src/Form/AskForm.php:94 src/Form/UpdateForm.php:189
 msgid "Tags"
 msgstr "برچسب ها"
 
-#: src/Form/AskForm.php:98 src/Form/UpdateForm.php:72
+#: src/Form/AskForm.php:98 src/Form/UpdateForm.php:193
 msgid "Use `|` as delimiter to separate tag terms"
 msgstr "با استفاده از `|` کلمات را از هم جدا کنید"
 
-#: src/Form/ProjectForm.php:53
+#: src/Form/ProjectForm.php:53 src/Form/UpdateForm.php:59
 msgid "slug"
 msgstr "اسلاگ"
 
-#: src/Form/ProjectForm.php:57
+#: src/Form/ProjectForm.php:57 src/Form/UpdateForm.php:63
 msgid "Used on URL value : must be unique, short, and user oriented"
 msgstr "در آدرس URL صفحه استفاده می شود، باید یکتا، کوتاه و مفید باشد"
 
-#: src/Form/ProjectForm.php:64 template/admin/question-update.phtml:5
+#: src/Form/ProjectForm.php:64 template/admin/question-update.phtml:14
 msgid "Description"
 msgstr "توضیحات"
 
@@ -200,29 +201,29 @@ msgstr "توضیحات"
 msgid "Additional images"
 msgstr "تصاویر اضافی"
 
-#: src/Form/ProjectForm.php:104
+#: src/Form/ProjectForm.php:104 src/Form/UpdateForm.php:110
 msgid "Status"
 msgstr "وضعیت"
 
-#: src/Form/ProjectForm.php:106 template/admin/project-index.phtml:34
-#: template/admin/question-index.phtml:62
+#: src/Form/ProjectForm.php:106 src/Form/UpdateForm.php:112
+#: template/admin/project-index.phtml:34 template/admin/question-index.phtml:61
 msgid "Published"
 msgstr "منتشر شده"
 
-#: src/Form/ProjectForm.php:107 template/admin/project-index.phtml:35
-#: template/admin/question-index.phtml:63
+#: src/Form/ProjectForm.php:107 src/Form/UpdateForm.php:113
+#: template/admin/project-index.phtml:35 template/admin/question-index.phtml:62
 msgid "Pending review"
 msgstr "در انتظار تایید"
 
-#: src/Form/ProjectForm.php:108
+#: src/Form/ProjectForm.php:108 src/Form/UpdateForm.php:114
 msgid "Draft"
 msgstr "پیش نویس"
 
-#: src/Form/ProjectForm.php:109
+#: src/Form/ProjectForm.php:109 src/Form/UpdateForm.php:115
 msgid "Private"
 msgstr "خصوصی"
 
-#: src/Form/ProjectForm.php:110
+#: src/Form/ProjectForm.php:110 src/Form/UpdateForm.php:116
 msgid "Remove"
 msgstr "حذف شده"
 
@@ -234,45 +235,49 @@ msgstr "مدیر"
 msgid "Project manager user id"
 msgstr "شناسه کاربری مدیر پروژه"
 
-#: src/Form/ProjectForm.php:133
+#: src/Form/ProjectForm.php:133 src/Form/UpdateForm.php:141
 msgid "SEO options"
 msgstr "گزینه های سئو"
 
-#: src/Form/ProjectForm.php:140
+#: src/Form/ProjectForm.php:140 src/Form/UpdateForm.php:148
 msgid "Meta Title"
 msgstr "عنوان متا ( Meta Title )"
 
-#: src/Form/ProjectForm.php:146
+#: src/Form/ProjectForm.php:146 src/Form/UpdateForm.php:154
 msgid ""
 "Displayed in search Engine result pages as Title : between 10 to 70 "
 "character. If empty, will be popuated automaticaly by main title value"
 msgstr ""
 
-#: src/Form/ProjectForm.php:153
+#: src/Form/ProjectForm.php:153 src/Form/UpdateForm.php:161
 msgid "Meta Keywords"
 msgstr "کلمات کلیدی متا ( Meta Keywords )"
 
-#: src/Form/ProjectForm.php:159
+#: src/Form/ProjectForm.php:159 src/Form/UpdateForm.php:167
 msgid ""
 "Not used anymore by search engines : between 5 to 12 words / left it empty, "
 "it will be automaticaly populated with main title values"
 msgstr ""
 
-#: src/Form/ProjectForm.php:166
+#: src/Form/ProjectForm.php:166 src/Form/UpdateForm.php:174
 msgid "Meta Description"
 msgstr "توضیحات متا (Meta Keywords )"
 
-#: src/Form/ProjectForm.php:172
+#: src/Form/ProjectForm.php:172 src/Form/UpdateForm.php:180
 msgid ""
 "Displayed in search Engine result pages : quick summary to incitate user to "
 "click, between 80 to 160 character"
 msgstr ""
 
+#: src/Form/UpdateForm.php:129
+msgid "Project"
+msgstr "پروژه"
+
 #: template/admin/project-index.phtml:4
 msgid "List of projects"
 msgstr "فهرست پروژه ها"
 
-#: template/admin/project-index.phtml:7 template/admin/question-index.phtml:14
+#: template/admin/project-index.phtml:7
 msgid "ID"
 msgstr "شناسه"
 
@@ -285,7 +290,7 @@ msgid "View"
 msgstr "نمایش"
 
 #: template/admin/project-index.phtml:26 template/admin/project-index.phtml:28
-#: template/admin/question-index.phtml:54
+#: template/admin/question-index.phtml:53
 msgid "Edit"
 msgstr "ویرایش"
 
@@ -298,29 +303,29 @@ msgid "List of questions and answers"
 msgstr "فهرست سوالات و پاسخ ها"
 
 #: template/admin/question-index.phtml:16
-msgid "Type"
-msgstr "نوع"
+msgid "User"
+msgstr "کاربر"
 
 #: template/admin/question-index.phtml:17
-#: template/admin/question-update.phtml:6
+#: template/admin/question-update.phtml:11
 msgid "Create"
 msgstr "ایجاد"
 
-#: template/admin/question-index.phtml:50
+#: template/admin/question-index.phtml:49
 #: template/admin/question-index.phtml:78
 msgid "Reject"
 msgstr "رد کردن"
 
-#: template/admin/question-index.phtml:52
+#: template/admin/question-index.phtml:51
 #: template/admin/question-index.phtml:83
 msgid "Accept"
 msgstr "تایید"
 
-#: template/admin/question-index.phtml:55
+#: template/admin/question-index.phtml:54
 msgid "Delete"
 msgstr "حذف"
 
-#: template/admin/question-index.phtml:66
+#: template/admin/question-index.phtml:65
 msgid "No question submit yet"
 msgstr "هنوز هیچ سوالی ارسال نشده است"
 
@@ -328,7 +333,7 @@ msgstr "هنوز هیچ سوالی ارسال نشده است"
 msgid "Accept in process"
 msgstr "تایید در حال انجام است"
 
-#: template/admin/question-update.phtml:4
+#: template/admin/question-update.phtml:8
 msgid "Slug"
 msgstr "اسلاگ"
 
@@ -402,6 +407,9 @@ msgid ""
 msgstr ""
 "هیچ اطلاعاتی از کلمات کلیدی به عنوان برچسب هنوز در سیستم درج نشده است. لطفا "
 "بعدا از این صفحه را بررسی فرمایید. "
+
+#~ msgid "Type"
+#~ msgstr "نوع"
 
 #~ msgid "The tag not set."
 #~ msgstr "برچسب یافت نشد"

@@ -47,11 +47,5 @@ return array(
                 //'admin',
             ),
         ),
-        'tools'       => array(
-            'title'         => _a('Tools'),
-            'access'        => array(
-                //'admin',
-            ),
-        ),
     ),
 );

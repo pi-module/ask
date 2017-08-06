@@ -14,12 +14,12 @@ return array(
     'meta'  => array(
         'title'         => _a('Ask'),
         'description'   => _a('Ask and Answer'),
-        'version'       => '0.2.2',
+        'version'       => '0.2.7',
         'license'       => 'New BSD',
         'logo'          => 'image/logo.png',
         'readme'        => 'docs/readme.txt',
         'demo'          => 'http://pialog',
-        'icon'          => 'fa-question',
+        'icon'          => 'fa-database',
         'clonable'      => true,
     ),
     // Author information

@@ -22,6 +22,7 @@ class IndexController extends ActionController
         return $this->redirect()->toRoute('', array(
             'controller' => 'question',
             'action'     => 'index',
+            'type'       => 'all',
         ));
     }
 }
