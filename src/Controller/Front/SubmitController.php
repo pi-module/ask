@@ -36,6 +36,7 @@ class SubmitController extends ActionController
         // Check user is login or not
         Pi::service('authentication')->requireLogin();
         // Check project
+        $project = array();
         if ($config['project_active'] && !empty($slug)) {
             // Get topic information from model
             $project = Pi::api('project', 'ask')->getProject($slug, 'slug');
@@ -99,6 +100,10 @@ class SubmitController extends ActionController
                 if (isset($tag) && is_array($tag) && Pi::service('module')->isActive('tag')) {
                     Pi::service('tag')->add($this->params('module'), $row->id, '', $tag);
                 }
+                // Set question
+                $question = Pi::api('question', 'ask')->canonizeQuestion($row);
+                // Send notification
+                Pi::api('notification', 'ask')->askQuestion($question, $project);
                 // Check it save or not
                 if ($this->config('auto_approval')) {
                     $message = __('Your ask new question successfully, Other users can view and answer it');                 

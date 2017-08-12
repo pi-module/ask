@@ -1,0 +1,20 @@
+[comment]answer question user[/comment]
+
+[format]html[/format]
+
+[subject]%site_name% - Answer question[/subject]
+
+[body]
+<div style="padding: 1px; direction: ltr;">
+	<h3 style="font-size: 1.1em;">Dear %user%</h3>
+	<div style="padding: 3px 0; margin: 1px 0;">You submit new answer on <strong>%title%</strong> question on <strong>%time%</strong>. Status is : <strong>%status%</strong></div>
+	<div style="padding: 3px 0; margin: 1px 0;">%description%</div>
+	<div style="padding: 3px 0; margin: 1px 0;">
+        <a href="%url%" title="View">(Just available if status is published) %url%</a>
+	</div>
+	<div style="padding: 3px 0; margin: 1px 0;">Dont reply to this email</div>
+	<div style="margin-top: 10px">
+        <a href="%site_url%" title="%site_name%">%site_name%</a>
+    </div>
+</div>
+[/body]

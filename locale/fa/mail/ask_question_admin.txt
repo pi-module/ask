@@ -1,0 +1,20 @@
+[comment]ask question admin[/comment]
+
+[format]html[/format]
+
+[subject]%site_name% - ارسال سوال[/subject]
+
+[body]
+<div style="padding: 1px; direction: rtl;">
+	<h3 style="font-size: 1.1em;">مدیر وب سایت %site_name%</h3>
+	<div style="padding: 3px 0; margin: 1px 0;">یک سوال جدید با عنوان <strong>%title%</strong> در تاریخ <strong>%time%</strong> توسط <strong>%user%</strong> در وب سایت ارسال شد : وضعیت <strong>%status%</strong></div>
+	<div style="padding: 3px 0; margin: 1px 0;">%description%</div>
+	<div style="padding: 3px 0; margin: 1px 0;">
+        <a href="%url%" title="مشاهده">(تنها در صورتی که سوال / پاسخ در وب سایت تایید شده باشد لینک آن در دسترس است) %url%</a>
+	</div>
+	<div style="padding: 3px 0; margin: 1px 0;">لطفا به این پیام پاسخی ندهید</div>
+	<div style="margin-top: 10px">
+        <a href="%site_url%" title="%site_name%">%site_name%</a>
+    </div>
+</div>
+[/body]

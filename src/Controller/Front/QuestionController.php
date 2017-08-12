@@ -141,6 +141,7 @@ class QuestionController extends ActionController
             return false;
         }
         //
+        $mainQuestion = array();
         if ($question['type'] == 'A') {
             $mainQuestion = Pi::api('question', 'ask')->getQuestion($question['question_id']);
             $question['project_id'] = $mainQuestion['project_id'];
@@ -213,6 +214,8 @@ class QuestionController extends ActionController
                 }
                 break;
         }
+        //
+        Pi::api('notification', 'ask')->reviewQuestion($status, $project, $question, $mainQuestion);
         // Set jump
         $this->jump($url, $message);
     }

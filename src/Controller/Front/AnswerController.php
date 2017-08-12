@@ -42,6 +42,19 @@ class AnswerController extends ActionController
             $url = array('', 'module' => $module, 'controller' => 'index', 'action' => 'index');
             $this->jump($url, $message);
         }
+        // Check project
+        $project = array();
+        if ($config['project_active'] && $question['project_id']) {
+            // Get topic information from model
+            $project = Pi::api('project', 'ask')->getProject($question['project_id']);
+            // Check slug set
+            if (empty($project) || $project['status'] != 1) {
+                $this->getResponse()->setStatusCode(404);
+                $this->terminate(__('Project not set.'), '', 'error-404');
+                $this->view()->setLayout('layout-simple');
+                return;
+            }
+        }
         // get info
         $form = new AnswerForm('Answer');
         if ($this->request->isPost()) {
@@ -75,6 +88,7 @@ class AnswerController extends ActionController
                 $values['uid'] = Pi::user()->getId();
                 $values['status'] = $this->config('auto_approval');
                 $values['type'] = 'A';
+                $values['project_id'] = $project['id'];
                 // Update answer
                 $this->getModel('question')->update(
                     array('answer' => $question['answer'] + 1),
@@ -84,6 +98,10 @@ class AnswerController extends ActionController
                 $row = $this->getModel('question')->createRow();
                 $row->assign($values);
                 $row->save();
+                // Set question
+                $answer = Pi::api('question', 'ask')->canonizeQuestion($row);
+                // Send notification
+                Pi::api('notification', 'ask')->askQuestion($question, $answer, $project);
                 // Check it save or not
                 if ($this->config('auto_approval')) {
                     $message = __('Your new answer to this question save successfully, and show under question');
