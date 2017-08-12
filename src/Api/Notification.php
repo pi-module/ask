@@ -47,7 +47,7 @@ class Notification extends AbstractApi
         );
 
         // Send notification to project manager
-        if (!empty($project)) {
+        if (!empty($project) && $project['manager'] > 0) {
             Pi::service('notification')->send(
                 array(
                     $project['user']['email'] => $project['user']['name'],
@@ -95,7 +95,7 @@ class Notification extends AbstractApi
         );
 
         // Send notification to project manager
-        if (!empty($project)) {
+        if (!empty($project) && $project['manager'] > 0) {
             Pi::service('notification')->send(
                 array(
                     $project['user']['email'] => $project['user']['name'],
