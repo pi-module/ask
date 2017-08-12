@@ -10,6 +10,7 @@
 /**
  * @author Hossein Azizabadi <azizabadi@faragostaresh.com>
  */
+
 namespace Module\Ask\Controller\Front;
 
 use Pi;
@@ -26,6 +27,8 @@ class ProjectController extends IndexController
         $slug = $this->params('slug');
         // Get config
         $config = Pi::service('registry')->config->read($module);
+        // Get user id
+        $uid = Pi::user()->getId();
         // Get topic information from model
         $project = Pi::api('project', 'ask')->getProject($slug, 'slug');
         // Check slug set
@@ -37,6 +40,12 @@ class ProjectController extends IndexController
         }
         // Set question info
         $where = array('status' => 1, 'type' => 'Q', 'project_id' => $project['id']);
+        // check is project manager
+        $userIsManager = false;
+        if ($project['manager'] == $uid && $config['auto_approval'] == 2) {
+            $userIsManager = true;
+            $where['status'] = array(1, 2);
+        }
         // Set paginator info
         $template = array(
             'controller' => 'index',
@@ -52,7 +61,7 @@ class ProjectController extends IndexController
         $this->view()->assign('paginator', $paginator);
         $this->view()->assign('project', $project);
         $this->view()->assign('config', $config);
+        $this->view()->assign('userIsManager', $userIsManager);
         $this->view()->assign('title', __('List of all questions'));
-
     }
 }

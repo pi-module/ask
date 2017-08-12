@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2017-08-06 13:38+0430\n"
+"POT-Creation-Date: 2017-08-12 10:40+0430\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -80,11 +80,11 @@ msgid "Automatic approval"
 msgstr ""
 
 #: config/config.php:116
-msgid "All questions and answers need admin review before publish"
+msgid "Automatic approval all questions and answers"
 msgstr ""
 
 #: config/config.php:117
-msgid "Automatic approval all questions and answers"
+msgid "All questions and answers need admin or project manager review before publish"
 msgstr ""
 
 #: config/config.php:128

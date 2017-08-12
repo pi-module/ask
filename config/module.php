@@ -14,7 +14,7 @@ return array(
     'meta'  => array(
         'title'         => _a('Ask'),
         'description'   => _a('Ask and Answer'),
-        'version'       => '0.3.0',
+        'version'       => '0.3.1',
         'license'       => 'New BSD',
         'logo'          => 'image/logo.png',
         'readme'        => 'docs/readme.txt',

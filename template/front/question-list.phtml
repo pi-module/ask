@@ -63,7 +63,7 @@
             <h2><?php _e('List of questions'); ?></h2>
         </div>
         <?php foreach($questions as $question) { ?>
-            <div class="question-single clearfix">
+            <div class="question-single clearfix <?php if ($question['status'] == 2) { echo 'question-pending bg-danger'; } ?>">
                 <div class="col-md-2">
                     <div class="question-single-information">
                         <ul class="list-inline">
@@ -91,6 +91,9 @@
                     <div class="question-single-title">
                         <h3>
                             <a title="<?php echo $this->escape($question['title']); ?>" href="<?php echo $question['questionUrl']; ?>">
+                                <?php if ($question['status'] == 2) { ?>
+                                    <small>(<?php _e('Pending review'); ?>)</small>
+                                <?php } ?>
                                 <?php echo $this->escape($question['title']); ?>
                             </a>
                         </h3>

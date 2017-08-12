@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2017-08-06 13:34+0430\n"
+"POT-Creation-Date: 2017-08-12 10:40+0430\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -72,7 +72,8 @@ msgid "Answer question not active"
 msgstr ""
 
 #: src/Controller/Front/AnswerController.php:41
-#: src/Controller/Front/QuestionController.php:33
+#: src/Controller/Front/QuestionController.php:36
+#: src/Controller/Front/QuestionController.php:62
 msgid "The question not found."
 msgstr ""
 
@@ -98,13 +99,29 @@ msgid "List of all projects"
 msgstr ""
 
 #: src/Controller/Front/IndexController.php:53
-#: src/Controller/Front/ProjectController.php:55
+#: src/Controller/Front/ProjectController.php:65
 msgid "List of all questions"
 msgstr ""
 
-#: src/Controller/Front/ProjectController.php:34
+#: src/Controller/Front/ProjectController.php:37
 #: src/Controller/Front/SubmitController.php:45
 msgid "Project not set."
+msgstr ""
+
+#: src/Controller/Front/QuestionController.php:174
+msgid "Question confirmed !"
+msgstr ""
+
+#: src/Controller/Front/QuestionController.php:185
+msgid "Question rejected !"
+msgstr ""
+
+#: src/Controller/Front/QuestionController.php:200
+msgid "Answer confirmed !"
+msgstr ""
+
+#: src/Controller/Front/QuestionController.php:211
+msgid "Answer rejected !"
 msgstr ""
 
 #: src/Controller/Front/SubmitController.php:34
@@ -144,9 +161,9 @@ msgid "List of all used tags"
 msgstr ""
 
 #: src/Form/AnswerForm.php:49 template/admin/question-index.phtml:26
-#: template/front/question-index.phtml:104
-#: template/front/question-index.phtml:108
 #: template/front/question-list.phtml:73
+#: template/front/question-single.phtml:148
+#: template/front/question-single.phtml:152
 msgid "Answer"
 msgstr ""
 
@@ -201,12 +218,15 @@ msgid "Status"
 msgstr ""
 
 #: src/Form/ProjectForm.php:106 src/Form/UpdateForm.php:112
-#: template/admin/project-index.phtml:34 template/admin/question-index.phtml:61
+#: template/admin/project-index.phtml:34 template/admin/question-index.phtml:74
 msgid "Published"
 msgstr ""
 
 #: src/Form/ProjectForm.php:107 src/Form/UpdateForm.php:113
-#: template/admin/project-index.phtml:35 template/admin/question-index.phtml:62
+#: template/admin/project-index.phtml:35 template/admin/question-index.phtml:75
+#: template/front/question-list.phtml:95
+#: template/front/question-single.phtml:53
+#: template/front/question-single.phtml:128
 msgid "Pending review"
 msgstr ""
 
@@ -285,7 +305,8 @@ msgid "View"
 msgstr ""
 
 #: template/admin/project-index.phtml:26 template/admin/project-index.phtml:28
-#: template/admin/question-index.phtml:53
+#: template/admin/question-index.phtml:62
+#: template/admin/question-index.phtml:64
 msgid "Edit"
 msgstr ""
 
@@ -306,25 +327,30 @@ msgstr ""
 msgid "Create"
 msgstr ""
 
-#: template/admin/question-index.phtml:49
-#: template/admin/question-index.phtml:78
+#: template/admin/question-index.phtml:55
+#: template/admin/question-index.phtml:91
+#: template/front/question-single.phtml:40
+#: template/front/question-single.phtml:45
+#: template/front/question-single.phtml:116
+#: template/front/question-single.phtml:121
 msgid "Reject"
 msgstr ""
 
-#: template/admin/question-index.phtml:51
-#: template/admin/question-index.phtml:83
+#: template/admin/question-index.phtml:60
+#: template/admin/question-index.phtml:96
 msgid "Accept"
 msgstr ""
 
-#: template/admin/question-index.phtml:54
+#: template/admin/question-index.phtml:65
+#: template/admin/question-index.phtml:67
 msgid "Delete"
 msgstr ""
 
-#: template/admin/question-index.phtml:65
+#: template/admin/question-index.phtml:78
 msgid "No question submit yet"
 msgstr ""
 
-#: template/admin/question-index.phtml:72
+#: template/admin/question-index.phtml:85
 msgid "Accept in process"
 msgstr ""
 
@@ -332,26 +358,17 @@ msgstr ""
 msgid "Slug"
 msgstr ""
 
-#: template/front/answer-index.phtml:19 template/front/question-index.phtml:27
-#: template/front/question-index.phtml:82
+#: template/front/answer-index.phtml:19 template/front/question-single.phtml:28
+#: template/front/question-single.phtml:106
 msgid "Time"
 msgstr ""
 
-#: template/front/answer-index.phtml:20 template/front/question-index.phtml:28
+#: template/front/answer-index.phtml:20 template/front/question-single.phtml:29
 msgid "Read"
 msgstr ""
 
-#: template/front/answer-index.phtml:20 template/front/question-index.phtml:28
+#: template/front/answer-index.phtml:20 template/front/question-single.phtml:29
 msgid "Times"
-msgstr ""
-
-#: template/front/question-index.phtml:13
-#: template/front/question-index.phtml:76
-msgid "View profile"
-msgstr ""
-
-#: template/front/question-index.phtml:62
-msgid "Answers"
 msgstr ""
 
 #: template/front/question-list.phtml:20
@@ -371,12 +388,28 @@ msgstr ""
 msgid "Vote"
 msgstr ""
 
-#: template/front/question-list.phtml:100
+#: template/front/question-list.phtml:103
 msgid "On"
 msgstr ""
 
-#: template/front/question-list.phtml:102
+#: template/front/question-list.phtml:105
 msgid "By"
+msgstr ""
+
+#: template/front/question-single.phtml:14
+#: template/front/question-single.phtml:100
+msgid "View profile"
+msgstr ""
+
+#: template/front/question-single.phtml:34
+#: template/front/question-single.phtml:39
+#: template/front/question-single.phtml:110
+#: template/front/question-single.phtml:115
+msgid "Confirm"
+msgstr ""
+
+#: template/front/question-single.phtml:85
+msgid "Answers"
 msgstr ""
 
 #: template/front/submit-index.phtml:11

@@ -37,7 +37,7 @@ class AnswerController extends ActionController
         // Find story
         $question = Pi::api('question', 'ask')->getQuestion($slug, 'slug');
         // Check page
-        if (!$question || $question['status'] != 1) {
+        if (empty($question) || $question['status'] != 1) {
             $message = __('The question not found.');
             $url = array('', 'module' => $module, 'controller' => 'index', 'action' => 'index');
             $this->jump($url, $message);

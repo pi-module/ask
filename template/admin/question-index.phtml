@@ -17,23 +17,26 @@ $this->js($this->assetModule('script/system-msg.js', 'system'));
                 <th class="col-md-2"><?php _e('Create'); ?></th>
                 <th class="col-md-3"><?php _e('Action'); ?></th>
             </tr>
-            <?php foreach($questions as $question) { ?>
-                <?php if($question['type'] == 'Q') {
+            <?php foreach ($questions as $question) { ?>
+                <?php if ($question['type'] == 'Q') {
                     $labelTypeClass = 'label-success';
                     $titleType = __('Question');
-                } elseif($question['type'] == 'A') {
+                } elseif ($question['type'] == 'A') {
                     $labelTypeClass = 'label-info';
                     $titleType = __('Answer');
                 } ?>
                 <tr>
                     <td>
                         <span class="label <?php echo $labelTypeClass; ?>"><?php echo $titleType; ?></span>
-                        <?php if($question['type'] == 'Q') { ?>
-                            <a target="_blank" data-toggle="tooltip" data-placement="top" title="<?php echo $this->escape($question['title']); ?>" href="<?php echo $question['questionUrl']; ?>">
+                        <?php if ($question['type'] == 'Q') { ?>
+                            <a target="_blank" data-toggle="tooltip" data-placement="top"
+                               title="<?php echo $this->escape($question['title']); ?>"
+                               href="<?php echo $question['questionUrl']; ?>">
                                 <?php echo $this->escape($question['title']); ?>
                             </a>
                         <?php } else { ?>
-                            <span data-toggle="tooltip" data-placement="top" title="<?php echo $this->escape($question['title']); ?>">
+                            <span data-toggle="tooltip" data-placement="top"
+                                  title="<?php echo $this->escape($question['title']); ?>">
                                 <?php echo $this->escape($question['title']); ?>
                             </span>
                         <?php } ?>
@@ -45,13 +48,23 @@ $this->js($this->assetModule('script/system-msg.js', 'system'));
                     </td>
                     <td><?php echo $this->escape($question['time_create_view']); ?></td>
                     <td>
-                        <?php if($question['status'] == 1) { ?>
-                            <button id="button-<?php echo $question['id']; ?>" type="button" class="btn btn-warning btn-xs" data-toggle="button" data-link="<?php echo $this->url('', array('action' => 'accept', 'id' => $question['id'], 'status' => '2')); ?>"><i class="fa fa-times"></i> <?php _e('Reject'); ?></button>
-                        <?php } else { ?>
-                            <button id="button-<?php echo $question['id']; ?>" type="button" class="btn btn-success btn-xs" data-toggle="button" data-link="<?php echo $this->url('', array('action' => 'accept', 'id' => $question['id'], 'status' => '1')); ?>"><i class="fa fa-check"></i> <?php _e('Accept'); ?></button>
+                        <?php if ($question['status'] == 1) { ?>
+                            <button id="button-<?php echo $question['id']; ?>" type="button"
+                                    class="btn btn-warning btn-xs" data-toggle="button"
+                                    data-link="<?php echo $this->url('', array('action' => 'accept', 'id' => $question['id'], 'status' => '2')); ?>">
+                                <i class="fa fa-times"></i> <?php _e('Reject'); ?></button>
+                        <?php } elseif ($question['status'] == 2) { ?>
+                            <button id="button-<?php echo $question['id']; ?>" type="button"
+                                    class="btn btn-success btn-xs" data-toggle="button"
+                                    data-link="<?php echo $this->url('', array('action' => 'accept', 'id' => $question['id'], 'status' => '1')); ?>">
+                                <i class="fa fa-check"></i> <?php _e('Accept'); ?></button>
                         <?php } ?>
-                        <a class="btn btn-primary btn-xs" title="<?php _e('Edit'); ?>" href="<?php echo $this->url('', array('action' => 'update', 'id' => $question['id'])); ?>"><i class="fa fa-pencil-square-o"></i> <?php _e('Edit'); ?></a>
-                        <a class="btn btn-danger btn-xs" title="<?php _e('Delete'); ?>" href="<?php echo $this->url('', array('action' => 'delete', 'id' => $question['id'])); ?>"><i class="fa fa-trash-o"></i> <?php _e('Delete'); ?></a>
+                        <a class="btn btn-primary btn-xs" title="<?php _e('Edit'); ?>"
+                           href="<?php echo $this->url('', array('action' => 'update', 'id' => $question['id'])); ?>"><i
+                                    class="fa fa-pencil-square-o"></i> <?php _e('Edit'); ?></a>
+                        <a class="btn btn-danger btn-xs" title="<?php _e('Delete'); ?>"
+                           href="<?php echo $this->url('', array('action' => 'delete', 'id' => $question['id'])); ?>"><i
+                                    class="fa fa-trash-o"></i> <?php _e('Delete'); ?></a>
                     </td>
                 </tr>
             <?php } ?>
@@ -65,27 +78,28 @@ $this->js($this->assetModule('script/system-msg.js', 'system'));
         <div class="alert alert-danger" role="alert"><?php _e('No question submit yet'); ?></div>
     <?php } ?>
 </div>
-<script type="text/javascript" >
-    (function($){
+<script type="text/javascript">
+    (function ($) {
         $('[data-toggle="tooltip"]').tooltip()
-        $("#question-list").on("click","button",function(){
+        $("#question-list").on("click", "button", function () {
             systemMessage.wait("<?php _e('Accept in process'); ?>");
-            $.getJSON($(this).attr("data-link")).done(function(result){
-                if(result.ajaxstatus==1){
-                    if(result.questionstatus==1){
+            $.getJSON($(this).attr("data-link")).done(function (result) {
+                if (result.ajaxstatus == 1) {
+                    if (result.questionstatus == 1) {
                         var labelClass = 'label label-success';
                         var buttonClass = 'btn btn-warning btn-xs disabled';
                         var buttonText = '<i class="fa fa-trash-o"></i> <?php _e("Reject"); ?>';
                     }
-                    if(result.questionstatus==2){
+                    if (result.questionstatus == 2) {
                         var labelClass = 'label label-warning';
                         var buttonClass = 'btn btn-success btn-xs disabled';
                         var buttonText = '<i class="fa fa-check"></i> <?php _e("Accept"); ?>';
                     }
                     $('#label-' + result.id).attr('class', labelClass);
-                    $('#button-' + result.id).attr('class', buttonClass).html(buttonText);;
+                    $('#button-' + result.id).attr('class', buttonClass).html(buttonText);
+                    ;
                     systemMessage.succ(result.message);
-                }else{
+                } else {
                     systemMessage.fail(result.message);
                 }
             });

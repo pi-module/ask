@@ -113,8 +113,8 @@ return array(
                 'type'     => 'select',
                 'options'     => array(
                     'options' => array(
-                        0     => _a('All questions and answers need admin review before publish'),
                         1     => _a('Automatic approval all questions and answers'),
+                        2     => _a('All questions and answers need admin or project manager review before publish'),
                     ),
                 ),
             ),

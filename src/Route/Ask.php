@@ -66,7 +66,14 @@ class Ask extends Standard
                     break;
 
                 case 'question':
-                    if (!empty($parts[1])) {
+                    if (!empty($parts[1]) && $parts[1] == 'review') {
+                        if (isset($parts[2]) && in_array($parts[2], array('confirm', 'reject'))
+                            && isset($parts[3]) && !empty($parts[3])) {
+                            $matches['action'] = 'review';
+                            $matches['status'] = $this->decode($parts[2]);
+                            $matches['id'] = intval($parts[3]);
+                        }
+                    } elseif (!empty($parts[1])) {
                         $matches['slug'] = $this->decode($parts[1]);
                     }
                     break;
@@ -88,7 +95,7 @@ class Ask extends Standard
                         case 'term':
                             $matches['action'] = 'term';
                             if (!empty($parts[2])) {
-                                $matches['slug'] = urldecode($parts[2]);
+                                $matches['slug'] = $this->decode($parts[2]);
                             }
                             break;
                         
@@ -96,10 +103,17 @@ class Ask extends Standard
                             $matches['action'] = 'list';
                             break;
                     }
-
                     break;
             }
         }
+
+        /* echo '<pre>';
+        print_r($matches);
+        echo '</pre>';
+
+        echo '<pre>';
+        print_r($parts);
+        echo '</pre>'; */
 
         return $matches;
     }
@@ -130,14 +144,17 @@ class Ask extends Standard
         if (!empty($mergedParams['action']) && $mergedParams['action'] != 'index') {
             $url['action'] = $mergedParams['action'];
         }
+        if (!empty($mergedParams['status'])) {
+            $url['status'] = $mergedParams['status'];
+        }
         if (!empty($mergedParams['slug'])) {
             $url['slug'] = urlencode($mergedParams['slug']);
         }
-        if (!empty($mergedParams['order'])) {
-            $url['order'] = 'order' . $this->paramDelimiter . $mergedParams['order'];
-        }
         if (!empty($mergedParams['id'])) {
             $url['id'] = $mergedParams['id'];
+        }
+        if (!empty($mergedParams['order'])) {
+            $url['order'] = 'order' . $this->paramDelimiter . $mergedParams['order'];
         }
 
         // Make url

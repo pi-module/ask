@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2017-08-06 13:36+0430\n"
+"POT-Creation-Date: 2017-08-12 10:40+0430\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -23,7 +23,7 @@ msgstr "مدیریت"
 msgid "Show"
 msgstr "نمایش"
 
-#: config/config.php:24 config/page.php:53
+#: config/config.php:24 config/page.php:48
 msgid "Question"
 msgstr "سوال"
 
@@ -80,12 +80,12 @@ msgid "Automatic approval"
 msgstr "تایید خودکار"
 
 #: config/config.php:116
-msgid "All questions and answers need admin review before publish"
-msgstr "تمام سوالات و پاسخ خا به تایید مدیر برای انتشار نیاز دارند"
-
-#: config/config.php:117
 msgid "Automatic approval all questions and answers"
 msgstr "تایید خودکار پرسش و پاسخ های ارسالی"
+
+#: config/config.php:117
+msgid "All questions and answers need admin or project manager review before publish"
+msgstr "تمام سوال ها و جواب ها قبل از انتشار نیاز به تایید مدیر سایت یا مدیر پروژه دارند"
 
 #: config/config.php:128
 msgid "Show feed icon"
@@ -136,27 +136,23 @@ msgstr "پروژه ها"
 msgid "New project"
 msgstr "پروژه جدید"
 
-#: config/navigation.php:112 config/page.php:27 config/permission.php:51
-msgid "Tools"
-msgstr "ابزار"
-
-#: config/page.php:35
+#: config/page.php:30
 msgid "Index page"
 msgstr "صفحه اول"
 
-#: config/page.php:41
+#: config/page.php:36
 msgid "Project page"
 msgstr "صفحه پروژه"
 
-#: config/page.php:47 config/permission.php:30
+#: config/page.php:42 config/permission.php:30
 msgid "Answer"
 msgstr "پاسخ"
 
-#: config/page.php:59
+#: config/page.php:54
 msgid "Submit question"
 msgstr "ارسال سوال"
 
-#: config/page.php:65
+#: config/page.php:60
 msgid "Tag"
 msgstr "برچسب"
 
@@ -167,6 +163,12 @@ msgstr "دسترسی های عمومی"
 #: config/permission.php:24
 msgid "Submit"
 msgstr "ارسال"
+
+#~ msgid "All questions and answers need admin review before publish"
+#~ msgstr "تمام سوالات و پاسخ خا به تایید مدیر برای انتشار نیاز دارند"
+
+#~ msgid "Tools"
+#~ msgstr "ابزار"
 
 #~ msgid "Title"
 #~ msgstr "عنوان"
