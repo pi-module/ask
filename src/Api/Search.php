@@ -28,7 +28,6 @@ class Search extends AbstractSearch
     protected $searchIn = array(
         'title',
         'text_description',
-        'tags',
     );
 
     /**
@@ -39,7 +38,7 @@ class Search extends AbstractSearch
         'title'            => 'title',
         'text_description' => 'content',
         'time_create'      => 'time',
-        'uid'              => 'uid',
+        'main_image'       => 'main_image',
         'slug'             => 'slug',
     );
 
@@ -53,7 +52,7 @@ class Search extends AbstractSearch
     /**
      * {@inheritDoc}
      */
-    protected function buildUrl(array $item)
+    protected function buildUrl(array $item, $table = '')
     {
         $link = Pi::url(Pi::service('url')->assemble('ask', array(
             'module'        => $this->getModule(),
@@ -62,5 +61,13 @@ class Search extends AbstractSearch
         )));
 
         return $link;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    protected function buildImage(array $item, $table = '')
+    {
+        return Pi::url((string)Pi::api('doc', 'media')->getSingleLinkUrl($item['main_image'])->thumb('thumbnail'));
     }
 }
