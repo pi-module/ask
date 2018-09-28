@@ -19,7 +19,7 @@
                 <?php if ($question['main_image']) { ?>
                     <div class="clearfix thumbnail">
                         <div class="clearfix text-center">
-                            <img class="img-responsive" src="<?php echo Pi::api('doc','media')->getSingleLinkUrl($question['main_image'])->thumb('medium'); ?>">
+                            <img class="img-fluid" src="<?php echo Pi::api('doc','media')->getSingleLinkUrl($question['main_image'])->thumb('medium'); ?>">
                         </div>
                     </div>
                 <?php } ?>
@@ -30,7 +30,7 @@
                     </ul>
                 <?php } ?>
                 <?php if ($question['status'] == 2 && $userIsManager) { ?>
-                    <div class="btn-group btn-group-justified">
+                    <div class="btn-group d-flex">
                         <a class="btn btn-success" title="<?php _e('Confirm'); ?>" href="<?php echo Pi::url($this->url('', array(
                             'controller' => 'question',
                             'action'     => 'review',
@@ -106,7 +106,7 @@
                                 <li class="list-group-item"><i class="fa fa-clock-o"></i> <?php _e('Time'); ?>: <?php echo $this->escape($answer['time_create_view']); ?></li>
                             </ul>
                             <?php if ($answer['status'] == 2 && $userIsManager) { ?>
-                                <div class="btn-group btn-group-justified">
+                                <div class="btn-group d-flex">
                                     <a class="btn btn-success" title="<?php _e('Confirm'); ?>" href="<?php echo Pi::url($this->url('', array(
                                         'controller' => 'question',
                                         'action'     => 'review',
@@ -144,7 +144,7 @@
         </div>
     <?php } ?>
     <?php if ($config['question_answer'] && $question['status'] == 1) { ?>
-        <div class="btn-group btn-group-justified" role="group">
+        <div class="btn-group d-flex" role="group">
             <a class="btn btn-success" title="<?php _e('Answer'); ?>" href="<?php echo Pi::url($this->url('', array(
                 'controller' => 'answer',
                 'action' => 'index',
