@@ -14,7 +14,7 @@
 namespace Module\Ask\Form;
 
 use Pi;
-use Zend\InputFilter\InputFilter;
+use Laminas\InputFilter\InputFilter;
 
 class ProjectFilter extends InputFilter
 {

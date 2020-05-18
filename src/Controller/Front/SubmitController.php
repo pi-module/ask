@@ -17,7 +17,7 @@ use Pi\Mvc\Controller\ActionController;
 use Pi\Filter;
 use Module\Ask\Form\AskForm;
 use Module\Ask\Form\AskFilter;
-use Zend\Json\Json;
+use Laminas\Json\Json;
 
 class SubmitController extends ActionController
 {
