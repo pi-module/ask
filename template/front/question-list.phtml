@@ -26,11 +26,11 @@
                 <?php if ($project['main_image']) { ?>
                     <div class="clearfix thumbnail">
                         <div class="clearfix text-center">
-                            <img class="img-responsive" src="<?php echo Pi::api('doc','media')->getSingleLinkUrl($project['main_image'])->thumb('medium'); ?>">
+                            <img class="img-fluid" src="<?php echo Pi::api('doc','media')->getSingleLinkUrl($project['main_image'])->thumb('medium'); ?>">
                         </div>
                     </div>
                 <?php } ?>
-                <div class="btn-group btn-group-justified">
+                <div class="btn-group d-flex">
                     <a class="btn btn-success" title="<?php _e('Ask question'); ?>" href="<?php echo Pi::url($this->url('', array(
                         'controller' => 'submit',
                         'action' => 'index',
@@ -50,7 +50,7 @@
             <h1 class="pull-left"><?php echo $this->escape($title); ?></h1>
             <?php if ($config['question_ask']) { ?>
                 <p class="pull-right">
-                    <a class="btn btn-primary btn-xs" title="<?php _e('Ask question'); ?>" href="<?php echo Pi::url($this->url('', array(
+                    <a class="btn btn-primary btn-sm" title="<?php _e('Ask question'); ?>" href="<?php echo Pi::url($this->url('', array(
                         'controller' => 'submit',
                         'action' => 'index'
                     ))); ?>"><?php _e('Ask question'); ?></a>
@@ -67,18 +67,18 @@
                 <div class="col-md-2">
                     <div class="question-single-information">
                         <ul class="list-inline">
-                            <li class="text-center">
+                            <li class="list-inline-item text-center">
                                 <?php echo _number($question['answer']) ?>
                                 <br />
                                 <?php _e('Answer'); ?>
                             </li>
-                            <li class="text-center">
+                            <li class="list-inline-item text-center">
                                 <?php echo _number($question['hits']) ?>
                                 <br />
                                 <?php _e('View'); ?>
                             </li>
                             <?php if ($config['vote_bar']) { ?>
-                                <li class="text-center">
+                                <li class="list-inline-item text-center">
                                     <?php echo _number($question['point']) ?>
                                     <br />
                                     <?php _e('Vote'); ?>
@@ -100,10 +100,10 @@
                     </div>
                     <div class="question-single-time">
                         <ul class="list-inline pull-right small">
-                            <li><?php _e('On'); ?></li>
-                            <li><?php echo $this->escape($question['time_create_view']); ?></li>
-                            <li><?php _e('By'); ?></li>
-                            <li><?php echo $this->escape($question['user']['name']); ?></li>
+                            <li class="list-inline-item"><?php _e('On'); ?></li>
+                            <li class="list-inline-item"><?php echo $this->escape($question['time_create_view']); ?></li>
+                            <li class="list-inline-item"><?php _e('By'); ?></li>
+                            <li class="list-inline-item"><?php echo $this->escape($question['user']['name']); ?></li>
                         </ul>
                     </div>
                 </div>

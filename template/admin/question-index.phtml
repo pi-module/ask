@@ -9,7 +9,7 @@ $this->js($this->assetModule('script/system-msg.js', 'system'));
 <div class="clearfix">
     <?php if (!empty($questions)) { ?>
         <h3><?php _e('List of questions and answers') ?></h3>
-        <table id="question-list" class="table table-striped table-bordered table-condensed">
+        <table id="question-list" class="table table-striped table-bordered table-sm">
             <tr>
 
                 <th class="col-md-6"><?php _e('Title'); ?></th>
@@ -50,19 +50,19 @@ $this->js($this->assetModule('script/system-msg.js', 'system'));
                     <td>
                         <?php if ($question['status'] == 1) { ?>
                             <button id="button-<?php echo $question['id']; ?>" type="button"
-                                    class="btn btn-warning btn-xs" data-toggle="button"
+                                    class="btn btn-warning btn-sm" data-toggle="button"
                                     data-link="<?php echo $this->url('', array('action' => 'accept', 'id' => $question['id'], 'status' => '2')); ?>">
                                 <i class="fa fa-times"></i> <?php _e('Reject'); ?></button>
                         <?php } elseif ($question['status'] == 2) { ?>
                             <button id="button-<?php echo $question['id']; ?>" type="button"
-                                    class="btn btn-success btn-xs" data-toggle="button"
+                                    class="btn btn-success btn-sm" data-toggle="button"
                                     data-link="<?php echo $this->url('', array('action' => 'accept', 'id' => $question['id'], 'status' => '1')); ?>">
                                 <i class="fa fa-check"></i> <?php _e('Accept'); ?></button>
                         <?php } ?>
-                        <a class="btn btn-primary btn-xs" title="<?php _e('Edit'); ?>"
+                        <a class="btn btn-primary btn-sm" title="<?php _e('Edit'); ?>"
                            href="<?php echo $this->url('', array('action' => 'update', 'id' => $question['id'])); ?>"><i
                                     class="fa fa-pencil-square-o"></i> <?php _e('Edit'); ?></a>
-                        <a class="btn btn-danger btn-xs" title="<?php _e('Delete'); ?>"
+                        <a class="btn btn-danger btn-sm" title="<?php _e('Delete'); ?>"
                            href="<?php echo $this->url('', array('action' => 'delete', 'id' => $question['id'])); ?>"><i
                                     class="fa fa-trash-o"></i> <?php _e('Delete'); ?></a>
                     </td>
@@ -71,8 +71,8 @@ $this->js($this->assetModule('script/system-msg.js', 'system'));
         </table>
         <div class="paginator"><?php echo $this->paginationControl($paginator, 'Sliding', 'paginator'); ?></div>
         <p>
-            <span class="label label-success"><?php _e('Published'); ?></span>
-            <span class="label label-warning"><?php _e('Pending review'); ?></span>
+            <span class="badge badge-success"><?php _e('Published'); ?></span>
+            <span class="badge badge-warning"><?php _e('Pending review'); ?></span>
         </p>
     <?php } else { ?>
         <div class="alert alert-danger" role="alert"><?php _e('No question submit yet'); ?></div>
@@ -86,13 +86,13 @@ $this->js($this->assetModule('script/system-msg.js', 'system'));
             $.getJSON($(this).attr("data-link")).done(function (result) {
                 if (result.ajaxstatus == 1) {
                     if (result.questionstatus == 1) {
-                        var labelClass = 'label label-success';
-                        var buttonClass = 'btn btn-warning btn-xs disabled';
+                        var labelClass = 'badge badge-success';
+                        var buttonClass = 'btn btn-warning btn-sm disabled';
                         var buttonText = '<i class="fa fa-trash-o"></i> <?php _e("Reject"); ?>';
                     }
                     if (result.questionstatus == 2) {
-                        var labelClass = 'label label-warning';
-                        var buttonClass = 'btn btn-success btn-xs disabled';
+                        var labelClass = 'badge badge-warning';
+                        var buttonClass = 'btn btn-success btn-sm disabled';
                         var buttonText = '<i class="fa fa-check"></i> <?php _e("Accept"); ?>';
                     }
                     $('#label-' + result.id).attr('class', labelClass);

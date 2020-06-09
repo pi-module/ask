@@ -10,7 +10,7 @@
             <?php if ($question['main_image']) { ?>
                 <div class="clearfix thumbnail">
                     <div class="clearfix text-center">
-                        <img class="img-responsive" src="<?php echo Pi::api('doc','media')->getSingleLinkUrl($question['main_image'])->thumb('medium'); ?>">
+                        <img class="img-fluid" src="<?php echo Pi::api('doc','media')->getSingleLinkUrl($question['main_image'])->thumb('medium'); ?>">
                     </div>
                 </div>
             <?php } ?>
@@ -28,7 +28,7 @@
         </div>
     </div>
     <br />
-    <div class="well">
+    <div class="card card-body bg-light mb-3">
         <?php echo $this->form($form, 'vertical'); ?>
     </div>
 </div>
