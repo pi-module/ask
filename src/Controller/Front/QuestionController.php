@@ -15,7 +15,7 @@ namespace Module\Ask\Controller\Front;
 use Pi;
 use Pi\Filter;
 use Pi\Mvc\Controller\ActionController;
-use Zend\Json\Json;
+use Laminas\Json\Json;
 
 class QuestionController extends ActionController
 {

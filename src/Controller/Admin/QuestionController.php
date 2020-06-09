@@ -18,8 +18,8 @@ use Pi\Mvc\Controller\ActionController;
 use Pi\Paginator\Paginator;
 use Module\Ask\Form\UpdateForm;
 use Module\Ask\Form\UpdateFilter;
-use Zend\Json\Json;
-use Zend\Db\Sql\Predicate\Expression;
+use Laminas\Json\Json;
+use Laminas\Db\Sql\Predicate\Expression;
 
 class QuestionController extends ActionController
 {
